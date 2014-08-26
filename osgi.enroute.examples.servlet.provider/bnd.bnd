@@ -5,10 +5,7 @@
 
 Bundle-Version:					1.0.0.${tstamp}
 Bundle-Description: 				\
-	A bundle with a provider. Notice that this provider exports the API package. \
-	It also provides a JUnit test and it can be run standalone. \
-	\
-	${warning;Please update this Bundle-Description in osgi.enroute.examples.servlet.provider/bnd.bnd}
+	A puny little tiny servlet ...
 
 
 Private-Package:  \
