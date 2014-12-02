@@ -66,9 +66,17 @@
 			</div>
 		</div>
   		
-  		<div ng-view>
-  		</div>  	
-
+  		<div class=row>
+	  		<div ng-view ng-class="{'col-md-12':page() == '/' , 'col-md-8':page() != '/' }">
+	  		</div>  	
+			<div class="btn-group-vertical col-md-4" role="group" aria-label="..." ng-hide="page() == '/'">
+	  			<button type="button" class="btn btn-default" ng-click="editor.cmapp.factory()">Factory Create</button>
+	  			<button type="button" class="btn btn-default" ng-click="editor.cmapp.singleton()">Singleton Create</button>
+	  			<button type="button" class="btn btn-default" ng-click="editor.cmapp.listener()">Listener Create</button>
+	  			<button type="button" class="btn btn-default" ng-click="editor.cmapp.plugin()">Plugin Create</button>
+	  			<button type="button" class="btn btn-default" ng-click="editor.cmapp.coordinator()">Coordination</button>
+			</div>	
+		</div>
 		<div class="footer">
 			<p>&copy; ${def;Bundle-Vendor;Company} ${tstamp;YYYY}</p>
 		</div>

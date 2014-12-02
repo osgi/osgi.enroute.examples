@@ -88,6 +88,32 @@ public class CmFacade implements JSONRPC {
 				.collect(Collectors.toList());
 	}
 
+	/**
+	 * Function to call some examples
+	 * 
+	 * @throws Exception
+	 */
+
+	public void coordinator() throws Exception {
+		ca.exampleCoordinator();
+	}
+
+	public void plugin() throws Exception {
+		ca.examplePlugin();
+	}
+
+	public void listener() throws Exception {
+		ca.exampleListener();
+	}
+
+	public void singleton() throws Exception {
+		ca.exampleSingleton();
+	}
+
+	public void factory() throws Exception {
+		ca.exampleFactory();
+	}
+
 	/*
 	 * Just handle the conversion from an array (potentially null) to a stream.
 	 */

@@ -1,8 +1,12 @@
 package osgi.enroute.examples.cm.application;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 import org.osgi.dto.DTO;
@@ -12,6 +16,8 @@ import org.osgi.service.cm.ConfigurationEvent;
 import org.osgi.service.cm.ConfigurationListener;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.coordinator.Coordination;
+import org.osgi.service.coordinator.Coordinator;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 
@@ -21,6 +27,7 @@ import osgi.enroute.capabilities.ConfigurerExtender;
 import osgi.enroute.capabilities.EventAdminSSEEndpoint;
 import osgi.enroute.capabilities.WebServerExtender;
 import osgi.enroute.dto.api.DTOs;
+import osgi.enroute.dto.api.TypeReference;
 
 /**
  * CM Application.
@@ -57,6 +64,7 @@ public class CmApplication implements ConfigurationListener {
 	private EventAdmin ea;
 	private ConfigurationAdmin cm;
 	private DTOs dtos;
+	private Coordinator coordinator;
 
 	/*
 	 * A utility function to convert a dictonary to a map.
@@ -91,11 +99,13 @@ public class CmApplication implements ConfigurationListener {
 			ConfigurationEventProperties cep = new ConfigurationEventProperties();
 			cep.factoryPid = event.getFactoryPid();
 			cep.pid = event.getPid();
-			if ( ConfigurationEvent.CM_DELETED  != event.getType()) {
-				Configuration configuration = cm.getConfiguration(event.getPid());
-				cep.location =configuration.getBundleLocation();
-				Dictionary<String, Object> properties = configuration.getProperties();
-				if ( properties == null) {
+			if (ConfigurationEvent.CM_DELETED != event.getType()) {
+				Configuration configuration = cm.getConfiguration(event
+						.getPid());
+				cep.location = configuration.getBundleLocation();
+				Dictionary<String, Object> properties = configuration
+						.getProperties();
+				if (properties == null) {
 					cep.properties = new HashMap<>();
 				} else
 					cep.properties = toMap(properties);
@@ -104,6 +114,76 @@ public class CmApplication implements ConfigurationListener {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	
+	
+	public static class Config {
+		public String pid;
+		public String factoryPid;
+		public Hashtable<String,Object> properties;
+	}
+	
+	void exampleCoordinator() throws Exception {
+		try (InputStream in = CmApplication.class
+				.getResourceAsStream("example.configs")) {
+
+			Coordination coordination = coordinator.begin("example.1", 100000);
+			try {
+				List<Config> list = dtos.decoder(
+						new TypeReference<List<Config>>() {
+						}).get(in);
+
+				for (Config config : list) {
+					Configuration c;
+
+					if (config.factoryPid != null)
+						c = cm.createFactoryConfiguration(config.factoryPid,
+								"?");
+					else
+						c = cm.getConfiguration(config.pid);
+
+					c.update(config.properties);
+				}
+				coordination.end();
+			} catch (Throwable t) {
+				coordination.fail(t);
+			}
+		}
+	}
+
+	public void examplePlugin() throws IOException {
+		Configuration configuration = cm.getConfiguration("plugin", "?");
+		Hashtable<String, Object> map = new Hashtable<String,Object>();
+		map.put("msg", "Hello World");
+		configuration.update(map);
+	}
+
+	public void exampleListener() throws IOException {
+		Configuration configuration = cm.getConfiguration("listener", "?");
+		if ( configuration.getProperties() == null)
+			configuration.update(new Hashtable<String,Object>());
+	}
+
+	public void exampleSingleton() throws IOException {
+		Configuration configuration = cm.getConfiguration("singleton", "?");
+		Hashtable<String, Object> map = new Hashtable<String,Object>();
+		map.put("msg", "Hello Singleton");
+		configuration.update(map);
+	}
+
+	public void exampleFactory() throws IOException {
+		Configuration a = cm.createFactoryConfiguration("factory", "?");
+		Hashtable<String, Object> map = new Hashtable<String,Object>();
+		map.put("string", "Hello Factory");
+		a.update(map);
+	}
+
+
+	
+	@Reference
+	void setCoordinator(Coordinator coordinator) {
+		this.coordinator = coordinator;
 	}
 
 	@Reference

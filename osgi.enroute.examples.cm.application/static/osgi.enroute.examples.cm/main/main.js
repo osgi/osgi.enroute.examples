@@ -75,14 +75,16 @@
 
 		resolveBefore.cmAppEndpoint().then(function(cmapp) {
 			editor = new Editor(cmapp);
+			$rootScope.editor = editor;
 			en$easse.handle("osgi/enroute/examples/*", editor.update, error);
 		});
 
 		function Editor(cmapp) {
 			var THIS = this;
-
+			
 			this.configurations = {};
-
+			this.cmapp = cmapp;
+			
 			this.init = function(isfact) {
 				this.isfact = isfact;
 				this.select(undefined);
@@ -96,8 +98,7 @@
 						THIS.select(undefined);
 					}
 				} else {
-					angular.copy(msg.properties,
-							THIS.configurations[msg.pid].properties);
+					THIS.set(msg.pid,msg.factoryPid,msg.properties);
 					THIS.select(THIS.configurations[msg.pid]);
 				}
 
@@ -105,7 +106,10 @@
 			};
 
 			this.select = function(config) {
-				if (config) {
+				if (config ) {
+					if ( this.isfact == !config.factoryPid)
+						return;
+					
 					this.pid = config.pid;
 					this.factoryPid = config.factoryPid;
 					this.configuration = config;
@@ -185,6 +189,9 @@
 				return angular.isArray(value);
 			}
 
+			this.example = function(name) {
+				cmapp.example(name);
+			}
 			//
 			// Ok, get all the configurations
 			//
@@ -198,11 +205,11 @@
 	});
 
 	var singletonProvider = function($scope) {
-		$scope.editor = editor.init(false);
+		editor.init(false);
 	}
 
 	var factoryProvider = function($scope) {
-		$scope.editor = editor.init(true);
+		editor.init(true);
 	}
 
 })();
