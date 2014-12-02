@@ -1,0 +1,52 @@
+<section>
+	<div class="input-group input-group-sm">
+		 <input type="text" class="form-control"
+			placeholder="new Factory PID" 
+			ng-model=newfpid><span 
+				class="input-group-addon" 
+				ng-click="newfpid && editor.addInstance(newfpid || editor.factoryPid)"
+			>+</span>
+	</div>
+	<br>
+	
+	<div class="list-group=sm">
+		<a 	
+			class		="list-group-item"
+			ng-class	="{selected: fpid===editor.factoryPid}"
+			ng-repeat	="fpid in editor.getFactoryPids()"
+			ng-click	=editor.factoryPid=fpid 
+			>
+			
+				{{fpid}}
+
+		</a>
+	</div>
+	
+	<br>
+	
+	<div 
+		class		="list-group=sm">
+		<a 
+			ng-class	="{selected: config.pid===editor.pid}" 
+			class		="list-group-item"
+			ng-repeat	="config in editor.getConfigurations(editor.factoryPid)" 
+			ng-click	="editor.select(config)">
+
+				{{config.pid}}
+				
+			<button 
+				class	="close" 
+				ng-click="editor.remove(config.pid)">
+				
+				<span aria-hidden="true">&times;</span>
+				<span class="sr-only">Close</span>
+
+			</button>
+		</a>
+
+	</div>
+	<br>
+	
+	<ng-include src='"main/htm/properties.htm"'></ng-include>
+
+</section>

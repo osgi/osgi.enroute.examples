@@ -1,0 +1,32 @@
+
+<table class="table table-small" ng-show=editor.pid>
+	<colgroup>
+		<col style="width: 30%">
+		<col style="width: 70%">
+		<col style="width: 20px">
+	</colgroup>
+	<thead>
+		<tr>
+			<th>Key</th>
+			<th colspan=2>Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="(k,v) in editor.configuration.properties">
+			<td><b>{{k}}</b></td>
+			<td>
+				<div ng-repeat="x in v track by $index" ng-show=editor.isArray(v)>{{x}}</div>
+				<span ng-show=!isArray(v)>{{v}}</span>
+			</td>
+			<td ng-click=editor.removeKey(k)>-</td>
+		</tr>
+		<tr ng-show=editor.select>
+			<td><input type=text ng-model=key class=form-control
+				placeholder=key></td>
+			<td><input type=text ng-model=value class=form-control
+				placeholder=value></td>
+			<td ng-click="key=(value=editor.addKey(key,value))" ng-disable=!key>+</td>
+		</tr>
+	</tbody>
+
+</table>

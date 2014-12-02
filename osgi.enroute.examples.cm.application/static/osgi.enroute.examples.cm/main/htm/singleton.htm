@@ -1,0 +1,29 @@
+<section>
+	<div class="input-group input-group-sm">
+		 <input 
+		 	type="text" 
+		 	class="form-control"
+			placeholder="new PID" 
+			ng-model=newpid><span 
+				class="input-group-addon" 
+				ng-click="newpid && editor.addSingleton(newpid)"
+				>+</span>
+	</div>
+	<br>
+	<div class="list-group=sm">
+		<a 
+			ng-class="{selected: config.pid===editor.pid}" 
+			class="list-group-item"
+			ng-click=editor.select(config)
+			ng-repeat="config in editor.getConfigurations(null)" >
+				{{config.pid}}
+			<button type="button" class="close" ng-click="editor.remove(config.pid)">
+				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+			</button>
+		</a>
+
+	</div>
+	<br>
+
+	<ng-include src='"main/htm/properties.htm"'></ng-include>
+</section>

@@ -1,0 +1,17 @@
+#
+# OSGI ENROUTE EXAMPLES APPLICATION RUN SPECIFICATION
+#
+
+
+Bundle-Version:				1.0.0.${tstamp}
+Bundle-SymbolicName:		osgi.enroute.examples.application.launch
+JPMCommand:					exampls
+
+
+-runfw:						org.eclipse.osgi
+
+-runrequires:  \
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.application)'
+
+-runbundles: \
+	${error;Resolve first}
