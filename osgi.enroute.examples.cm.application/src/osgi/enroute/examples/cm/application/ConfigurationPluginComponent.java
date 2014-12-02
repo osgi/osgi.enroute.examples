@@ -8,6 +8,10 @@ import org.osgi.service.cm.ConfigurationPlugin;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
 
+/**
+ * An example Configuration Plugin
+ * 
+ */
 @Component(name = "plugin", configurationPolicy = ConfigurationPolicy.REQUIRE)
 public class ConfigurationPluginComponent implements ConfigurationPlugin {
 

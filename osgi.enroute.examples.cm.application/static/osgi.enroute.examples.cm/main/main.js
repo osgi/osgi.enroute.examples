@@ -1,9 +1,16 @@
-'use strict';
+/**
+ * OSGI ENROUTE EXAMPLES CM
+ * 
+ * This module provides a demo of the capabilities of the OSGi Configuration
+ * Admin service.
+ */
 
 (function() {
 
-	var MODULE = angular.module('osgi.enroute.examples.cm', [ 'ngRoute',
-			'ngResource', 'enJsonrpc', 'enEasse' ]);
+	'use strict';
+
+	var MODULE = angular.module('osgi.enroute.examples.cm', //
+	[ 'ngRoute', 'ngResource', 'enJsonrpc', 'enEasse' ]);
 
 	var alerts = [];
 	var editor;
@@ -16,7 +23,16 @@
 		});
 	}
 
+	//
+	// CONFIG
+	//
+
 	MODULE.config(function($routeProvider, en$jsonrpcProvider) {
+
+		en$jsonrpcProvider.route();
+		en$jsonrpcProvider.setNotification({
+			error : error
+		})
 
 		resolveBefore = {
 			cmAppEndpoint : en$jsonrpcProvider
@@ -41,11 +57,11 @@
 
 		$routeProvider.otherwise('/');
 
-		en$jsonrpcProvider.route();
-		en$jsonrpcProvider.setNotification({
-			error : error
-		})
 	});
+
+	//
+	// RUN
+	//
 
 	MODULE.run(function($rootScope, $location, en$easse, en$jsonrpc) {
 
@@ -59,8 +75,7 @@
 
 		resolveBefore.cmAppEndpoint().then(function(cmapp) {
 			editor = new Editor(cmapp);
-			en$easse.handle("osgi/enroute/examples/*", editor.update,
-					error);
+			en$easse.handle("osgi/enroute/examples/*", editor.update, error);
 		});
 
 		function Editor(cmapp) {
@@ -74,28 +89,23 @@
 				return this;
 			}
 
-			cmapp.getConfigurations(null).then(function(configurations) {
-				configurations.forEach(function(c) {
-					this.set(c["service.pid"], c["service.factoryPid"],c);
-				}, THIS);
-			});
-
 			this.update = function(msg) {
 				if (!msg.properties) {
 					delete THIS.configurations[msg.pid];
-					if ( THIS.pid == msg.pid ) {
+					if (THIS.pid == msg.pid) {
 						THIS.select(undefined);
 					}
 				} else {
-					angular.copy(msg.properties, THIS.configurations[msg.pid].properties);
+					angular.copy(msg.properties,
+							THIS.configurations[msg.pid].properties);
 					THIS.select(THIS.configurations[msg.pid]);
 				}
-				
+
 				$rootScope.$digest();
 			};
-			
+
 			this.select = function(config) {
-				if ( config ) {
+				if (config) {
 					this.pid = config.pid;
 					this.factoryPid = config.factoryPid;
 					this.configuration = config;
@@ -106,7 +116,7 @@
 				}
 			}
 
-			this.set = function(pid, fpid,properties) {
+			this.set = function(pid, fpid, properties) {
 				var config = this.configurations[pid];
 				if (angular.isUndefined(config)) {
 					config = (this.configurations[pid] = {
@@ -119,9 +129,9 @@
 			}
 
 			this.getConfigurations = function(factoryPid) {
-				if ( this.isfact && !factoryPid)
+				if (this.isfact && !factoryPid)
 					return;
-				
+
 				var result = [];
 				for ( var k in this.configurations) {
 					var c = this.configurations[k];
@@ -174,8 +184,17 @@
 			this.isArray = function(value) {
 				return angular.isArray(value);
 			}
-		}
 
+			//
+			// Ok, get all the configurations
+			//
+
+			cmapp.findConfigurations(null).then(function(configurations) {
+				configurations.forEach(function(c) {
+					this.set(c["service.pid"], c["service.factoryPid"], c);
+				}, THIS);
+			});
+		}
 	});
 
 	var singletonProvider = function($scope) {

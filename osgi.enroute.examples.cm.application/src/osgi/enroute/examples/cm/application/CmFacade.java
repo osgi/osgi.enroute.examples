@@ -14,37 +14,37 @@ import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import osgi.enroute.capabilities.AngularWebResource;
-import osgi.enroute.capabilities.BootstrapWebResource;
-import osgi.enroute.capabilities.ConfigurerExtender;
-import osgi.enroute.capabilities.EventAdminSSEEndpoint;
-import osgi.enroute.capabilities.WebServerExtender;
 import osgi.enroute.jsonrpc.api.JSONRPC;
 
-@AngularWebResource.Require
-@BootstrapWebResource.Require
-@WebServerExtender.Require
-@ConfigurerExtender.Require
-@EventAdminSSEEndpoint.Require
-@Component(property = JSONRPC.ENDPOINT
-		+ "=osgi.enroute.examples.cm")
-public class CmFacade implements JSONRPC  {
+/**
+ * CM FACADE
+ * 
+ * This component provides the facade of the application over a JSON RPC
+ * protocol. This implementation does not do the checking of the authority but
+ * this is of course criminal in a real application. This class is directly
+ * exposed to the outside world.
+ */
+@Component(property = JSONRPC.ENDPOINT + "=osgi.enroute.examples.cm")
+public class CmFacade implements JSONRPC {
 	private static final Configuration[] EMPTY = new Configuration[0];
-
-	ConfigurationAdmin cm;
-
+	private ConfigurationAdmin cm;
 	private CmApplication ca;
 
+	/**
+	 * Provides facade into to the caller.
+	 */
 	@Override
 	public Object getDescriptor() throws Exception {
 		return null;
 	}
 
 	/**
+	 * Save a new configuration.
 	 * 
 	 * @param pid
+	 *            the (instance) PID of the configuration
 	 * @param map
-	 * @throws IOException
+	 *            the set of properties
 	 */
 
 	public void saveConfiguration(String pid, Hashtable<String, Object> map)
@@ -52,20 +52,45 @@ public class CmFacade implements JSONRPC  {
 		cm.getConfiguration(pid, "?").update(map);
 	}
 
+	/**
+	 * Remove a configuration.
+	 * 
+	 * @param pid
+	 *            the (instance) PID of a configuration
+	 */
 	public void removeConfiguration(String pid) throws IOException {
 		cm.getConfiguration(pid, "?").delete();
 	}
 
+	/**
+	 * Create a new instance configuration for a given factoryPid, returning the
+	 * instance PID.
+	 * 
+	 * @param factoryPid
+	 *            the factory PID
+	 * @return the instance PID
+	 */
 	public String createInstance(String factoryPid) throws IOException {
 		return cm.createFactoryConfiguration(factoryPid, "?").getPid();
 	}
 
-	public Collection<Map<String, Object>> getConfigurations(String filter)
+	/**
+	 * Return a list of configurations filtered by an OSGi Filter expression.
+	 * 
+	 * @param filter
+	 *            the filter or null
+	 * @return a collection of configurations.
+	 */
+	public Collection<Map<String, Object>> findConfigurations(String filter)
 			throws IOException, InvalidSyntaxException {
-		return getConfigurations0(filter).map((c) -> ca.toMap(c.getProperties()))
+		return getConfigurations0(filter).map(
+				(c) -> ca.toMap(c.getProperties()))
 				.collect(Collectors.toList());
 	}
 
+	/*
+	 * Just handle the conversion from an array (potentially null) to a stream.
+	 */
 	private Stream<Configuration> getConfigurations0(String filter)
 			throws IOException, InvalidSyntaxException {
 
