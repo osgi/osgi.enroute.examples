@@ -117,7 +117,59 @@ public class CmApplication implements ConfigurationListener {
 	}
 
 	
-	
+
+	/**
+	 * This code shows how you can create a singleton configuration with 
+	 * Configuration Admin.
+	 */
+	public void exampleSingleton() throws IOException {
+		Configuration configuration = cm.getConfiguration("singleton", "?");
+		Hashtable<String, Object> map = new Hashtable<String,Object>();
+		map.put("msg", "Hello Singleton");
+		configuration.update(map);
+	}
+
+	/**
+	 * This code is the same as {@link #exampleSingleton()} but it creates
+	 * a plugin. The plugin can inspect and modify properties before they
+	 * are delivered to the target service. The plugin is not effective for
+	 * Configuration Listeners.
+	 */
+	public void examplePlugin() throws IOException {
+		Configuration configuration = cm.getConfiguration("plugin", "?");
+		Hashtable<String, Object> map = new Hashtable<String,Object>();
+		map.put("msg", "Hello Plugin");
+		configuration.update(map);
+	}
+
+	/**
+	 * This code is the same as {@link #exampleSingleton()} but it creates
+	 * a Configuration Listener. A listener receives events from configuration
+	 * admin.
+	 */
+	public void exampleListener() throws IOException {
+		Configuration configuration = cm.getConfiguration("listener", "?");
+		if ( configuration.getProperties() == null)
+			configuration.update(new Hashtable<String,Object>());
+	}
+
+	/**
+	 * This example shows how to create a factory configuration.
+	 */
+	public void exampleFactory() throws IOException {
+		Configuration a = cm.createFactoryConfiguration("factory", "?");
+		Hashtable<String, Object> map = new Hashtable<String,Object>();
+		map.put("msg", "Hello Factory");
+		a.update(map);
+	}
+
+
+	/**
+	 * The following example shows how to parse a file and turn them
+	 * in configurations. The method uses the coordinator so that 
+	 * participating clients can update things at once.
+	 *
+	 */
 	public static class Config {
 		public String pid;
 		public String factoryPid;
@@ -151,34 +203,6 @@ public class CmApplication implements ConfigurationListener {
 			}
 		}
 	}
-
-	public void examplePlugin() throws IOException {
-		Configuration configuration = cm.getConfiguration("plugin", "?");
-		Hashtable<String, Object> map = new Hashtable<String,Object>();
-		map.put("msg", "Hello World");
-		configuration.update(map);
-	}
-
-	public void exampleListener() throws IOException {
-		Configuration configuration = cm.getConfiguration("listener", "?");
-		if ( configuration.getProperties() == null)
-			configuration.update(new Hashtable<String,Object>());
-	}
-
-	public void exampleSingleton() throws IOException {
-		Configuration configuration = cm.getConfiguration("singleton", "?");
-		Hashtable<String, Object> map = new Hashtable<String,Object>();
-		map.put("msg", "Hello Singleton");
-		configuration.update(map);
-	}
-
-	public void exampleFactory() throws IOException {
-		Configuration a = cm.createFactoryConfiguration("factory", "?");
-		Hashtable<String, Object> map = new Hashtable<String,Object>();
-		map.put("string", "Hello Factory");
-		a.update(map);
-	}
-
 
 	
 	@Reference

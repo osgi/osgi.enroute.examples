@@ -89,7 +89,7 @@ public class CmFacade implements JSONRPC {
 	}
 
 	/**
-	 * Function to call some examples
+	 * Functions to call some examples
 	 * 
 	 * @throws Exception
 	 */
