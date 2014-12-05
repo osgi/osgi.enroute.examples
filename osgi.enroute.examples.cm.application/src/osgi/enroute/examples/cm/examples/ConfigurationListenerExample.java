@@ -1,19 +1,24 @@
-package osgi.enroute.examples.cm.application;
+package osgi.enroute.examples.cm.examples;
 
 import org.osgi.service.cm.ConfigurationEvent;
 import org.osgi.service.cm.ConfigurationListener;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
+
 /**
- * Example Configuration Listener
+ * Example Configuration Listener. This listener will print out the events on
+ * the console.
  */
-@Component(name="listener", configurationPolicy = ConfigurationPolicy.REQUIRE)
-public class ConfigurationListenerComponent implements ConfigurationListener {
+@Component(name = "listener", configurationPolicy = ConfigurationPolicy.REQUIRE)
+public class ConfigurationListenerExample implements ConfigurationListener {
 
 	@Override
 	public void configurationEvent(ConfigurationEvent event) {
-		System.out.println("Configuration Event " + getType(event.getType()) + " "
-				+ (event.getFactoryPid() != null ? event.getFactoryPid()+ "::" :"") + event.getPid());
+		System.out.println("Configuration Event "
+				+ getType(event.getType())
+				+ " "
+				+ (event.getFactoryPid() != null ? event.getFactoryPid() + "::"
+						: "") + event.getPid());
 	}
 
 	private String getType(int type) {

@@ -14,7 +14,7 @@
 			class		="list-group-item"
 			ng-class	="{selected: fpid===editor.factoryPid}"
 			ng-repeat	="fpid in editor.getFactoryPids()"
-			ng-click	=editor.factoryPid=fpid 
+			ng-click	=editor.selectFactory(fpid) 
 			>
 			
 				{{fpid}}

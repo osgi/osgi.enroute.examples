@@ -1,4 +1,4 @@
-package osgi.enroute.examples.cm.application;
+package osgi.enroute.examples.cm.examples;
 
 import java.util.Dictionary;
 
@@ -15,7 +15,7 @@ import org.osgi.service.component.annotations.ConfigurationPolicy;
  * for demo purposes only.
  */
 @Component(name="factory", property="service.pid=factory", configurationPolicy=ConfigurationPolicy.IGNORE)
-public class ManagedServiceFactoryComponent implements ManagedServiceFactory {
+public class ManagedServiceFactoryExample implements ManagedServiceFactory {
 	
 	@Override
 	public String getName() {

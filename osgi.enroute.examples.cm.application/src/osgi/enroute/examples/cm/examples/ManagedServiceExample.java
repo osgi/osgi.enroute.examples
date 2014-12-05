@@ -1,4 +1,4 @@
-package osgi.enroute.examples.cm.application;
+package osgi.enroute.examples.cm.examples;
 
 import java.util.Dictionary;
 
@@ -15,7 +15,7 @@ import org.osgi.service.component.annotations.ConfigurationPolicy;
  * for demo purposes only.
  */
 @Component(name = "singleton", property = "service.pid=singleton", configurationPolicy = ConfigurationPolicy.IGNORE)
-public class ManagedServiceComponent implements ManagedService {
+public class ManagedServiceExample implements ManagedService {
 
 	@Override
 	public void updated(Dictionary<String, ?> properties)

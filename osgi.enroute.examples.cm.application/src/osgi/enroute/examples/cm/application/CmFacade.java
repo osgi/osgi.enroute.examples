@@ -90,28 +90,15 @@ public class CmFacade implements JSONRPC {
 
 	/**
 	 * Functions to call some examples
-	 * 
-	 * @throws Exception
+	 * @throws Throwable 
 	 */
 
-	public void coordinator() throws Exception {
-		ca.exampleCoordinator();
+	public Object example(String example) throws Throwable {
+		return ca.example(example);
 	}
 
-	public void plugin() throws Exception {
-		ca.examplePlugin();
-	}
-
-	public void listener() throws Exception {
-		ca.exampleListener();
-	}
-
-	public void singleton() throws Exception {
-		ca.exampleSingleton();
-	}
-
-	public void factory() throws Exception {
-		ca.exampleFactory();
+	public Object examples() throws Exception {
+		return ca.examples();
 	}
 
 	/*
@@ -136,5 +123,4 @@ public class CmFacade implements JSONRPC {
 	void setCmApplication(CmApplication ca) {
 		this.ca = ca;
 	}
-
 }

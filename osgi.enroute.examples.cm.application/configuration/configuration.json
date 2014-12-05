@@ -10,10 +10,5 @@
      "service.pid":"Server Side Events",
      "alias":"/sse/1",
      "allow.origin":"*"
-  }, 
-  {
-     "service.pid":"abcdef",
-     "key":"value",
-     "what":"true"
-   }
+  }
 ]

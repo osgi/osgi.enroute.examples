@@ -10,8 +10,9 @@ Bundle-Description: \
 	specification. This example is part of the OSGi enRoute project. You can find a description \
 	at http://enroute.osgi.org/services/org.osgi.service.cm.html
 
-Private-Package:  \
-	osgi.enroute.examples.cm.application
+Private-Package: \
+	osgi.enroute.examples.cm.application,\
+	osgi.enroute.examples.cm.examples
 	
 -includeresource: \
 	{readme.md}, \

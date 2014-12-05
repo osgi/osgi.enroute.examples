@@ -1,0 +1,38 @@
+[
+	{
+		"pid": "singleton.1",
+		"properties": {
+			"test":"test.1"
+		}
+	},
+	{
+		"pid": "singleton.2",
+		"properties": {
+			"test":"test.2"
+		}
+	},
+	{
+		"pid": "singleton.3",
+		"properties": {
+			"test":"test.3"
+		}
+	},
+	{
+		"factoryPid": "factory.1",
+		"properties": {
+			"test":"test.1"
+		}
+	},
+	{
+		"factoryPid": "factory.1",
+		"properties": {
+			"test":"test.2"
+		}
+	},
+	{
+		"factoryPid": "factory.1",
+		"properties": {
+			"test":"test.3"
+		}
+	}
+]

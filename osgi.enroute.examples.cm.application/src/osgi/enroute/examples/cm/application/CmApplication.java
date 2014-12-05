@@ -1,23 +1,24 @@
 package osgi.enroute.examples.cm.application;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.osgi.dto.DTO;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.cm.ConfigurationEvent;
 import org.osgi.service.cm.ConfigurationListener;
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.coordinator.Coordination;
-import org.osgi.service.coordinator.Coordinator;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 
@@ -25,9 +26,14 @@ import osgi.enroute.capabilities.AngularWebResource;
 import osgi.enroute.capabilities.BootstrapWebResource;
 import osgi.enroute.capabilities.ConfigurerExtender;
 import osgi.enroute.capabilities.EventAdminSSEEndpoint;
+import osgi.enroute.capabilities.PagedownWebResource;
 import osgi.enroute.capabilities.WebServerExtender;
 import osgi.enroute.dto.api.DTOs;
-import osgi.enroute.dto.api.TypeReference;
+import osgi.enroute.examples.cm.examples.ConfigurationListenerExample;
+import osgi.enroute.examples.cm.examples.ConfigurationPluginExample;
+import osgi.enroute.examples.cm.examples.Examples;
+import osgi.enroute.examples.cm.examples.ManagedServiceExample;
+import osgi.enroute.examples.cm.examples.ManagedServiceFactoryExample;
 
 /**
  * CM Application.
@@ -41,18 +47,19 @@ import osgi.enroute.dto.api.TypeReference;
  * outside world.
  * <li>{@link Configuration2EventAdmin} – Forwards events about CM to the Event
  * Admin (which forwards it to the browser).
- * <li>{@link ConfigurationListenerComponent} – An example listener.
- * <li>{@link ConfigurationPluginComponent} – An example plugin. It adds a new
+ * <li>{@link ConfigurationListenerExample} – An example listener.
+ * <li>{@link ConfigurationPluginExample} – An example plugin. It adds a new
  * key to each configuration before it is delivered. The new key contains the
  * service id of the receiving Managed Service (Factory).
- * <li>{@link ManagedServiceComponent} – An example Managed Service, just prints
+ * <li>{@link ManagedServiceExample} – An example Managed Service, just prints
  * out the configuration.
- * <li>{@link ManagedServiceFactoryComponent} – An example Managed Service
+ * <li>{@link ManagedServiceFactoryExample} – An example Managed Service
  * factory, just prints out the configurations it gets.
  * </ul>
  */
 
 @AngularWebResource.Require
+@PagedownWebResource.Require
 @BootstrapWebResource.Require
 @WebServerExtender.Require
 @ConfigurerExtender.Require
@@ -64,8 +71,17 @@ public class CmApplication implements ConfigurationListener {
 	private EventAdmin ea;
 	private ConfigurationAdmin cm;
 	private DTOs dtos;
-	private Coordinator coordinator;
+	private Examples examples;
+	private Map<String, Method> examplesMap;
 
+	
+	@Activate
+	void activate() throws Exception {
+		ConfigurationEventProperties cep = new ConfigurationEventProperties();
+		cep.refresh=true;
+		ea.postEvent(new Event(TOPIC, dtos.asMap(cep)));
+		
+	}
 	/*
 	 * A utility function to convert a dictonary to a map.
 	 */
@@ -86,7 +102,11 @@ public class CmApplication implements ConfigurationListener {
 		return toMap(properties, new HashMap<>());
 	}
 
+	/**
+	 * 
+	 */
 	public static class ConfigurationEventProperties extends DTO {
+		public boolean refresh;
 		public String pid;
 		public String factoryPid;
 		public Map<String, Object> properties;
@@ -116,98 +136,25 @@ public class CmApplication implements ConfigurationListener {
 		}
 	}
 
-	
+	public Object example(String example) throws Throwable {
+		Method m = examplesMap.get(example);
+		if (m == null)
+			throw new FileNotFoundException("No such example " + example);
 
-	/**
-	 * This code shows how you can create a singleton configuration with 
-	 * Configuration Admin.
-	 */
-	public void exampleSingleton() throws IOException {
-		Configuration configuration = cm.getConfiguration("singleton", "?");
-		Hashtable<String, Object> map = new Hashtable<String,Object>();
-		map.put("msg", "Hello Singleton");
-		configuration.update(map);
-	}
-
-	/**
-	 * This code is the same as {@link #exampleSingleton()} but it creates
-	 * a plugin. The plugin can inspect and modify properties before they
-	 * are delivered to the target service. The plugin is not effective for
-	 * Configuration Listeners.
-	 */
-	public void examplePlugin() throws IOException {
-		Configuration configuration = cm.getConfiguration("plugin", "?");
-		Hashtable<String, Object> map = new Hashtable<String,Object>();
-		map.put("msg", "Hello Plugin");
-		configuration.update(map);
-	}
-
-	/**
-	 * This code is the same as {@link #exampleSingleton()} but it creates
-	 * a Configuration Listener. A listener receives events from configuration
-	 * admin.
-	 */
-	public void exampleListener() throws IOException {
-		Configuration configuration = cm.getConfiguration("listener", "?");
-		if ( configuration.getProperties() == null)
-			configuration.update(new Hashtable<String,Object>());
-	}
-
-	/**
-	 * This example shows how to create a factory configuration.
-	 */
-	public void exampleFactory() throws IOException {
-		Configuration a = cm.createFactoryConfiguration("factory", "?");
-		Hashtable<String, Object> map = new Hashtable<String,Object>();
-		map.put("msg", "Hello Factory");
-		a.update(map);
-	}
-
-
-	/**
-	 * The following example shows how to parse a file and turn them
-	 * in configurations. The method uses the coordinator so that 
-	 * participating clients can update things at once.
-	 *
-	 */
-	public static class Config {
-		public String pid;
-		public String factoryPid;
-		public Hashtable<String,Object> properties;
-	}
-	
-	void exampleCoordinator() throws Exception {
-		try (InputStream in = CmApplication.class
-				.getResourceAsStream("example.configs")) {
-
-			Coordination coordination = coordinator.begin("example.1", 100000);
-			try {
-				List<Config> list = dtos.decoder(
-						new TypeReference<List<Config>>() {
-						}).get(in);
-
-				for (Config config : list) {
-					Configuration c;
-
-					if (config.factoryPid != null)
-						c = cm.createFactoryConfiguration(config.factoryPid,
-								"?");
-					else
-						c = cm.getConfiguration(config.pid);
-
-					c.update(config.properties);
-				}
-				coordination.end();
-			} catch (Throwable t) {
-				coordination.fail(t);
-			}
+		try {
+			return m.invoke(examples);
+		} catch (InvocationTargetException e) {
+			Throwable cause = e.getTargetException();
+			throw cause;
 		}
 	}
 
-	
-	@Reference
-	void setCoordinator(Coordinator coordinator) {
-		this.coordinator = coordinator;
+	public Map<String, String> examples() {
+		return examplesMap.values().stream()
+				.collect(Collectors.toMap((m) -> m.getName(), (m) -> {
+					Tooltip tooltip = m.getAnnotation(Tooltip.class);
+					return tooltip == null ? m.getName() : tooltip.value();
+				}));
 	}
 
 	@Reference
@@ -225,4 +172,14 @@ public class CmApplication implements ConfigurationListener {
 		this.dtos = dtos;
 	}
 
+	@Reference
+	void setExample(Examples ex) {
+		this.examples = ex;
+		examplesMap = Arrays
+				.stream(ex.getClass().getMethods())
+				.filter((m) -> !Modifier.isStatic(m.getModifiers())
+						&& !Modifier.isAbstract(m.getModifiers())
+						&& m.getDeclaringClass() != Object.class)
+				.collect(Collectors.toMap((m) -> m.getName(), (m) -> m));
+	}
 }

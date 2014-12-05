@@ -82,3 +82,12 @@ body {
     border-bottom: 0;
   }
 }
+
+[ng-click] {
+	cursor: pointer;
+}
+
+section {	
+	min-height: 500px;
+}
+

@@ -1,5 +1,5 @@
 
-<table class="table table-small" ng-show=editor.pid>
+<table class="table table-small" ng-show=editor.configurations[editor.pid].properties>
 	<colgroup>
 		<col style="width: 30%">
 		<col style="width: 70%">
@@ -12,7 +12,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="(k,v) in editor.configuration.properties">
+		<tr ng-repeat="(k,v) in editor.configurations[editor.pid].properties">
 			<td><b>{{k}}</b></td>
 			<td>
 				<div ng-repeat="x in v track by $index" ng-show=editor.isArray(v)>{{x}}</div>
@@ -20,7 +20,7 @@
 			</td>
 			<td ng-click=editor.removeKey(k)>-</td>
 		</tr>
-		<tr ng-show=editor.select>
+		<tr ng-show=editor.configurations[editor.pid].properties>
 			<td><input type=text ng-model=key class=form-control
 				placeholder=key></td>
 			<td><input type=text ng-model=value class=form-control
