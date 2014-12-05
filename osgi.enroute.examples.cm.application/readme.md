@@ -1,3 +1,5 @@
+# OSGi enRoute Configuration Admin Examples
+
 This application demonstrates the usage of the Configuration Admin service. It minimally shows the contents of the current Configuration Admin service and updates the GUI dynamically whenever one of the configurations is updated. Additionally, you can delete, modify and add configurations. 
 
 This application is an illustration for  the [OSGi enRoute CM service description][enroute.cm] service catalog entry. It is advised to first read this page the concepts of using Configuration Admin. After you understand these concepts, this application allows you to see it in action in a live system. You should run the application in debug mode in bndtools. This allows you to inspect the interaction between the different actors and modify the code to see what the consequences are. Though you can of course see actual configurations, this demo app is not a Configuration Admin app itself, it definitely takes a few shortcuts to keep the code simple.
