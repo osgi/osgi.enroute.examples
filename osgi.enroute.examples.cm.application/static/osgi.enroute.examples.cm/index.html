@@ -57,7 +57,7 @@
 			<div class="btn-group-vertical col-md-4" role="group"
 				aria-label="..." ng-hide="page() == '/'">
 				<button type="button" class="btn btn-default"
-					ng-click="editor.cmapp.example(name)"
+					ng-click="editor.example(name)"
 					ng-repeat="(name,tooltip) in editor.examples  | orderBy:'toString()'"
 					title={{tooltip}}>{{name}}</button>
 			</div>
