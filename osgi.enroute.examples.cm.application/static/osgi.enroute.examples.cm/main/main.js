@@ -213,17 +213,17 @@
 			}
 
 			this.addKey = function(key, value) {
-				this.configuration.properties[key] = value;
+				this.configurations[this.pid].properties[key] = value;
 				cmapp
 						.saveConfiguration(this.pid,
-								this.configuration.properties);
+								this.configurations[this.pid].properties);
 			}
 
 			this.removeKey = function(key) {
-				delete this.configuration.properties[key];
 				cmapp
 						.saveConfiguration(this.pid,
-								this.configuration.properties);
+								this.configurations[this.pid].properties);
+				delete this.configurations[this.pid].properties[key];
 			}
 
 			this.isArray = function(value) {
