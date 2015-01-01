@@ -17,8 +17,9 @@ Private-Package: \
 -includeresource: \
 	{readme.md}, \
 	{configuration=configuration}, \
-	{static=static}
+	{static=static}, \
+	{web=web}
 
 -buildpath: \
 	osgi.enroute.base.api,\
-	osgi.enroute.easse.simple.adapter
+	osgi.enroute.easse.simple.adapter;version=1.2.2

@@ -58,12 +58,12 @@ import osgi.enroute.examples.cm.examples.ManagedServiceFactoryExample;
  * </ul>
  */
 
-@AngularWebResource.Require
-@PagedownWebResource.Require
-@BootstrapWebResource.Require
-@WebServerExtender.Require
-@ConfigurerExtender.Require
-@EventAdminSSEEndpoint.Require
+@AngularWebResource(resource={"angular.js", "angular-route.js", "angular-resource.js"}, priority=1000)
+@PagedownWebResource(resource="enmarkdown.js")
+@BootstrapWebResource(resource={"css/bootstrap.css"})
+@WebServerExtender
+@ConfigurerExtender
+@EventAdminSSEEndpoint
 @Component(name = "osgi.enroute.examples.cm", service = { CmApplication.class,
 		ConfigurationListener.class })
 public class CmApplication implements ConfigurationListener {

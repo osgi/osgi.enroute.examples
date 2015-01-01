@@ -13,8 +13,7 @@
 <title>Configuration Admin Example</title>
 
 <link rel="stylesheet" type="text/css"
-	href="/twitter/bootstrap/3/css/bootstrap.css">
-<link href="/osgi.enroute.examples.cm/css/style.css" rel="stylesheet">
+	href="/osgi.enroute.webresource/${bsn}/${Bundle-Version}/*.css">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -36,7 +35,7 @@
 
 		<div class="header">
 			<ul class="nav nav-pills pull-right">
-				<li ng-class="{active: page() == '/'}"><a href="#">About</a></li>
+				<li ng-class="{active: page() == '/'}"><a href="#/">About</a></li>
 				<li ng-class="{active: page() == '/singleton'}"><a
 					href="#/singleton">Singleton</a></li>
 				<li ng-class="{active: page() == '/factory'}"><a
@@ -69,14 +68,10 @@
 
 	</div>
 
-	<script src="/google/angular/1/angular.js"></script>
-	<script src="/google/angular/1/angular-route.js"></script>
-	<script src="/google/angular/1/angular-resource.js"></script>
+	<script src="/osgi.enroute.webresource/${bsn}/${Bundle-Version}/*.js"></script>
 	<script src="/osgi/enroute/jsonrpc/jsonrpc.js"></script>
 	<script src="/osgi/enroute/easse/easse.js"></script>
 	<script src="/osgi/enroute/easse/polyfill/eventsource.js"></script>
-	<script src="/stackexchange/pagedown/1.1/enmarkdown.js"></script>
-	<script src="/osgi.enroute.examples.cm/main/main.js"></script>
 
 </body>
 </html>
