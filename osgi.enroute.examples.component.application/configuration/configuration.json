@@ -1,0 +1,8 @@
+[
+   { 
+   	  "comment":							"Factory configuration for Component",
+      "service.factoryPid":					"osgi.enroute.examples.component",
+      "service.pid":						"initial",
+      "name":								"COMPONENT"
+   }
+]
