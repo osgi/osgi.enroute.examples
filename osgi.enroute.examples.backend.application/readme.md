@@ -12,10 +12,10 @@ The problem is a classic dispatch problem. In this case we need to dispatch the 
 We use OSGi µservices to implement this dispatching. The backend's are implemented as a `Backend` µservice. A Backend Application collects these backends, their type is conveyed using a µservice property. The application provides itself as a service. It provides an API to find a backend by type name and can provide a list of registered backend. Then we also provide a REST interface that uses the application to get the types. The REST interface is implemented using the [OSGi enRoute REST API][1]. It provides the following URIs:
 
 * `GET 	/rest/backend` – Return an array of types.
-* `GET /rest/backend/&lt;type>` – Return a list of MetaData for the entries in the <type> backend.
-* `GET /rest/backend/&lt;type>/&lt;name>` – Get the blob
-* `PUT /rest/backend/&lt;type>/&lt;name>` – Put the blob 
-* `DELETE /rest/backend/&lt;type>/&lt;name>` –  Delete the blob
+* `GET /rest/backend/:type` – Return a list of MetaData for the entries in the <type> backend.
+* `GET /rest/backend/:type>/:name` – Get the blob
+* `PUT /rest/backend/:type>/:name` – Put the blob 
+* `DELETE /rest/backend/:type/:name` –  Delete the blob
 
 ### Packages
 
@@ -28,11 +28,13 @@ The GUI Javascript code can be found in `web` and the resources that are needed 
 
 ### GUI
 
-The application also has a GUI. This GUI allows to create blobs and delete them while showing which blobs are available. To run the app, checkout the project on [githb][2] (osgi.enroute.examples.backend.application). Then select debug.bndrun in bndtools and click on the Debug icon left top. After the app is started you can go to:
+The application also has a GUI. This GUI allows to create blobs and delete them while showing which blobs are available. To run the app, checkout the project on [githb][2] (osgi.enroute.examples.backend.application). Then select debug.bndrun in bndtools, resolve, and then click on the Debug icon. After the app is started you can go to:
 
 http://localhost:8080/osgi.enroute.examples.backend
 
-The GUI should be self explanatory.
+The GUI should be self explanatory. Don't forget to look at XRay. You can find XRay at:
+
+http://localhost:8080/system/console/xray
 
 ## The Original Email Conversation
 

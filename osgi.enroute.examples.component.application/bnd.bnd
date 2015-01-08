@@ -4,11 +4,8 @@
 
 Bundle-Version: 1.0.0.${tstamp}
 Bundle-Description: \
-	This is the OSGI ENROUTE EXAMPLES COMPONENT APPLICATION bundle. It carries the configuration for an application \
-	and provides some basic very much application specific stuff.  It provides a button \
-	that calls a REST function that turns a text into upper case. \
-	\
-	${warning;Please update this Bundle-Description in osgi.enroute.examples.component.application/bnd.bnd}
+	An example OSGi enRoute project demonstrating the use of Declarative Services \
+	components. 
 
 Private-Package: \
 	osgi.enroute.examples.component.application,\
@@ -44,5 +41,5 @@ Private-Package: \
 	osgi.enroute.rest.simple.provider;version='[2.0.0,2.0.1)',\
 	osgi.enroute.scheduler.simple.provider;version='[1.0.1,1.0.2)',\
 	osgi.enroute.twitter.bootstrap.webresource;version='[3.3.1,3.3.2)',\
-	osgi.enroute.web.simple.provider;version='[1.2.2,1.2.3)'
+	osgi.enroute.web.simple.provider;version='[1.2.3,1.2.4)'
 -resolve: auto
