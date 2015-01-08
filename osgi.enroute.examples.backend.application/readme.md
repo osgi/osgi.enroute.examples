@@ -13,8 +13,8 @@ We use OSGi µservices to implement this dispatching. The backend's are implemen
 
 * `GET 	/rest/backend` – Return an array of types.
 * `GET /rest/backend/:type` – Return a list of MetaData for the entries in the <type> backend.
-* `GET /rest/backend/:type>/:name` – Get the blob
-* `PUT /rest/backend/:type>/:name` – Put the blob 
+* `GET /rest/backend/:type/:name` – Get the blob
+* `PUT /rest/backend/:type/:name` – Put the blob 
 * `DELETE /rest/backend/:type/:name` –  Delete the blob
 
 ### Packages
