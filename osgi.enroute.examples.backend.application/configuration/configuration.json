@@ -1,0 +1,8 @@
+[
+   { 
+   	  "comment":							"Factory configuration for Backend",
+      "service.factoryPid":					"osgi.enroute.examples.backend",
+      "service.pid":						"initial",
+      "name":								"BACKEND"
+   }
+]

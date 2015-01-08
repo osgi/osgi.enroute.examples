@@ -1,0 +1,84 @@
+<!-- 
+	Show a table with the type (a popup), a list of blobs, the 
+	name of a selected blob, and the text of the selected blob.
+ -->
+<section ng-cloak>
+
+
+	<div>
+		<table class="table table-small">
+
+			<colgroup>
+				<col style="width: 30%; max-width: 10em" class=control-label>
+				<col class=form-control>
+			</colgroup>
+
+			<tbody>
+
+				<!--
+				The types popup  
+			 -->
+				<tr>
+					<td><label for="type">Type</label></td>
+					<td><select ng-options="v.toUpperCase() for v in bm.types"
+						ng-model="bm.type" ng-show=bm.types.length ng-change=bm.refresh()></select>
+						<div ng-hide=bm.types.length>No types</div></td>
+				<tr>
+
+					<!--
+				The list of resources for the given type  
+			 -->
+				<tr>
+					<td><label for="bm.resources" class="control-label">Resources</label>
+					</td>
+					<td>
+						<table class="table" ng-show=bm.resources.length>
+							<tr ng-repeat="r in bm.resources | orderBy: 'name'"
+								ng-class="{active:bm.name==r.name}">
+								<td ng-click=bm.read(r)>{{r.name}}</td>
+								<td ng-click=bm.read(r)>{{r.size}}</td>
+								<td ng-click=bm.read(r)>{{r.modified | date }}</td>
+								<td>
+									<button type="button" class="close" ng-click=bm.remove(r)
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<!--
+				The name of the selected blob  
+			 -->
+				<tr>
+
+					<td><label for="name">Name</label></td>
+					<td><input type="text" class="form-control" id="name"
+						placeholder="Enter name" ng-model=bm.name></td>
+				<tr>
+
+					<!--
+				The content of the selected blob  
+			 -->
+				<tr>
+					<td><label for="text">Text</label></td>
+					<td><textarea class="form-control" id="text"
+							placeholder="Enter text to store" ng-model=bm.text></textarea></td>
+				<tr>
+			</tbody>
+		</table>
+	</div>
+	<!--
+		 The button to store the blob
+	 -->
+	<div class=clearfix style="margin-bottom:2em">
+	
+		<button ng-click=bm.store() type="button"
+			class="btn btn-default btn-primary pull-right"
+			ng-disabled="!bm.text || !bm.type || !bm.name">Store</button>
+			
+
+	</div>
+</section>

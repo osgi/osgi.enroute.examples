@@ -1,0 +1,35 @@
+#
+# OSGI ENROUTE EXAMPLES BACKEND APPLICATION APPLICATION
+#
+
+Bundle-Version: 1.0.0.${tstamp}
+Bundle-Description: \
+	This application was developed after someone asked on the OSGi dev mailing list \
+	how to write an application that dispatched between backend stores. Since this was \
+	a nice way to show what you can do with enRoute this became the result. There \
+	were several proposals but some were quite of topic. It seemed like a good idea 
+	for the enRoute work to take such a practical example and work it out.
+
+Private-Package: \
+	osgi.enroute.examples.backend.application,\
+	osgi.enroute.examples.backend.file.provider,\
+	osgi.enroute.examples.backend.memory.provider
+	
+Export-Package: osgi.enroute.examples.backend.api
+
+Bundle-Vendor: \
+	OSGi Alliance
+
+-includeresource: \
+	{readme.md}, \
+	{configuration=configuration}, \
+	{static=static}, \
+	{web=web}
+
+-buildpath: \
+	osgi.enroute.base.api,\
+	osgi.enroute.logger.simple.provider,\
+	osgi.enroute.web.simple.provider;version=1.2
+	
+
+
