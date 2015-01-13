@@ -1,0 +1,58 @@
+<section ng-cloak>
+	<div class=container>
+		<div class=row>
+			<div class=col-md-8>
+				<table class="table table-small">
+					<colgroup>
+						<col style="width: 5%">
+						<col style="width: 20%">
+						<col style="width: 35%">
+						<col style="width: 15%">
+						<col style="width: 20%">
+						<col style="width: 5%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Method</th>
+							<th>Parameters</th>
+							<th>Time</th>
+							<th>Event</th>
+							<th>Cmd</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='t in trackers'>
+							<td>{{t.id}}</td>
+							<td>{{t.method}}</td>
+							<td>{{t.parameter}}</td>
+							<td>{{t.modified|date}}</td>
+							<td>{{t.lastEvent}} {{t.ticks.length}}</td>
+							<td>
+								<button type="button" class="close" ng-click=sm.remove(t)
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class=col-md-4>
+				<h2>Examples</h2>
+				<div ng-repeat="(name,info) in sm.examples" style="margin-bottom:1em;">
+					<p>
+						<b>{{sm.toName(name)}}</b>
+					<p>{{info.description}}
+					<div class="input-group">
+						<input type="{{info.type}}" class="form-control"
+							placeholder="{{info.deflt}}" ng-model=parameter> <span
+							class="input-group-btn">
+							<button class="btn btn-default" type="button" ng-click=sm.execute(name,parameter)>Go!</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,28 @@
+#
+# OSGI ENROUTE EXAMPLES SCHEDULER APPLICATION APPLICATION
+#
+
+Bundle-Version: 1.0.0.${tstamp}
+Bundle-Description: \
+	Examples to demonstrate the use of the OSGi enRoute scheduler. The Scheduler API provides \
+	a time based functions. This application shows a timeline and allows creating and \
+	cancelation of the examples.
+
+Private-Package: \
+	osgi.enroute.examples.scheduler.application,\
+	osgi.enroute.examples.scheduler.examples
+
+Bundle-Vendor: OSGi Alliance
+	
+-includeresource: \
+	{readme.md}, \
+	{configuration=configuration}, \
+	{static=static}, \
+	web=web
+
+-buildpath: \
+	osgi.enroute.base.api,\
+	osgi.enroute.logger.simple.provider,\
+	osgi.enroute.web.simple.provider;version=1.2,\
+	osgi.enroute.scheduler.simple.provider
+	
