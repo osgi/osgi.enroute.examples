@@ -3,6 +3,7 @@ package osgi.enroute.examples.scheduler.examples;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -57,7 +58,7 @@ public class Examples {
 
 		CancellablePromise<String> promise = scheduler.after(() -> timeout
 				+ " ms", timeout < 1000 ? 1000 : timeout);
-
+		
 		promise.then((p) -> {
 			out.println("Finished afterWithCallback " + id);
 			return null;
@@ -73,18 +74,12 @@ public class Examples {
 	@Tooltip(description = "Schedule a promise to resolve at a certain date-time", type = "datetime-local", deflt = "2015-01-13T09:54:42.820Z")
 	public CancellablePromise<Instant> atWithPromise(int id, String parameter)
 			throws Exception {
-		Instant zd = Instant.now().plus(1, ChronoUnit.SECONDS);
-		try {
-			zd = LocalDateTime.parse(parameter, ISODATE)
-					.atZone(ZoneId.of("UTC")).toInstant();
-		} catch (Exception e) {
-			throw new Exception("Parameter must be a valid date like "
-					+ ISODATE.format(ZonedDateTime.ofInstant(zd,
-							ZoneId.systemDefault())) + " not like " + parameter
-					+ " " + e.getMessage());
-		}
-
-		CancellablePromise<Instant> promise = scheduler.at(zd);
+		
+		LocalDateTime localDateTime = LocalDateTime.parse(parameter, ISODATE);
+		ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("UTC"));
+		Instant instant = zonedDateTime.toInstant();
+		
+		CancellablePromise<Instant> promise = scheduler.at(instant);
 		String actual = parameter;
 
 		promise.then((p) -> {

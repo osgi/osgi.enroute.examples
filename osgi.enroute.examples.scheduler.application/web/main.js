@@ -10,7 +10,7 @@
 	'use strict';
 
 	var MODULE = angular.module('osgi.enroute.examples.scheduler', [ 'ngRoute',
-			'ngResource', 'enEasse', 'enMarkdown' ]);
+			'ngResource', 'enEasse', 'enMarkdown', 'enClock' ]);
 
 	var alerts = [];
 
