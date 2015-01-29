@@ -1,0 +1,29 @@
+<section ng-cloak>
+
+	<h1>OSGI ENROUTE EXAMPLES PROPERTIES APPLICATION</h1>
+	<p>${Bundle-Description}</p>
+
+	<div class="input-group input-group-sm">
+	  <span class="input-group-addon btn btn-default" ng-click=query(key)>Get</span>
+	  <input type="text" class="form-control" ng-model=key placeholder="Key">
+	</div>
+
+	<p>{{value}}</p>
+
+	<table class="table table-small">
+		<colgroup>
+		</colgroup>
+		<thead>
+			<tr>
+				<td>Key</td>
+				<td>Value</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="(k,v) in properties">
+				<td>{{k}}</td>
+				<td>{{breaker(v)}}</td>
+			</tr>
+		</tbody>
+	</table>
+</section>

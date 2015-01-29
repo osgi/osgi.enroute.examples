@@ -1,0 +1,9 @@
+
+#
+# Try uncommenting these for testing the 
+# examples properties project
+#
+
+#-runvm: -DRUNVM_IS_SET_IN_EXT=1
+#-runvm.ext: -DRUNVM_EXT_PLUS_IS_SET=1
+

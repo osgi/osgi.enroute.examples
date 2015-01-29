@@ -1,0 +1,30 @@
+#
+# OSGI ENROUTE EXAMPLES PROPERTIES APPLICATION APPLICATION
+#
+
+Bundle-Version: 1.0.0.${tstamp}
+Bundle-Description: \
+	This is a small project that shows the use of properties in bnd. In \
+	the osgi.enroute.examples.properties.bndrun file we can set or not set \
+	the -runvm parameter. However, we can inherit this parameter from \
+	cnf/build.bnd and any cnf/*.bnd file. In cnf/build.bnd you can find \
+	commented examples as well as in cnf/ext/examples.properties.bnd. You \
+	can try out different combinations. At http://localhost:8080/osgi.enroute.examples.properties \
+	you can find a user interface that shows the result. Note: bndtools has a refresh problem, \
+	you have to close and open the bndrun file after you made changes to the \
+	build.bnd or etx/*.bnd files. 
+
+Private-Package:  \
+	osgi.enroute.examples.properties.application
+	
+-includeresource: \
+	{readme.md}, \
+	{configuration=configuration}, \
+	{static=static}, \
+	web=web
+
+-buildpath: \
+	osgi.enroute.base.api,\
+	osgi.enroute.logger.simple.provider,\
+	osgi.enroute.web.simple.provider;version=1.2
+	

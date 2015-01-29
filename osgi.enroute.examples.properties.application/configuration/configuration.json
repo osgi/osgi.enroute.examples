@@ -1,0 +1,8 @@
+[
+   { 
+   	  "comment":							"Factory configuration for Properties",
+      "service.factoryPid":					"osgi.enroute.examples.properties",
+      "service.pid":						"initial",
+      "name":								"PROPERTIES"
+   }
+]
