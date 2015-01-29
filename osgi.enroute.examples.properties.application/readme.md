@@ -24,7 +24,7 @@ Uncomment the `-runvm.home` line so it looks like:
 	-runvm 		= -DRUNVM_HOME_IS_SET=1
 	-runvm.home = -DRUNVM_HOME_PLUS_IS_SET=1
 
-Again, quit the bndrun editor and reopen (until we fixed this bug). Then quit the running framework and start it again, then refresh. You now can see the 2 keys `RUNVM_HOME__IS_SET` and `RUNVM_HOME_PLUS_IS_SET`. You can see both because bnd merges all instructions that start with `-runvm`.
+Again, quit the bndrun editor and reopen [until we fixed this bug][1]. Then quit the running framework and start it again, then refresh. You now can see the 2 keys `RUNVM_HOME__IS_SET` and `RUNVM_HOME_PLUS_IS_SET`. You can see both because bnd merges all instructions that start with `-runvm`.
 
 ## Workspace Wide
 
@@ -47,6 +47,12 @@ In the `cnf/ext` directory you can find the `examples.properties.bnd` file. All 
 	#-runvm.ext: -DRUNVM_EXT_PLUS_IS_SET=1
 
 Again, play with uncommenting and then refreshing the browser. Did I tell you not to open and close the browser and restart the framework? 
+
+## The Bug
+
+You can follow the bug that requires this extensive refreshing [here][1]
+
+[1]: https://github.com/bndtools/bndtools/issues/1010
 
 
 
