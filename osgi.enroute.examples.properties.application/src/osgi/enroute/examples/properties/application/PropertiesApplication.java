@@ -5,6 +5,8 @@ import java.util.Properties;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import osgi.enroute.capabilities.AngularWebResource;
 import osgi.enroute.capabilities.BootstrapWebResource;
@@ -19,14 +21,17 @@ import osgi.enroute.rest.api.RESTRequest;
 @ConfigurerExtender
 @Component(name="osgi.enroute.examples.properties")
 public class PropertiesApplication implements REST {
-
+	Logger logger = LoggerFactory.getLogger(PropertiesApplication.class);
+	
 	BundleContext context;
 	
 	@Activate
 	void activate(BundleContext ctx) {
+		logger.info("Activated");
 		this.context =ctx;
 	}
 	public String getProperty(RESTRequest rq, String string) {
+		logger.info("getProperty " + string);
 		System.out.println("Get " + string);
 		return context.getProperty(string);
 	}
