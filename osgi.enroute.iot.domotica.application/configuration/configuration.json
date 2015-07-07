@@ -1,0 +1,8 @@
+[
+   { 
+   	  "comment":							"Factory configuration for Domotica",
+      "service.factoryPid":					"osgi.enroute.iot.domotica",
+      "service.pid":						"initial",
+      "name":								"DOMOTICA"
+   }
+]
