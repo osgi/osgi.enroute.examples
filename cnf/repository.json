@@ -1,3 +1,13 @@
 {
- 
+ "revisionRefs":[{
+  "artifactId":"parsii","baseline":"1.4.0","bsn":"com.scireum__parsii","created":1417084903000,"description":"parsii is a super fast and lightweight parser and expression evaluator","groupId":"com.scireum","md5":"1AB8D5C0B1B252AAE1AC7CA6DFD00BD9","name":"parsii","phase":"MASTER","revision":"8ED84B0FE7E68A04CCDDE538E67053A66D356709","size":47529,"urls":["http://repo1.maven.org/maven2/com/scireum/parsii/1.4/parsii-1.4.jar"],"version":"1.4"
+ },{
+  "artifactId":"hawtbuf","baseline":"1.10.0","bsn":"org.fusesource.hawtbuf.hawtbuf","created":1392921032969,"description":"HawtBuf: a rich byte buffer library","errors":1,"groupId":"org.fusesource.hawtbuf","md5":"EE10E39E05BE06EAF267F8C0F39409C4","name":"hawtbuf","phase":"MASTER","revision":"A20907168EB4F05C8F777E1671D8070CD06715E4","size":50150,"urls":["http://repo1.maven.org/maven2/org/fusesource/hawtbuf/hawtbuf/1.10/hawtbuf-1.10.jar"],"version":"1.10"
+ },{
+  "artifactId":"hawtdispatch","baseline":"1.20.0","bsn":"org.fusesource.hawtdispatch.hawtdispatch","created":1391616667178,"description":"HawtDispatch: The libdispatch style API for Java","errors":1,"groupId":"org.fusesource.hawtdispatch","md5":"8607CFCD743FFD30CFE54EECC45ACF63","name":"hawtdispatch","phase":"MASTER","revision":"390FA83E97939C333AE1F82738FF5210294F720C","size":119046,"urls":["http://repo1.maven.org/maven2/org/fusesource/hawtdispatch/hawtdispatch/1.20/hawtdispatch-1.20.jar"],"version":"1.20"
+ },{
+  "artifactId":"hawtdispatch-transport","baseline":"1.20.0","bsn":"org.fusesource.hawtdispatch.hawtdispatch-transport","created":1391616695132,"description":"HawtDispatch Transport: Transport abstractions for HawtDispatch","errors":1,"groupId":"org.fusesource.hawtdispatch","md5":"D65F324CE4FC61E1CA8D0D07EEB641B1","name":"hawtdispatch-transport","phase":"MASTER","revision":"B4F58ECDC9FA770B86F1CAF88DA7ED71EAA511F2","size":127595,"urls":["http://repo1.maven.org/maven2/org/fusesource/hawtdispatch/hawtdispatch-transport/1.20/hawtdispatch-transport-1.20.jar"],"version":"1.20"
+ },{
+  "artifactId":"mqtt-client","baseline":"1.10.0","bsn":"org.fusesource.mqtt-client.mqtt-client","created":1394805011062,"description":"mqtt-client provides an ASL 2.0 licensed API to MQTT. It takes care of     automatically reconnecting to your MQTT server and restoring your client     session if any network failures occur. Applications can use a blocking     API style, a futures based API, or a callback/continuations passing API     style.","errors":1,"groupId":"org.fusesource.mqtt-client","md5":"C376FC374607C19B4AD6865186EA83C7","name":"mqtt-client","phase":"MASTER","revision":"B7FD7E41D2F5A9D4391D6830DC1BB69627845268","size":115619,"tag":"mqtt-client-project-1.10","urls":["http://repo1.maven.org/maven2/org/fusesource/mqtt-client/mqtt-client/1.10/mqtt-client-1.10.jar"],"version":"1.10"
+ }]
 }
