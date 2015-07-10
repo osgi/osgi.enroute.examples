@@ -26,6 +26,9 @@ public interface Controller {
 	 * @param alternative
 	 */
 	void swtch(boolean alternative);
+	
+	boolean getSwitch();
+	
 
 	/**
 	 * Read an RFID. Resolves the promise when a new RFID is read.
