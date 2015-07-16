@@ -10,8 +10,9 @@ JPMCommand:					client
 
 -runfw:						org.eclipse.osgi
 
--runrequires:  \
-	osgi.identity;filter:='(osgi.identity=osgi.enroute.rube.goldberg.client.application)'
+-runrequires: \
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.rube.goldberg.client.application)',\
+	osgi.identity;filter:='(osgi.identity=org.eclipse.equinox.coordinator)'
 
 -runbundles: \
 	biz.aQute.bnd.annotation;version='[2.4.0,2.4.1)',\
