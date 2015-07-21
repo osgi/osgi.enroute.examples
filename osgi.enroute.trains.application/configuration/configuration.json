@@ -1,0 +1,8 @@
+[
+   { 
+   	  "comment":							"Factory configuration for Trains",
+      "service.factoryPid":					"osgi.enroute.trains",
+      "service.pid":						"initial",
+      "name":								"TRAINS"
+   }
+]
