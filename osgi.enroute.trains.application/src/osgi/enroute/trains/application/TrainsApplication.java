@@ -5,7 +5,7 @@ import org.osgi.service.component.annotations.Component;
 import osgi.enroute.capabilities.AngularWebResource;
 import osgi.enroute.capabilities.BootstrapWebResource;
 import osgi.enroute.capabilities.ConfigurerExtender;
-import osgi.enroute.capabilities.EventAdminSSEEndpoint;
+import osgi.enroute.capabilities.EasseWebResource;
 import osgi.enroute.capabilities.WebServerExtender;
 import osgi.enroute.rest.api.REST;
 import osgi.enroute.rest.api.RESTRequest;
@@ -14,7 +14,7 @@ import osgi.enroute.rest.api.RESTRequest;
 @BootstrapWebResource(resource="css/bootstrap.css")
 @WebServerExtender
 @ConfigurerExtender
-@EventAdminSSEEndpoint
+@EasseWebResource
 @Component(name="osgi.enroute.trains")
 public class TrainsApplication implements REST {
 

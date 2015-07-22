@@ -3,7 +3,7 @@
 (function() {
 
 	var MODULE = angular.module('osgi.enroute.trains',
-			[ 'ngRoute', 'ngResource' ]);
+			[ 'ngRoute', 'ngResource', 'enEasse' ]);
 
 	MODULE.config( function($routeProvider) {
 		$routeProvider.when('/', { controller: mainProvider, templateUrl: '/osgi.enroute.trains/main/htm/home.htm'});
