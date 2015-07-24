@@ -5,10 +5,10 @@ import org.osgi.util.promise.Promise;
 import osgi.enroute.trains.cloud.api.Color;
 
 /**
- * A controller conrols a signal, a switch and an RFID reader. This API provides
+ * A controller controls a signal, a switch and an RFID reader. This API provides
  * access to the underlying information
  */
-public interface Controller {
+public interface SegmentController {
 	
 	/**
 	 * Service property for identifying this controller
