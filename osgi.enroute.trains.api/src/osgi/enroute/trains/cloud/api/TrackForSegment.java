@@ -3,7 +3,7 @@ package osgi.enroute.trains.cloud.api;
 /**
  * The public Track interface for a Track Controller
  */
-public interface TrackForController extends TrackInfo {
+public interface TrackForSegment extends TrackInfo {
 
 	/**
 	 * Send when a train has been identified at a locator segment
