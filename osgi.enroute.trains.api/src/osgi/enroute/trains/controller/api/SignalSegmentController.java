@@ -13,4 +13,5 @@ public interface SignalSegmentController extends SegmentController {
 	 */
 	void signal(Color color);
 
+	Color getSignal();
 }
