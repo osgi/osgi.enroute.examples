@@ -1,0 +1,24 @@
+#
+# OSGI ENROUTE TRAINS TRACK MANAGER EXAMPLE PROVIDER BUNDLE 
+#
+
+
+Bundle-Version:					1.0.0.${tstamp}
+Bundle-Description: This is OSGI ENROUTE TRAINS Example Track Manager project.
+
+Private-Package:  \
+	osgi.enroute.trains.track.manager.example.provider
+	
+-buildpath: \
+	osgi.enroute.base.api;version=1.0,\
+	biz.aQute.junit,\
+	osgi.enroute.trains.api;version=latest
+
+-includeresource: {readme.md}
+
+
+-runrequires:  \
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.trains.track.manager.example.provider)'
+	
+-runbundles: \
+	${error;Resolve first}
