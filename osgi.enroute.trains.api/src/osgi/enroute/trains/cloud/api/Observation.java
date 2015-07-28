@@ -6,7 +6,7 @@ import org.osgi.dto.DTO;
  * Event class for sending out information about what's happening
  */
 public class Observation extends DTO {
-	public final static String TOPIC = "/osgi/trains/observation";
+	public final static String TOPIC = "osgi/trains/observation";
 
 	public enum Type {
 		CHANGE, LOCATED, ASSIGNMENT, SIGNAL, SWITCH
