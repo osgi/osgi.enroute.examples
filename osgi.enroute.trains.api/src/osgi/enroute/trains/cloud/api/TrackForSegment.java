@@ -24,4 +24,14 @@ public interface TrackForSegment extends TrackInfo {
 	 *            defines the normal or alternative track
 	 */
 	void switched(String segment, boolean alternative);
+	
+	/**
+	 * Indicate that a signal changed color
+	 * 
+	 * @param segment
+	 *            the name of the signal segment
+	 * @param color
+	 *            the new signal color
+	 */
+	void signal(String segment, Color color);
 }
