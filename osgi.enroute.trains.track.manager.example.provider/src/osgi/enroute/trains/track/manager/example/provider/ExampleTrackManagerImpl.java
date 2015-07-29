@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
@@ -263,5 +264,17 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 	@Reference 
 	public void setDTOs(DTOs dtos){
 		this.dtos = dtos;
+	}
+
+	@Override
+	public Set<String> getBlocked() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void blocked(String segment, String reason, boolean blocked) {
+		// TODO Auto-generated method stub
+		
 	}
 }

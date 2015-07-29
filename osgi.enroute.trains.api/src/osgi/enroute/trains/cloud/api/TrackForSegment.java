@@ -34,4 +34,10 @@ public interface TrackForSegment extends TrackInfo {
 	 *            the new signal color
 	 */
 	void signal(String segment, Color color);
+	
+	/**
+	 * External indication that a segment is broken 
+	 */
+	
+	void blocked(String segment, String reason, boolean blocked);
 }

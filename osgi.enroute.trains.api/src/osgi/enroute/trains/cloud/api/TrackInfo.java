@@ -2,6 +2,7 @@ package osgi.enroute.trains.cloud.api;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * General track info for Gui, trains, and controllers.
@@ -37,6 +38,13 @@ public interface TrackInfo {
 	 * @return
 	 */
 	Map<String, Boolean> getSwitches();
+
+	/**
+	 * Get the blocked segments
+	 * 
+	 * @return
+	 */
+	Set<String> getBlocked();
 
 	/**
 	 * Get the current locators and their last seen RFID

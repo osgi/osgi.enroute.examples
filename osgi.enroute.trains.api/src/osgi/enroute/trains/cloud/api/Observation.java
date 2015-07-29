@@ -9,7 +9,7 @@ public class Observation extends DTO {
 	public final static String TOPIC = "osgi/trains/observation";
 
 	public enum Type {
-		CHANGE, LOCATED, ASSIGNMENT, SIGNAL, SWITCH
+		CHANGE, LOCATED, ASSIGNMENT, SIGNAL, SWITCH, BLOCKED
 	}
 
 	public Type type;
@@ -19,4 +19,5 @@ public class Observation extends DTO {
 	public String assignment;
 	public long time;
 	public long id;
+	public String message;
 }
