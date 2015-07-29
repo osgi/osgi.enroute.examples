@@ -104,7 +104,7 @@ public class TrackControllerImpl implements EventHandler {
 		
 		// track new rfid detections on this controller
 		if(rfidSegment!=null){
-			String segment = rfidSegment.name;
+			String segment = rfidSegment.track+"-"+rfidSegment.sequence;
 			trackRFID(id, segment);
 		}
 		
