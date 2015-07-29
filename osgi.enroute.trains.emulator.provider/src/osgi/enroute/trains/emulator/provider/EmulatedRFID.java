@@ -15,7 +15,7 @@ import aQute.lib.converter.Converter;
 @Component(name="osgi.enroute.trains.controller.rfid",
 	designateFactory = ControllerConfig.class,
 	immediate=true)
-public class EmulatedRFID implements RFIDSegmentController {
+public class EmulatedRFID implements RFIDSegmentController, RFIDTrigger {
 	static Logger logger = LoggerFactory.getLogger(EmulatedRFID.class);
 	
 	// controller.id
@@ -32,15 +32,21 @@ public class EmulatedRFID implements RFIDSegmentController {
 	}
 	
 	// called when (emulated) train is detected
+	@Override
 	public synchronized void trigger(String rfid){
-		// resolve next
-		nextRFID.resolve(rfid);
-		// set lastRFID
-		this.lastRFID = rfid;
-		// create new deferred for next
+		// first keep the old deferred we have to resolve
+		Deferred<String> toResolve = nextRFID;
+
+		// create new deferred for next, since we will call 
+		// a new nextRFID() when the previous is resolved
 		nextRFID = new Deferred<String>();
 		
-		logger.info("RFID Controller "+id+" was triggerd by "+rfid);
+		// resolve previous
+		toResolve.resolve(rfid);
+		// set lastRFID
+		this.lastRFID = rfid;
+		
+		logger.info("RFID Controller "+id+" was triggered by "+rfid);
 	}
 	
 	@Override

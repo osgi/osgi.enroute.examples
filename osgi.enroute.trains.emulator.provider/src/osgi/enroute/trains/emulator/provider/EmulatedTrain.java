@@ -13,12 +13,14 @@ import aQute.lib.converter.Converter;
 @Component(name="osgi.enroute.trains.train",
 	designateFactory = TrainConfig.class,
 	immediate=true)
-public class EmulatedTrain implements TrainController {
+public class EmulatedTrain implements TrainController, Train {
 	static Logger logger = LoggerFactory.getLogger(EmulatedTrain.class);
 
 	private String train;
 	
 	private boolean light = false;
+	
+	private int directionAndSpeed = 0;
 	
 	@Activate
 	public void activate(Map<String, Object> map) throws Exception {
@@ -28,7 +30,7 @@ public class EmulatedTrain implements TrainController {
 	
 	@Override
 	public void move(int directionAndSpeed) {
-		// TODO start moving!
+		this.directionAndSpeed = directionAndSpeed;
 		logger.info("Train "+train+" is moving "+directionAndSpeed);
 	}
 
@@ -41,6 +43,16 @@ public class EmulatedTrain implements TrainController {
 		} else {
 			logger.info("Train "+train+" turns his light off");
 		}
+	}
+
+	@Override
+	public int getDirectionAndSpeed() {
+		return directionAndSpeed;
+	}
+
+	@Override
+	public String getName() {
+		return train;
 	}
 
 }
