@@ -18,7 +18,9 @@ public class Segment extends DTO {
 	}
 
 	/**
- 	* Name of the track
+ 	* Name of the track.This is the name required to get permission 
+ 	* from the Track Manager. If this name starts with X then no admission is required. This 
+ 	* is generally for switches.
  	*/
  	public String track;
  	
