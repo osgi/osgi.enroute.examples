@@ -18,9 +18,16 @@ public class Segment extends DTO {
 	}
 
 	/**
-	 * Name of the segment
+ 	* Name of the track.This is the name required to get permission 
+ 	* from the Track Manager. If this name starts with X then no admission is required. This 
+ 	* is generally for switches.
+ 	*/
+ 	public String track;
+ 	
+	/**
+	 * Sequence of the segment in the track
 	 */
-	public String name;
+	public int sequence;
 
 	/**
 	 * Length of the segment in millimeters, can be zero. It an be zero because
