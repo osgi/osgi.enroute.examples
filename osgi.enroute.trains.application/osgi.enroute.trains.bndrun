@@ -10,9 +10,12 @@ JPMCommand:					trains
 
 -runfw:						org.eclipse.osgi
 
--runrequires:  \
-	osgi.identity;filter:='(osgi.identity=osgi.enroute.trains.application)'
-
+-runrequires: \
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.trains.application)',\
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.trains.emulator.provider)',\
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.trains.track.controller.provider)',\
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.trains.track.manager.example.provider)',\
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.trains.train.manager.example.provider)'
 -runbundles: \
 	biz.aQute.bnd.annotation;version='[2.4.0,2.4.1)',\
 	biz.aQute.bndlib;version='[2.4.0,2.4.1)',\
@@ -29,5 +32,9 @@ JPMCommand:					trains
 	osgi.enroute.logger.simple.provider;version='[1.1.1,1.1.2)',\
 	osgi.enroute.rest.simple.provider;version='[2.0.0,2.0.1)',\
 	osgi.enroute.trains.application;version='[1.0.0,1.0.1)',\
+	osgi.enroute.trains.emulator.provider;version='[1.0.0,1.0.1)',\
+	osgi.enroute.trains.track.controller.provider;version='[1.0.0,1.0.1)',\
+	osgi.enroute.trains.track.manager.example.provider;version='[1.0.0,1.0.1)',\
+	osgi.enroute.trains.train.manager.example.provider;version='[1.0.0,1.0.1)',\
 	osgi.enroute.twitter.bootstrap.webresource;version='[3.3.2,3.3.3)',\
-	osgi.enroute.web.simple.provider;version='[1.3.1,1.3.2)'
+	osgi.enroute.web.simple.provider;version='[1.3.2,1.3.3)'
