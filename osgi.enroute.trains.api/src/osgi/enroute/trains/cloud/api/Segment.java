@@ -18,9 +18,14 @@ public class Segment extends DTO {
 	}
 
 	/**
-	 * Name of the segment
+ 	* Name of the track
+ 	*/
+ 	public String track;
+ 	
+	/**
+	 * Sequence of the segment in the track
 	 */
-	public String name;
+	public int sequence;
 
 	/**
 	 * Length of the segment in millimeters, can be zero. It an be zero because
