@@ -16,6 +16,7 @@ import osgi.enroute.trains.cloud.api.Observation;
 import osgi.enroute.trains.cloud.api.Segment;
 import osgi.enroute.trains.cloud.api.TrackForSegment;
 import osgi.enroute.trains.cloud.api.TrackForTrain;
+import osgi.enroute.trains.cloud.api.TrackInfo;
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Reference;
@@ -23,7 +24,8 @@ import aQute.bnd.annotation.component.Reference;
 /**
  * 
  */
-@Component(name = "osgi.enroute.trains.track.manager")
+@Component(name = "osgi.enroute.trains.track.manager",
+		provide={TrackForSegment.class, TrackForTrain.class, TrackInfo.class})
 public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 	static Logger logger = LoggerFactory.getLogger(ExampleTrackManagerImpl.class);
 
@@ -120,6 +122,19 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		s8.to = new String[]{"A-1"};
 		s8.controller = 8; // switch controller
 		segments.put("X2", s8);
+		
+		// how to initialize this? Should the TrackController publish 
+		// initial state to the TrackManager once it has a reference?
+		locators.put("A-1", null);
+		locators.put("B-1", null);
+		locators.put("C-1", null);
+		
+		switches.put("X1", false);
+		switches.put("X2", false);
+		
+		signals.put("A-2", Color.GREEN);
+		signals.put("B-2", Color.GREEN);
+		signals.put("C-2", Color.GREEN);
 	}
 	
 	@Override
@@ -179,6 +194,8 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 
 	@Override
 	public void locatedTrainAt(String train, String segment) {
+		locators.put(segment, train);
+		
 		Observation o = new Observation();
 		synchronized(observations){
 			o.type = Observation.Type.LOCATED;
@@ -195,6 +212,8 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 
 	@Override
 	public void switched(String segment, boolean alternative) {
+		switches.put(segment, alternative);
+		
 		Observation o = new Observation();
 		synchronized(observations){
 			o.type = Observation.Type.SWITCH;
@@ -210,6 +229,8 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 
 	@Override
 	public void signal(String segment, Color color) {
+		signals.put(segment, color);
+		
 		Observation o = new Observation();
 		synchronized(observations){
 			o.type = Observation.Type.SIGNAL;

@@ -19,6 +19,7 @@ import osgi.enroute.trains.controller.api.RFIDSegmentController;
 import osgi.enroute.trains.controller.api.SegmentController;
 import osgi.enroute.trains.controller.api.SignalSegmentController;
 import osgi.enroute.trains.controller.api.SwitchSegmentController;
+import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Reference;
 
@@ -86,34 +87,21 @@ public class TrackControllerImpl implements EventHandler {
 		}
 	}
 	
-	@Reference
-	public void setTrackManager(TrackForSegment tm){
-		this.trackManager = tm;
-	}
-	
-	@Reference(type='*')
-	public void addRFIDController(RFIDSegmentController c, Map<String, Object> properties){
-		int id = Integer.parseInt((String)properties.get(SegmentController.CONTROLLER_ID));
-		// find the segment for this controller
-		Segment rfidSegment = null;
-		for(Segment s : trackManager.getSegments().values()){
-			if(s.controller==id){
-				rfidSegment = s;
+	private void startTracking(int controller){
+		if(trackManager != null){
+			Segment rfidSegment = null;
+			for(Segment s : trackManager.getSegments().values()){
+				if(s.controller==controller){
+					rfidSegment = s;
+				}
+			}
+			
+			// track new rfid detections on this controller
+			if(rfidSegment!=null){
+				String segment = rfidSegment.track+"-"+rfidSegment.sequence;
+				trackRFID(controller, segment);
 			}
 		}
-		
-		// track new rfid detections on this controller
-		if(rfidSegment!=null){
-			String segment = rfidSegment.track+"-"+rfidSegment.sequence;
-			trackRFID(id, segment);
-		}
-		
-		rfids.put(id, c);
-	}
-	
-	public void removeRFIDController(RFIDSegmentController c, Map<String, Object> properties){
-		int id = Integer.parseInt((String)properties.get(SegmentController.CONTROLLER_ID));
-		rfids.remove(id);
 	}
 	
 	private void trackRFID(final int controller, final String segment){
@@ -130,6 +118,37 @@ public class TrackControllerImpl implements EventHandler {
 				trackRFID(controller, segment); 
 				return null;});
 		}
+	}
+	
+	@Reference
+	public void setTrackManager(TrackForSegment tm){
+		this.trackManager = tm;
+
+		// start tracking RFID notifications for any previously registered RFIDControllers
+		synchronized(rfids){
+			for(int c : rfids.keySet()){
+				startTracking(c);
+			}
+		}
+		
+		// publish initial states 
+		synchronized(switches){
+	
+		}
+	}
+	
+	@Reference(type='*')
+	public void addRFIDController(RFIDSegmentController c, Map<String, Object> properties){
+		int id = Integer.parseInt((String)properties.get(SegmentController.CONTROLLER_ID));
+		rfids.put(id, c);
+		
+		// start tracking RFID notifications
+		startTracking(id);
+	}
+	
+	public void removeRFIDController(RFIDSegmentController c, Map<String, Object> properties){
+		int id = Integer.parseInt((String)properties.get(SegmentController.CONTROLLER_ID));
+		rfids.remove(id);
 	}
 	
 	@Reference(type='*')
