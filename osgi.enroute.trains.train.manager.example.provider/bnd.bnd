@@ -12,6 +12,7 @@ Private-Package:  \
 -buildpath: \
 	osgi.enroute.base.api;version=1.0,\
 	biz.aQute.junit,\
+	biz.aQute.bndlib,\
 	osgi.enroute.trains.api;version=latest
 
 -includeresource: {readme.md}
