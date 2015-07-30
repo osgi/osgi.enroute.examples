@@ -15,6 +15,7 @@ import aQute.bnd.annotation.component.Reference;
 @Component(name = "osgi.enroute.trains.train.manager.example")
 public class ExampleTrainManagerImpl {
 
+	@SuppressWarnings("unused")
 	private TrackForTrain trackManager;
 	
 	private Map<TrainController, TrainDriver> trains = Collections.synchronizedMap(new HashMap<TrainController, TrainDriver>()); 

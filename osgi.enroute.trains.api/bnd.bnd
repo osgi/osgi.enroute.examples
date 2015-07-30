@@ -4,10 +4,7 @@
 
 Bundle-Version:1.0.0.${tstamp}
 Bundle-Description: 				\
-	This is OSGI ENROUTE TRAINS API project. An API project should in general not contain any \
-	implementation code.\
-	\
-	${warning;Please update this Bundle-Description in osgi.enroute.trains.api/bnd.bnd}
+	Contains the API code for the trains.
 
 	
 Export-Package: \

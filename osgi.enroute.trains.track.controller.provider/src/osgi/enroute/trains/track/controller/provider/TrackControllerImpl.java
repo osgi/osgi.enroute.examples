@@ -19,7 +19,6 @@ import osgi.enroute.trains.controller.api.RFIDSegmentController;
 import osgi.enroute.trains.controller.api.SegmentController;
 import osgi.enroute.trains.controller.api.SignalSegmentController;
 import osgi.enroute.trains.controller.api.SwitchSegmentController;
-import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Reference;
 
