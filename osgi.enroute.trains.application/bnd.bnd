@@ -22,5 +22,6 @@ Private-Package:  \
 	osgi.enroute.base.api,\
 	osgi.enroute.logger.simple.provider,\
 	osgi.enroute.web.simple.provider;version=1.2,\
-	osgi.enroute.trains.api;version=latest
+	osgi.enroute.trains.api;version=latest,\
+	osgi.enroute.easse.simple.adapter
 	

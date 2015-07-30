@@ -1,40 +1,89 @@
 <section ng-cloak>
 
-	<div class="jumbotron">
-		<h1>OSGI ENROUTE TRAINS APPLICATION</h1>
-		<p class="lead">${Bundle-Description}</p>
-		<p>
-			<a class="btn btn-lg btn-success" ng-click=upper() role="button">To Upper!</a>
-		</p>
-	</div>
-
-	<div class="row marketing">
-		<div class="col-lg-6">
-			<h4>Subheading</h4>
-			<p>Donec id elit non mi porta gravida at eget metus. Maecenas
-				faucibus mollis interdum.</p>
-
-			<h4>Subheading</h4>
-			<p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-				Cras mattis consectetur purus sit amet fermentum.</p>
-
-			<h4>Subheading</h4>
-			<p>Maecenas sed diam eget risus varius blandit sit amet non
-				magna.</p>
+	
+	<div class=row>
+		<div class="col-lg-12">
+			<h2>Tracks</h2>
+			<table class="table table-small">
+				<colgroup>
+					<col style="">
+					<col style="">
+					<col style="">
+					<col style="">
+					<col style="">
+					<col style="">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Cntrl</th>
+						<th>Length</th>
+						<th>Max Speed</th>
+						<th>To</th>
+						<th>Trains</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat='(s,d) in trains.segments'>
+						<td>{{s}}</td>
+						<td>{{d.type}}</td>
+						<td>{{d.controller}}</td>
+						<td>{{d.length}}</td>
+						<td>{{d.maxSpeed}}</td>
+						<td>
+							<div ng-repeat="x in d.to">{{x}}</div>
+						</td>
+						<td>
+							<div ng-repeat="(train,seg) in trains.locations" ng-show="seg==s">
+								{{train}}
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-
-		<div class="col-lg-6">
-			<h4>Subheading</h4>
-			<p>Donec id elit non mi porta gravida at eget metus. Maecenas
-				faucibus mollis interdum.</p>
-
-			<h4>Subheading</h4>
-			<p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-				Cras mattis consectetur purus sit amet fermentum.</p>
-
-			<h4>Subheading</h4>
-			<p>Maecenas sed diam eget risus varius blandit sit amet non
-				magna.</p>
+	</div>
+	
+	<div class=row>
+		<div class="col-lg-12">
+			<h2>Events</h2>
+			<table class="table table-small">
+				<colgroup>
+					<col style="">
+					<col style="">
+					<col style="">
+					<col style="">
+					<col style="">
+					<col style="">
+					<col style="">
+					<col style="">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Message</th>
+						<th>Segment</th>
+						<th>Train</th>
+						<th>Alternative</th>
+						<th>Blocked</th>
+						<th>Assignment</th>
+						<th>Signal</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat='e in trains.events.slice().reverse()'>
+						<td>{{e.type}}</td>
+						<td>{{e.message}}</td>
+						<td>{{e.segment}}</td>
+						<td>{{e.train}}</td>
+						<td>{{e.alternative}}</td>
+						<td>{{e.blocked}}</td>
+						<td>{{e.assignment}}</td>
+						<td>{{e.signal}}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </section>
