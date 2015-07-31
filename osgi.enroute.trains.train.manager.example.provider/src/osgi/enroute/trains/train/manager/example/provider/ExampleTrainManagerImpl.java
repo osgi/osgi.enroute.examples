@@ -1,63 +1,55 @@
 package osgi.enroute.trains.train.manager.example.provider;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import osgi.enroute.trains.cloud.api.TrackForTrain;
 import osgi.enroute.trains.train.api.TrainController;
+import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
+import aQute.bnd.annotation.component.Deactivate;
 import aQute.bnd.annotation.component.Reference;
 
 /**
  * 
  */
-@Component(name = "osgi.enroute.trains.train.manager.example")
+@Component(name = "osgi.enroute.trains.train.manager.example",
+	immediate=true,
+	provide=Object.class,
+	properties={"osgi.command.scope=trains","osgi.command.function=move"})
 public class ExampleTrainManagerImpl {
 
-	@SuppressWarnings("unused")
 	private TrackForTrain trackManager;
 	
-	private Map<TrainController, TrainDriver> trains = Collections.synchronizedMap(new HashMap<TrainController, TrainDriver>()); 
-		
+	private TrainController train;
+	
+	@Activate
+	public void activate(){
+		// TODO where does the TrainManager get his name from?
+		// notify Track Manager
+		trackManager.registerTrain("Train1", "Train");
+
+		// turn the train light on 
+		train.light(true);
+		// start moving on activation
+		train.move(50);
+	}
+	
+	@Deactivate
+	public void deactivate(){
+		// stop when deactivated
+		train.move(0);
+	}
+	
+	@Reference
+	public void setTrainController(TrainController t){
+		this.train = t;
+	}
 
 	@Reference
 	public void setTrackManager(TrackForTrain t){
 		this.trackManager = t;
 	}
-	
-	@Reference(type='*')
-	public void addTrainController(TrainController t){
-		TrainDriver driver = new TrainDriver(t);
-		trains.put(t, driver);
-		driver.start();
-	}
-	
-	public void removeTrainController(TrainController t){
-		TrainDriver driver = trains.get(t);
-		if(driver!=null){
-			driver.stop();
-		}
-	}
-	
-	/**
-	 * Simple class that keeps on driving a train infinitely
-	 * without requesting segment access
-	 */
-	private class TrainDriver {
 
-		private final TrainController train;
-		
-		public TrainDriver(TrainController t){
-			this.train = t;
-		}
-		
-		public void start(){
-			this.train.move(50); // 5 cm per second = 11 seconds per segment
-		}
-		
-		public void stop(){
-			train.move(0);
-		}
+	// make train move from gogo shell command
+	public void move(int directionAndSpeed){
+		this.train.move(directionAndSpeed);
 	}
 }
