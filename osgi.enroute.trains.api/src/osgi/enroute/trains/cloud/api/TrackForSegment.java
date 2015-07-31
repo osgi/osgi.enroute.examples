@@ -8,12 +8,12 @@ public interface TrackForSegment extends TrackInfo {
 	/**
 	 * Send when a train has been identified at a locator segment
 	 * 
-	 * @param train
+	 * @param rfid
 	 *            The RFID for the train
 	 * @param segment
 	 *            The name of the segment
 	 */
-	void locatedTrainAt(String train, String segment);
+	void locatedTrainAt(String rfid, String segment);
 
 	/**
 	 * Indicate that a switch has been set

@@ -146,7 +146,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		signals.put("C-2", Color.RED);
 		
 		
-		trains.put("Train1", "rfid1");
+		trains.put("rfid1", "Train1");
 	}
 	
 	@Override
@@ -157,7 +157,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 	@Override
 	public List<String> getTrains() {
 		List<String> t = new ArrayList<String>();
-		t.addAll(trains.keySet());
+		t.addAll(trains.values());
 		return t;
 	}
 
@@ -206,7 +206,8 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 	}
 
 	@Override
-	public void locatedTrainAt(String train, String segment) {
+	public void locatedTrainAt(String rfid, String segment) {
+		String train = trains.get(rfid);
 		locators.put(segment, train);
 		
 		Observation o = new Observation();
