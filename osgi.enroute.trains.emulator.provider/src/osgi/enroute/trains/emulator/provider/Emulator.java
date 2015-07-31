@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import osgi.enroute.trains.cloud.api.Color;
 import osgi.enroute.trains.cloud.api.Segment;
 import osgi.enroute.trains.cloud.api.TrackInfo;
 import osgi.enroute.trains.controller.api.SegmentController;
@@ -53,13 +54,9 @@ public class Emulator {
 							// speed in mm/s
 							int speed = train.getDirectionAndSpeed();
 							
-							if(speed < 0 ){
-								System.err.println("Train "+train.getName()+" is moving backwards, not supported!");
-							}
-							
 							position.distance += speed*INTERVAL/1000.f;
 							
-							if(position.distance > position.segment.length){
+							if(speed > 0 && position.distance > position.segment.length){
 								// go to next segment
 								position.distance -= position.segment.length;
 								Segment next = track.getSegments().get(position.segment.to[0]);
@@ -68,8 +65,24 @@ public class Emulator {
 									if(isSwitch(next)){
 										// this is a switch, check how it is configured
 										boolean swtch = track.getSwitches().get(next.track);
-										next = track.getSegments().get(next.to[swtch ? 1 : 0]);
+										
+										if(next.to.length>1){
+											// track splits up
+											next = track.getSegments().get(next.to[swtch ? 1 : 0]);
+										} else {
+											// track joins, check whether train comes from right track
+											if(!next.from[swtch ? 1 : 0].startsWith(position.segment.track)){
+												System.out.println(train.getName()+" CRASHED at switch "+next.track);
+											}
+											next = track.getSegments().get(next.to[0]);
+										}
+										
+										// train needs to travel the switch length as well
+										position.distance -= next.length;
 									} else if(isSignal(next)){
+										if(track.getSignals().get(next.track+"-"+next.sequence)==Color.RED){
+											System.out.print(train.getName()+" PASSED RED SIGNAL at "+next.track+"-"+next.sequence);
+										}
 										next = track.getSegments().get(next.to[0]);
 									}
 								}
@@ -80,6 +93,47 @@ public class Emulator {
 								if(rfid!=null){
 									rfid.trigger(train.getName());
 								}
+								
+							} else if(speed < 0 && position.distance < 0){
+								// go to the previous segment
+								position.distance += position.segment.length;
+								Segment prev = track.getSegments().get(position.segment.from[0]);
+
+								// skip signals/switches as prev segment
+								while(isSwitch(prev) || isSignal(prev)){
+									if(isSwitch(prev)){
+										// this is a switch, check how it is configured
+										boolean swtch = track.getSwitches().get(prev.track);
+										
+										if(prev.from.length>1){
+											// track splits up
+											prev = track.getSegments().get(prev.from[swtch ? 1 : 0]);
+										} else {
+											// track joins, check whether train comes from right track
+											if(!prev.to[swtch ? 1 : 0].startsWith(position.segment.track)){
+												System.out.println(train.getName()+" CRASHED at switch "+prev.track);
+											}
+											prev = track.getSegments().get(prev.from[0]);
+										}
+										
+										// train needs to travel the switch length as well
+										position.distance -= prev.length;
+									} else if(isSignal(prev)){
+										// bi-directional signals?
+										if(track.getSignals().get(prev.track+"-"+prev.sequence)==Color.RED){
+											System.out.print(train.getName()+" PASSED RED SIGNAL at "+prev.track+"-"+prev.sequence);
+										}
+										prev = track.getSegments().get(prev.from[0]);
+									}
+								}
+								position.segment = prev;
+								
+								// trigger next segments rfid
+								RFIDTrigger rfid = rfids.get(prev.controller);
+								if(rfid!=null){
+									rfid.trigger(train.getName());
+								}
+								
 							}
 							
 							//System.out.println(train.getName()+" is at "+position.segment.track+"-"+position.segment.sequence+" (distance: "+position.distance+" mm)");
