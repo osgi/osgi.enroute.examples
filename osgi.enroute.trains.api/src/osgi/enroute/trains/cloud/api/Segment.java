@@ -52,4 +52,10 @@ public class Segment extends DTO {
 	 * is the one selected if the switch is set to its alternative.
 	 */
 	public String to[];
+	
+	/**
+	 * The previous segment. Only a switch can have an additional to. The second to
+	 * is the one selected if the switch is set to its alternative.
+	 */
+	public String from[];
 }
