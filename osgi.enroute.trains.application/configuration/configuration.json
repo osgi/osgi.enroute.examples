@@ -48,6 +48,7 @@
    { 
       "service.factoryPid":					"osgi.enroute.trains.train",
       "service.pid":						"1",
-      "train.id":							"Train 1"
+      "name":								"Train1",
+      "rfid":								"rfid1"
    }
 ]

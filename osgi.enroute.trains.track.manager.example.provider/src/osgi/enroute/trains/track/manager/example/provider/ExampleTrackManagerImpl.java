@@ -32,7 +32,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 
 	
 	private Map<String, Segment> segments = new HashMap<String, Segment>();
-	private List<String> trains = new ArrayList<String>();
+	private Map<String, String> trains = new HashMap<String, String>();
 	private Map<String, Color> signals = new HashMap<String, Color>();
 	private Map<String, Boolean> switches = new HashMap<String, Boolean>();
 	private Map<String, String> locators = new HashMap<String, String>();
@@ -141,9 +141,12 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		switches.put("X1", false);
 		switches.put("X2", false);
 		
-		signals.put("A-2", Color.GREEN);
-		signals.put("B-2", Color.GREEN);
-		signals.put("C-2", Color.GREEN);
+		signals.put("A-2", Color.RED);
+		signals.put("B-2", Color.RED);
+		signals.put("C-2", Color.RED);
+		
+		
+		trains.put("Train1", "rfid1");
 	}
 	
 	@Override
@@ -153,7 +156,9 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 
 	@Override
 	public List<String> getTrains() {
-		return trains;
+		List<String> t = new ArrayList<String>();
+		t.addAll(trains.keySet());
+		return t;
 	}
 
 	@Override
@@ -197,8 +202,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 
 	@Override
 	public void registerTrain(String id, String type) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Train "+id+" online!");
 	}
 
 	@Override

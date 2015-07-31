@@ -3,7 +3,6 @@ package osgi.enroute.trains.emulator.provider;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -66,6 +65,9 @@ public class Emulator {
 										// this is a switch, check how it is configured
 										boolean swtch = track.getSwitches().get(next.track);
 										
+										// train needs to travel the switch length as well
+										position.distance -= next.length;
+										
 										if(next.to.length>1){
 											// track splits up
 											next = track.getSegments().get(next.to[swtch ? 1 : 0]);
@@ -73,12 +75,12 @@ public class Emulator {
 											// track joins, check whether train comes from right track
 											if(!next.from[swtch ? 1 : 0].startsWith(position.segment.track)){
 												System.out.println(train.getName()+" CRASHED at switch "+next.track);
+												
+											} else {
+												next = track.getSegments().get(next.to[0]);
 											}
-											next = track.getSegments().get(next.to[0]);
 										}
 										
-										// train needs to travel the switch length as well
-										position.distance -= next.length;
 									} else if(isSignal(next)){
 										if(track.getSignals().get(next.track+"-"+next.sequence)==Color.RED){
 											System.out.print(train.getName()+" PASSED RED SIGNAL at "+next.track+"-"+next.sequence);
@@ -91,7 +93,7 @@ public class Emulator {
 								// trigger next segments rfid
 								RFIDTrigger rfid = rfids.get(next.controller);
 								if(rfid!=null){
-									rfid.trigger(train.getName());
+									rfid.trigger(train.getRfid());
 								}
 								
 							} else if(speed < 0 && position.distance < 0){
@@ -131,7 +133,7 @@ public class Emulator {
 								// trigger next segments rfid
 								RFIDTrigger rfid = rfids.get(prev.controller);
 								if(rfid!=null){
-									rfid.trigger(train.getName());
+									rfid.trigger(train.getRfid());
 								}
 								
 							}
@@ -182,21 +184,16 @@ public class Emulator {
 	public void addTrain(Train train){
 		TrainPosition pos = new TrainPosition();
 		// TODO what is the initial train position?
-		// choose first free one?
-		Iterator<Segment> it = track.getSegments().values().iterator();
-		while(it.hasNext()){
-			Segment s = it.next();
-			if(!isSwitch(s) && !isSignal(s)){
-				pos.segment = s;
-				pos.distance = 0;
-			}
-		}
+		// for now fix at A-1
+		pos.segment = track.getSegments().get("A-1");
+		pos.distance = 0;
+	
 		trains.put(train, pos);
 		
 		// already trigger the train being at that position
 		RFIDTrigger rfid = rfids.get(pos.segment.controller);
 		if(rfid!=null){
-			rfid.trigger(train.getName());
+			rfid.trigger(train.getRfid());
 		}
 	}
 	

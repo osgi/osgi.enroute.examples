@@ -4,6 +4,8 @@ public interface Train {
 
 	String getName();
 	
+	String getRfid();
+	
 	int getDirectionAndSpeed();
 	
 }

@@ -16,7 +16,8 @@ import aQute.lib.converter.Converter;
 public class EmulatedTrain implements TrainController, Train {
 	static Logger logger = LoggerFactory.getLogger(EmulatedTrain.class);
 
-	private String train;
+	private String name;
+	private String rfid;
 	
 	private boolean light = false;
 	
@@ -25,13 +26,14 @@ public class EmulatedTrain implements TrainController, Train {
 	@Activate
 	public void activate(Map<String, Object> map) throws Exception {
 		TrainConfig config = Converter.cnv(TrainConfig.class, map);
-		this.train = config.train_id();
+		this.name = config.name();
+		this.rfid = config.rifd();
 	}
 	
 	@Override
 	public void move(int directionAndSpeed) {
 		this.directionAndSpeed = directionAndSpeed;
-		logger.info("Train "+train+" is moving "+directionAndSpeed);
+		logger.info("Train "+name+" is moving "+directionAndSpeed);
 	}
 
 	@Override
@@ -39,9 +41,9 @@ public class EmulatedTrain implements TrainController, Train {
 		light = on ? true : false;
 		
 		if(light){
-			logger.info("Train "+train+" turns his light on");
+			logger.info("Train "+name+" turns his light on");
 		} else {
-			logger.info("Train "+train+" turns his light off");
+			logger.info("Train "+name+" turns his light off");
 		}
 	}
 
@@ -52,7 +54,11 @@ public class EmulatedTrain implements TrainController, Train {
 
 	@Override
 	public String getName() {
-		return train;
+		return name;
 	}
 
+	@Override
+	public String getRfid(){
+		return rfid;
+	}
 }
