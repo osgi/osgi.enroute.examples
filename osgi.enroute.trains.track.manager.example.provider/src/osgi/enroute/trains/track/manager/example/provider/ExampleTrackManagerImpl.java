@@ -58,6 +58,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		s1.sequence = 1;
 		s1.length = 500;
 		s1.to = new String[]{"A-2"};
+		s1.from = new String[]{"X2"};
 		s1.controller = 1; // rfid controller
 		segments.put("A-1", s1);
 		
@@ -67,6 +68,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		s2.sequence = 2;
 		s2.length = 0;
 		s2.to = new String[]{"X1"};
+		s2.from = new String[]{"A-1"};
 		s2.controller = 2; // signal controller
 		segments.put("A-2", s2);
 		
@@ -76,6 +78,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		s3.sequence = 0;
 		s3.length = 50; // length of switch?
 		s3.to = new String[]{"B-1","C-1"};
+		s3.from = new String[]{"A-2"};
 		s3.controller = 3; // switch controller
 		segments.put("X1", s3);
 		
@@ -85,6 +88,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		s4.sequence = 1;
 		s4.length = 500;
 		s4.to = new String[]{"B-2"};
+		s4.from = new String[]{"X1"};
 		s4.controller = 4; // rfid controller
 		segments.put("B-1", s4);
 	
@@ -94,6 +98,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		s5.sequence = 2;
 		s5.length = 0;
 		s5.to = new String[]{"X2"};
+		s5.from = new String[]{"B-1"};
 		s5.controller = 5; // signal controller
 		segments.put("B-2", s5);
 		
@@ -103,6 +108,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		s6.sequence = 1;
 		s6.length = 500;
 		s6.to = new String[]{"C-2"};
+		s6.from = new String[]{"X1"};
 		s6.controller = 6; // rfid controller
 		segments.put("C-1", s6);
 	
@@ -112,6 +118,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		s7.sequence = 2;
 		s7.length = 0;
 		s7.to = new String[]{"X2"};
+		s7.from = new String[]{"C-1"};
 		s7.controller = 7; // signal controller
 		segments.put("C-2", s7);
 		
@@ -121,6 +128,7 @@ public class ExampleTrackManagerImpl implements TrackForSegment, TrackForTrain {
 		s8.sequence = 0;
 		s8.length = 50; // length of switch?
 		s8.to = new String[]{"A-1"};
+		s8.from = new String[]{"B-2","C-2"};
 		s8.controller = 8; // switch controller
 		segments.put("X2", s8);
 		
