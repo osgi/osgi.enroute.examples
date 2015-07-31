@@ -27,7 +27,7 @@ public class EmulatedTrain implements TrainController, Train {
 	public void activate(Map<String, Object> map) throws Exception {
 		TrainConfig config = Converter.cnv(TrainConfig.class, map);
 		this.name = config.name();
-		this.rfid = config.rifd();
+		this.rfid = config.rfid();
 	}
 	
 	@Override
