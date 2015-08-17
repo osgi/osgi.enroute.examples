@@ -9,7 +9,9 @@ Bundle-Description: \
 Private-Package: \
 	osgi.enroute.iot.domotica.application,\
 	osgi.enroute.iot.domotica.command
-	
+
+EnRoute-Application: osgi.enroute.iot.domotica
+
 -includeresource: \
 	{readme.md}, \
 	{configuration=configuration}, \

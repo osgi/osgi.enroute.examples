@@ -81,4 +81,18 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
-}
+
+        .node-container {
+            border: solid 1px #ccc;
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .node {
+            position: absolute;
+            border: solid 1px #0094ff;
+            padding: 20px;
+            background: #fff;
+        }
+ }

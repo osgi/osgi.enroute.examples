@@ -3,7 +3,7 @@
 (function() {
 
 	var MODULE = angular.module('osgi.enroute.iot.domotica',
-			[ 'ngRoute', 'ngResource' ]);
+			[ 'ngRoute', 'ngResource', 'jsplumb' ]);
 
 	MODULE.config( function($routeProvider) {
 		$routeProvider.when('/', { controller: mainProvider, templateUrl: '/osgi.enroute.iot.domotica/main/htm/home.htm'});
@@ -24,20 +24,27 @@
 	
 	
 	var mainProvider = function($scope, $http) {
+		$scope.nodes = [
+	                    { name: 'Node 1', position: [10, 10] }
+	                    
+//	                    ,
+//	                    { name: 'Node 2', position: [100, 100] },
+//	                    { name: 'Node 3', position: [200, 200] },
+//	                    { name: 'Node 4', position: [300, 300] }
+	                ];
 		
-		$scope.upper = function() {
-			var name = prompt("Under what name?");
-			if ( name ) {
-				$http.get('/rest/upper/'+name).then(
-						function(d) {
-							$scope.alerts.push( { type: 'success', msg: d.data });
-						}, function(d) {
-							$scope.alerts.push( { type: 'danger', msg: 'Failed with ['+ d.status + '] '+ d.statusText });
-						}
-				);
-			}
-		};
-	
+		$scope.connections = [
+//	                    { source: $scope.nodes[0], target: $scope.nodes[1], options: { paintStyle: { strokeStyle: '#666' } } }
+	    ];
+
+        $scope.removeConnection = function () {
+            this.connections.splice(0, 1);
+        };
+        
+        $scope.logConnection = function (receiver, $fromScope, $toScope) {
+            console.log({ receiver: receiver, event: 'new connection', source: $fromScope.node.name, target: $toScope.node.name });
+        };
+
 	}
 	
 })();

@@ -10,12 +10,6 @@ JPM-Service:				domotica
 
 -runfw:						org.eclipse.osgi
 -runkeep:					false
--runpath:					biz.aQute.remote.launcher
--runremote: \
-	pi; \
-	host=192.168.2.4; \
-	jdb=1044; \
-	shell = -1
 
 -runrequires: \
 	osgi.identity;filter:='(osgi.identity=osgi.enroute.iot.domotica.application)',\
@@ -48,8 +42,3 @@ JPM-Service:				domotica
 	osgi.enroute.scheduler.simple.provider;version='[1.0.2,1.0.3)',\
 	osgi.enroute.twitter.bootstrap.webresource;version='[3.3.1,3.3.2)',\
 	osgi.enroute.web.simple.provider;version='[1.3.1,1.3.2)'
-
-#
-# Add a remote agent so we can actually debug it
-#
--runbundles.remote : biz.aQute.remote.agent
