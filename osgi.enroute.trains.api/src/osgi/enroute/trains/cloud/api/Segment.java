@@ -10,12 +10,14 @@ import org.osgi.dto.DTO;
  */
 public class Segment extends DTO {
 
-	/**
-	 * Type of the segment
-	 */
 	public enum Type {
 		STRAIGHT, CURVED, SWITCH, SIGNAL, LOCATOR;
 	}
+	
+	/**
+	 * Type of the segment
+	 */
+ 	public Type type;
 
 	/**
  	* Name of the track.This is the name required to get permission 
