@@ -11,7 +11,7 @@ import aQute.bnd.annotation.component.Reference;
 import aQute.lib.converter.Converter;
 
 /**
- * Small component that offes GoGo commands that post Command
+ * Small component that offers GoGo commands that post Command
  * Events to EventAdmin to control (and test) the Track Controller
  */
 @Component(provide=Object.class,
