@@ -12,14 +12,16 @@ Private-Package:  \
 -buildpath: \
 	osgi.enroute.base.api;version=1.0,\
 	biz.aQute.junit,\
+	biz.aQute.bndlib;packages=*,\
 	osgi.enroute.trains.api;version=latest
 
 -includeresource: {readme.md}
-
 
 -runrequires:  \
 	osgi.identity;filter:='(osgi.identity=osgi.enroute.trains.segment.controller.provider)'
 	
 -runbundles: \
 	${error;Resolve first}
+	
 Export-Package: osgi.enroute.trains.controller.api
+#
