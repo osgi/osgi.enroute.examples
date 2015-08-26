@@ -1,28 +1,24 @@
 #
-# -ENROUTE DISTRO-
-# 
-# This file contains the setup for OSGi enRoute
+# OSGi enRoute Default Distro 
+#
+# This file defines the properties to be used in an enRoute workspace.
 #
 
-# must be removed before release
-bnd-release	=	https://bndtools.ci.cloudbees.com/job/bnd.master/lastSuccessfulBuild/artifact/dist/bundles
+-runfw: org.eclipse.osgi
 
- 
--pluginpath:\
-        ${build}/cache/biz.aQute.repository.jar;url=${bnd-release}/biz.aQute.repository/biz.aQute.repository-latest.jar
-
-
--plugin.enroute.distrorepo = \
-	aQute.bnd.jpm.Repository; \
-	        includeStage	=       true; \
+-plugin.enroute.distro = \
+	aQute.bnd.deployer.repository.FixedIndexedRepo; \
 	        name		=       Distro; \
-	        location	=       ~/.bnd/shacache; \
-	        index		=       ${build}/distro.json; \
-	        depository.group	=		OSGi; \
-    		depository.name		=		enRoute.rt
+	        locations	=       https://raw.githubusercontent.com/osgi/osgi.enroute/master/cnf/distro/index.xml
+	        
 
--runfw:							org.eclipse.osgi;version=@3.9.1
--runpath.eqnx:					osgi.enroute.equinox.log.adapter
+-runblacklist.enroute:	\
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.base.api)', \
+	osgi.identity;filter:='(osgi.identity=osgi.cmpn)', \
+	osgi.identity;filter:='(osgi.identity=osgi.core)'
+
+
+# TODO check if still needed
 
 -runproperties.eqnx: 				\
 	org.apache.felix.http.jettyEnabled=true, \
@@ -31,28 +27,65 @@ bnd-release	=	https://bndtools.ci.cloudbees.com/job/bnd.master/lastSuccessfulBui
 	osgi.console=, \
 	org.osgi.service.http.port=8080
 
+-runpath.eqnx: 					osgi.enroute.equinox.log.adapter
+-runrequires.eqnx: \
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.log)'
+	
+
 -runsystempackages.eqnx:		javax.script
 -runsystemcapabilities.dflt: 	${native_capability}
 
 debug-bundles: \
 	osgi.identity;filter:='(osgi.identity=aQute.xray.plugin)',\
-	osgi.identity;filter:='(osgi.identity=org.apache.felix.metatype)',\
-	osgi.identity;filter:='(osgi.identity=org.apache.felix.eventadmin)',\
-	osgi.identity;filter:='(osgi.identity=org.apache.felix.log)',\
+	osgi.implementation;filter:='(osgi.implementation=osgi.metatype)',\
+	osgi.implementation;filter:='(osgi.implementation=osgi.log)';effective:=active,\
+	osgi.implementation;filter:='(osgi.implementation=osgi.event)';effective:=active,\
 	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)',\
 	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)', \
 	osgi.identity;filter:='(osgi.identity=osgi.enroute.base.debug.provider)'
-	
-# 
-# Augments for the Repository Indexer
+
+-augment.kn_ua: \
+	org.knopflerfish.bundle.useradmin; \
+		capability:="osgi.service;objectClass:List<String>=org.osgi.service.useradmin.UserAdmin;effective:=active, \
+					 osgi.implementation;osgi.implementation=osgi.useradmin;effective:=active"
+
+-augment.eq_ev: \
+	org.eclipse.equinox.event; \
+		capability:="  osgi.service;objectClass=org.osgi.service.event.EventAdmin;effective:=active, \
+					   osgi.implementation;osgi.implementation=osgi.event;effective:=active", \
+		requirement:= "osgi.extender;filter:='(osgi.extender=osgi.component)'"
+
 #
+-augment.fe_ht: \
+	org.apache.felix.http.api; \
+		requirement:="osgi.implementation;filter:='(&(osgi.implementation=osgi.http)(version>=1.0.0)(!(version>=2.0)))'"
+		
+-augment.os_rs: \
+	org.osgi.service.remoteserviceadmin; \
+		requirement:="osgi.remoteserviceadmin.distribution;filter:='(configs=*)', \
+		              osgi.remoteserviceadmin.topology;filter:='(policy=*)', \
+		              osgi.remoteserviceadmin.discovery;filter:='(protocols=*)'"
 
-org.apache.felix.http.bundle: 		cap=osgi.enroute.whiteboard;osgi.enroute.whiteboard=osgi.enroute.servlet;version:Version=1.1.0;effective:=active, \
-	cap=osgi.service;objectClass=org.osgi.service.http.HttpService;effective:=active
-org.knopflerfish.bundle.useradmin: 	cap=osgi.service;objectClass=org.osgi.service.useradmin.UserAdmin;effective:=active
-org.eclipse.equinox.coordinator: 	cap=osgi.service;objectClass=org.osgi.service.coordinator.Coordinator;effective:=active
-org.apache.felix.scr:				\
-	cap=osgi.extender;osgi.extender=osgi.ds;version:Version=1.2.1;effective:=active, \
-	cap=osgi.extender;osgi.extender=osgi.component;version:Version=1.2.1;effective:=active
+
+-augment.os_me: \
+	org.osgi.service.metatype; \
+		requirement:="osgi.implementation;filter:='(osgi.implementation=osgi.metatype)'"
+		
+-augment.os_ev: \
+	org.osgi.service.event; \
+		requirement:="osgi.implementation;filter:='(osgi.implementation=osgi.event)';effective:=active"
+
+
+-augment.eq_co: \
+	org.eclipse.equinox.coordinator; \
+		capability:= "osgi.service;objectClass=org.osgi.service.coordinator.Coordinator;effective:=active"
+
+-augment.fe_lo: \
+	org.apache.felix.log; \
+		capability:= "osgi.implementation;osgi.implementation=osgi.log;effective:=active"
+		
+
+-augment.fe_sc: \
+	org.apache.felix.scr; \
+		requirement:="osgi.implementation;filter:='(osgi.implementation=osgi.metatype)'"
 	
-

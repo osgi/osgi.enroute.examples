@@ -22,18 +22,19 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 
-import osgi.enroute.capabilities.AngularWebResource;
-import osgi.enroute.capabilities.BootstrapWebResource;
-import osgi.enroute.capabilities.ConfigurerExtender;
-import osgi.enroute.capabilities.EventAdminSSEEndpoint;
-import osgi.enroute.capabilities.PagedownWebResource;
-import osgi.enroute.capabilities.WebServerExtender;
+import osgi.enroute.configurer.capabilities.RequireConfigurerExtender;
 import osgi.enroute.dto.api.DTOs;
+import osgi.enroute.eventadminserversentevents.capabilities.RequireEventAdminServerSentEventsWebResource;
 import osgi.enroute.examples.cm.examples.ConfigurationListenerExample;
 import osgi.enroute.examples.cm.examples.ConfigurationPluginExample;
 import osgi.enroute.examples.cm.examples.Examples;
 import osgi.enroute.examples.cm.examples.ManagedServiceExample;
 import osgi.enroute.examples.cm.examples.ManagedServiceFactoryExample;
+import osgi.enroute.github.angular.capabilities.RequireAngularWebResource;
+import osgi.enroute.jsonrpc.capabilities.RequireJsonrpcWebResource;
+import osgi.enroute.stackexchange.pagedown.webresource.RequirePagedownWebResource;
+import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;
+import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 
 /**
  * CM Application.
@@ -58,18 +59,22 @@ import osgi.enroute.examples.cm.examples.ManagedServiceFactoryExample;
  * </ul>
  */
 
-@AngularWebResource(resource={"angular.js", "angular-route.js", "angular-resource.js"}, priority=1000)
-@PagedownWebResource(resource="enmarkdown.js")
-@BootstrapWebResource(resource={"css/bootstrap.css"})
-@WebServerExtender
-@ConfigurerExtender
-@EventAdminSSEEndpoint
+@RequireAngularWebResource(resource={"angular.js", "angular-route.js", "angular-resource.js"}, priority=1000)
+@RequirePagedownWebResource(resource="enmarkdown.js")
+@RequireBootstrapWebResource(resource={"css/bootstrap.css"})
+@RequireWebServerExtender
+@RequireConfigurerExtender
+@RequireEventAdminServerSentEventsWebResource
+@RequireJsonrpcWebResource
 @Component(name = "osgi.enroute.examples.cm", service = { CmApplication.class,
 		ConfigurationListener.class })
 public class CmApplication implements ConfigurationListener {
 	private static final String TOPIC = "osgi/enroute/examples/cm";
+	@Reference
 	private EventAdmin ea;
+	@Reference
 	private ConfigurationAdmin cm;
+	@Reference
 	private DTOs dtos;
 	private Examples examples;
 	private Map<String, Method> examplesMap;
@@ -155,21 +160,6 @@ public class CmApplication implements ConfigurationListener {
 					Tooltip tooltip = m.getAnnotation(Tooltip.class);
 					return tooltip == null ? m.getName() : tooltip.value();
 				}));
-	}
-
-	@Reference
-	void setEventAdmin(EventAdmin ea) {
-		this.ea = ea;
-	}
-
-	@Reference
-	void setCm(ConfigurationAdmin cm) {
-		this.cm = cm;
-	}
-
-	@Reference
-	void setDTOs(DTOs dtos) {
-		this.dtos = dtos;
 	}
 
 	@Reference

@@ -13,6 +13,7 @@ Private-Package: \
 	osgi.enroute.examples.scheduler.examples
 
 Bundle-Vendor: OSGi Alliance
+EnRoute-Application: osgi.enroute.examples.scheduler
 	
 -includeresource: \
 	{readme.md}, \
@@ -22,8 +23,7 @@ Bundle-Vendor: OSGi Alliance
 
 -buildpath: \
 	osgi.enroute.base.api,\
-	osgi.enroute.logger.simple.provider,\
-	osgi.enroute.web.simple.provider;version=1.2,\
-	osgi.enroute.scheduler.simple.provider,\
-	org.fusesource.mqtt-client.mqtt-client;version=1.10.0
+	osgi.enroute.google.angular.webresource,\
+	osgi.enroute.twitter.bootstrap.webresource,\
+	osgi.enroute.stackexchange.pagedown.webresource
 	

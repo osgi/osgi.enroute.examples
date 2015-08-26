@@ -31,7 +31,8 @@ import osgi.enroute.rest.api.RESTRequest;
 @Component
 public class BackendREST implements REST {
 
-	private BackendApplication model;
+	@Reference
+	BackendApplication model;
 
 	/*
 	 * Defines how the body looks like
@@ -111,10 +112,5 @@ public class BackendREST implements REST {
 			throw new FileNotFoundException("No such type " + type);
 
 		return b;
-	}
-
-	@Reference
-	public void setModel(BackendApplication model) {
-		this.model = model;
 	}
 }

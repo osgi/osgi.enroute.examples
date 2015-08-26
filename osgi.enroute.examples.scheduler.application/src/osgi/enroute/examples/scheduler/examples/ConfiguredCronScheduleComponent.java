@@ -55,7 +55,9 @@ public class ConfiguredCronScheduleComponent implements
 		String cron();
 	}
 
+	@Reference
 	private SchedulerApplication app;
+	@Reference
 	private DTOs dtos;
 	private int id;
 	private Configuration configuration;
@@ -81,13 +83,4 @@ public class ConfiguredCronScheduleComponent implements
 		app.fire(id);
 	}
 
-	@Reference
-	void setApp(SchedulerApplication app) {
-		this.app = app;
-	}
-
-	@Reference
-	public void setDtos(DTOs dtos) {
-		this.dtos = dtos;
-	}
 }

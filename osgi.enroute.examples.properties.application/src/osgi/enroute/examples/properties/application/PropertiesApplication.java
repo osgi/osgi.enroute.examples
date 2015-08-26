@@ -8,17 +8,19 @@ import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import osgi.enroute.capabilities.AngularWebResource;
-import osgi.enroute.capabilities.BootstrapWebResource;
-import osgi.enroute.capabilities.ConfigurerExtender;
-import osgi.enroute.capabilities.WebServerExtender;
+import osgi.enroute.configurer.capabilities.RequireConfigurerExtender;
+import osgi.enroute.github.angular.capabilities.RequireAngularWebResource;
 import osgi.enroute.rest.api.REST;
 import osgi.enroute.rest.api.RESTRequest;
+import osgi.enroute.stackexchange.pagedown.webresource.RequirePagedownWebResource;
+import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;
+import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 
-@AngularWebResource(resource={"angular.js","angular-resource.js", "angular-route.js"}, priority=1000)
-@BootstrapWebResource(resource="css/bootstrap.css")
-@WebServerExtender
-@ConfigurerExtender
+@RequireAngularWebResource(resource={"angular.js","angular-resource.js", "angular-route.js"}, priority=1000)
+@RequireBootstrapWebResource(resource="css/bootstrap.css")
+@RequireWebServerExtender
+@RequireConfigurerExtender
+@RequirePagedownWebResource(resource="enmarkdown.js")
 @Component(name="osgi.enroute.examples.properties")
 public class PropertiesApplication implements REST {
 	Logger logger = LoggerFactory.getLogger(PropertiesApplication.class);

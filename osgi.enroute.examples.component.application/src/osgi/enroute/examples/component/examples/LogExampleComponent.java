@@ -8,6 +8,7 @@ import org.osgi.service.log.LogService;
 
 @Component
 public class LogExampleComponent {
+	@Reference
 	private LogService log;
 	
 	@Activate
@@ -18,10 +19,5 @@ public class LogExampleComponent {
 	@Deactivate
 	void deactivate() {
 		log.log(LogService.LOG_INFO, "Goodbye!");
-	}
-	
-	@Reference
-	void setLog(LogService log) {
-		this.log = log;
 	}
 }

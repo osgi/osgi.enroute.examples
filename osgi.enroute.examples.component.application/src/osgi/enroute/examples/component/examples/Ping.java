@@ -16,7 +16,9 @@ import osgi.enroute.scheduler.api.Scheduler;
 @Component
 public class Ping {
 
+	@Reference
 	private EventAdmin admin;
+	@Reference
 	private Scheduler scheduler;
 	private Closeable schedule;
 
@@ -29,15 +31,5 @@ public class Ping {
 	@Deactivate
 	void deactivate() throws IOException {
 		schedule.close();
-	}
-
-	@Reference
-	void setEventAdmin(EventAdmin admin) {
-		this.admin = admin;
-	}
-
-	@Reference
-	void setScheduler(Scheduler scheduler) {
-		this.scheduler = scheduler;
 	}
 }

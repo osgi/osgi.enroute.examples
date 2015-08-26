@@ -19,29 +19,28 @@ import org.osgi.service.event.EventAdmin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import osgi.enroute.capabilities.AngularWebResource;
-import osgi.enroute.capabilities.BootstrapWebResource;
-import osgi.enroute.capabilities.ConfigurerExtender;
-import osgi.enroute.capabilities.EventAdminSSEEndpoint;
-import osgi.enroute.capabilities.PagedownWebResource;
-import osgi.enroute.capabilities.WebServerExtender;
+import osgi.enroute.configurer.capabilities.RequireConfigurerExtender;
 import osgi.enroute.dto.api.DTOs;
+import osgi.enroute.eventadminserversentevents.capabilities.RequireEventAdminServerSentEventsWebResource;
 import osgi.enroute.examples.scheduler.examples.Examples;
+import osgi.enroute.github.angular.capabilities.RequireAngularWebResource;
 import osgi.enroute.scheduler.api.CancelException;
 import osgi.enroute.scheduler.api.CancellablePromise;
 import osgi.enroute.scheduler.api.TimeoutException;
+import osgi.enroute.stackexchange.pagedown.webresource.RequirePagedownWebResource;
+import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;
+import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 
 /**
  * This application demonstrates the use of the OSGi enRoute scheduler.
  * 
  */
-@AngularWebResource(resource = { "angular.js", "angular-resource.js",
-		"angular-route.js" }, priority = 1000)
-@BootstrapWebResource(resource = "css/bootstrap.css")
-@WebServerExtender
-@ConfigurerExtender
-@EventAdminSSEEndpoint
-@PagedownWebResource(resource = "enmarkdown.js")
+@RequireAngularWebResource(resource = { "angular.js", "angular-resource.js", "angular-route.js" }, priority = 1000)
+@RequireBootstrapWebResource(resource = "css/bootstrap.css")
+@RequireWebServerExtender
+@RequireConfigurerExtender
+@RequireEventAdminServerSentEventsWebResource
+@RequirePagedownWebResource(resource = "enmarkdown.js")
 @Component(name = "osgi.enroute.examples.scheduler", service = SchedulerApplication.class)
 public class SchedulerApplication {
 	static Logger logger = LoggerFactory.getLogger(SchedulerApplication.class);
@@ -77,7 +76,9 @@ public class SchedulerApplication {
 
 	private Map<String, Method> examplesMap;
 	private AtomicInteger n = new AtomicInteger(1000);
+	@Reference
 	private EventAdmin ea;
+	@Reference
 	private DTOs dtos;
 	private Map<Integer, Tracker> trackers = new ConcurrentHashMap<>();
 	private Examples examples;
@@ -85,8 +86,7 @@ public class SchedulerApplication {
 	/*
 	 * Execute a command and create tracker to allow it to be canceled.
 	 */
-	public Tracker createTracker(String method, String parameter)
-			throws Exception {
+	public Tracker createTracker(String method, String parameter) throws Exception {
 
 		Method m = examplesMap.get(method);
 		if (m == null)
@@ -98,7 +98,7 @@ public class SchedulerApplication {
 		}
 
 		Tracker tracker = new Tracker();
-		
+
 		tracker.id = n.getAndIncrement();
 		tracker.method = method;
 		tracker.parameter = parameter;
@@ -106,11 +106,11 @@ public class SchedulerApplication {
 		trackers.put(tracker.id, tracker);
 
 		//
-		// We accept comma separated lists 
+		// We accept comma separated lists
 		// so we need to turn those into
 		// an array
 		//
-		
+
 		Object source = parameter;
 		if (parameter.indexOf(',') > 0)
 			source = parameter.split("\\s*,\\s*");
@@ -121,40 +121,38 @@ public class SchedulerApplication {
 		// Check if we have a command with a callable
 		// or none. The callable will execute a tick
 		//
-		
+
 		if (m.getParameterTypes().length == 3) {
-			
+
 			Callable<Void> tick = () -> {
 				tick(tracker);
 				return null;
 			};
-			tracker.promise = (CancellablePromise<?>) m.invoke(examples,
-					tracker.id, parm, tick);
-			
+			tracker.promise = (CancellablePromise<?>) m.invoke(examples, tracker.id, parm, tick);
+
 		} else {
-			
-			tracker.promise = (CancellablePromise<?>) m.invoke(examples,
-					tracker.id, parm);
-			
+
+			tracker.promise = (CancellablePromise<?>) m.invoke(examples, tracker.id, parm);
+
 		}
 
 		//
 		// Register callbacks for any failure
 		// or success
 		//
-		
+
 		tracker.promise.then((x) -> {
 			tracker.value = x.getValue();
 			event(TrackerEvent.RESOLVED, tracker);
 			return null;
-		}, (x) -> {
+		} , (x) -> {
 			tracker.failure = x.getFailure().toString();
 
 			//
 			// Parse the timeout and cancelation
 			// from general failure
 			//
-			
+
 			if (x.getFailure() == TimeoutException.SINGLETON)
 				event(TrackerEvent.TIMEOUT, tracker);
 			else if (x.getFailure() == CancelException.SINGLETON)
@@ -171,8 +169,7 @@ public class SchedulerApplication {
 	 * Create a tick for this tracker.
 	 */
 	void tick(Tracker tracker) throws Exception {
-		int delta = (int) (tracker.modified = System.currentTimeMillis()
-				- tracker.created);
+		int delta = (int) (tracker.modified = System.currentTimeMillis() - tracker.created);
 		tracker.ticks.add(delta);
 		event(TrackerEvent.TICKED, tracker);
 	}
@@ -213,12 +210,7 @@ public class SchedulerApplication {
 	 * Return the list of commands
 	 */
 	public Map<String, ExampleInfo> examples() {
-		return examplesMap
-				.values()
-				.stream()
-				.collect(
-						Collectors.toMap((m) -> m.getName(),
-								this::getExampleInfo));
+		return examplesMap.values().stream().collect(Collectors.toMap((m) -> m.getName(), this::getExampleInfo));
 	}
 
 	/*
@@ -248,18 +240,16 @@ public class SchedulerApplication {
 	}
 
 	/////////////////////////////////////////////////////////////// housekeeping
-	
+
 	@Reference
 	void setExample(Examples ex) {
 		this.examples = ex;
-		examplesMap = Arrays.stream(ex.getClass().getMethods())
-				.filter(this::isExample)
+		examplesMap = Arrays.stream(ex.getClass().getMethods()).filter(this::isExample)
 				.collect(Collectors.toMap((m) -> m.getName(), (m) -> m));
 	}
 
 	boolean isExample(Method m) {
-		boolean yes = !Modifier.isStatic(m.getModifiers())
-				&& !Modifier.isAbstract(m.getModifiers())
+		boolean yes = !Modifier.isStatic(m.getModifiers()) && !Modifier.isAbstract(m.getModifiers())
 				&& m.getDeclaringClass() != Object.class;
 		if (!yes)
 			return false;
@@ -286,13 +276,4 @@ public class SchedulerApplication {
 		return true;
 	}
 
-	@Reference
-	void setEventAdmin(EventAdmin ea) {
-		this.ea = ea;
-	}
-
-	@Reference
-	void setDtos(DTOs dtos) {
-		this.dtos = dtos;
-	}
 }

@@ -2,15 +2,15 @@ package osgi.enroute.examples.component.application;
 
 import org.osgi.service.component.annotations.Component;
 
-import osgi.enroute.capabilities.AngularWebResource;
-import osgi.enroute.capabilities.BootstrapWebResource;
-import osgi.enroute.capabilities.WebServerExtender;
+import osgi.enroute.github.angular.capabilities.RequireAngularWebResource;
 import osgi.enroute.rest.api.REST;
 import osgi.enroute.rest.api.RESTRequest;
+import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;
+import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 
-@AngularWebResource
-@BootstrapWebResource
-@WebServerExtender
+@RequireAngularWebResource( resource={"angular.js", "angular-resource.js", "angular-route.js"})
+@RequireBootstrapWebResource( resource="css/bootstrap.css")
+@RequireWebServerExtender
 @Component(name="osgi.enroute.examples.component")
 public class ComponentApplication implements REST {
 

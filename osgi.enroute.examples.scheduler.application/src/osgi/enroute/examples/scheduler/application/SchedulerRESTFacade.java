@@ -24,7 +24,7 @@ import osgi.enroute.rest.api.RESTRequest;
  */
 @Component()
 public class SchedulerRESTFacade implements REST {
-	private SchedulerApplication app;
+	@Reference	private SchedulerApplication app;
 
 	interface PutRequest extends RESTRequest {
 		String parameter();
@@ -47,11 +47,6 @@ public class SchedulerRESTFacade implements REST {
 
 	public Map<String, ExampleInfo> getScheduler(RESTRequest rq) {
 		return app.examples();
-	}
-
-	@Reference
-	public void setApp(SchedulerApplication app) {
-		this.app = app;
 	}
 
 }

@@ -3,7 +3,7 @@
 (function() {
 
 	var MODULE = angular.module('osgi.enroute.examples.properties',
-			[ 'ngRoute', 'ngResource' ]);
+			[ 'ngRoute', 'ngResource', 'enMarkdown' ]);
 
 	MODULE.config( function($routeProvider) {
 		$routeProvider.when('/', { controller: mainProvider, templateUrl: '/osgi.enroute.examples.properties/main/htm/home.htm'});

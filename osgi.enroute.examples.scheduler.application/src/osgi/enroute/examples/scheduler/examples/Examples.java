@@ -243,33 +243,21 @@ public class Examples {
 	// HELPER CODE
 	// ////////////////////////////////////////////////////////////////////////////////
 
+	@Reference
 	private Scheduler scheduler;
 	private PrintStream out = System.out;
 	private Failure failure = (p) -> out.println("Failure");
 	private BundleContext context;
+	@Reference
 	private ConfigurationAdmin cm;
 	private ComponentContext componentContext;
 	private AtomicReference<FixedCronScheduleComponent> fsc = new AtomicReference<>();
+
 
 	@Activate
 	void activate(ComponentContext cc) {
 		context = cc.getBundleContext();
 		componentContext = cc;
-	}
-
-	/**
-	 * 
-	 * @param scheduler
-	 */
-
-	@Reference
-	void setScheduler(Scheduler scheduler) {
-		this.scheduler = scheduler;
-	}
-
-	@Reference
-	void setCm(ConfigurationAdmin cm) {
-		this.cm = cm;
 	}
 
 	@Reference(policy = ReferencePolicy.DYNAMIC, cardinality = ReferenceCardinality.MULTIPLE, target = "(component.name=*FixedCronScheduleComponent)")

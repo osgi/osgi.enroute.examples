@@ -20,7 +20,7 @@ EnRoute-Application: osgi.enroute.iot.domotica
 
 -buildpath: \
 	osgi.enroute.base.api,\
-	osgi.enroute.logger.simple.provider,\
-	osgi.enroute.web.simple.provider;version=1.2,\
-	osgi.enroute.iot.circuit.provider
+	osgi.enroute.google.angular.webresource,\
+	osgi.enroute.twitter.bootstrap.webresource,\
+	osgi.enroute.stackexchange.pagedown.webresource
 	
