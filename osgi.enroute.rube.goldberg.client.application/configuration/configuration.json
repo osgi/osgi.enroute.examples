@@ -1,8 +1,0 @@
-[
-   { 
-   	  "comment":							"Factory configuration for Client",
-      "service.factoryPid":					"osgi.enroute.rube.goldberg.client",
-      "service.pid":						"initial",
-      "name":								"CLIENT"
-   }
-]
