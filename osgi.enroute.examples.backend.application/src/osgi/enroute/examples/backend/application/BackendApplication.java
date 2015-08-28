@@ -11,10 +11,10 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 
-import osgi.enroute.configurer.capabilities.RequireConfigurerExtender;
+import osgi.enroute.configurer.api.RequireConfigurerExtender;
 import osgi.enroute.examples.backend.api.Backend;
-import osgi.enroute.github.angular.capabilities.RequireAngularWebResource;
-import osgi.enroute.stackexchange.pagedown.webresource.RequirePagedownWebResource;
+import osgi.enroute.google.angular.capabilities.RequireAngularWebResource;
+import osgi.enroute.stackexchange.pagedown.capabilities.RequirePagedownWebResource;
 import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;
 import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 

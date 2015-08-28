@@ -22,7 +22,7 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 
-import osgi.enroute.configurer.capabilities.RequireConfigurerExtender;
+import osgi.enroute.configurer.api.RequireConfigurerExtender;
 import osgi.enroute.dto.api.DTOs;
 import osgi.enroute.eventadminserversentevents.capabilities.RequireEventAdminServerSentEventsWebResource;
 import osgi.enroute.examples.cm.examples.ConfigurationListenerExample;
@@ -30,9 +30,9 @@ import osgi.enroute.examples.cm.examples.ConfigurationPluginExample;
 import osgi.enroute.examples.cm.examples.Examples;
 import osgi.enroute.examples.cm.examples.ManagedServiceExample;
 import osgi.enroute.examples.cm.examples.ManagedServiceFactoryExample;
-import osgi.enroute.github.angular.capabilities.RequireAngularWebResource;
-import osgi.enroute.jsonrpc.capabilities.RequireJsonrpcWebResource;
-import osgi.enroute.stackexchange.pagedown.webresource.RequirePagedownWebResource;
+import osgi.enroute.google.angular.capabilities.RequireAngularWebResource;
+import osgi.enroute.jsonrpc.api.RequireJsonrpcWebResource;
+import osgi.enroute.stackexchange.pagedown.capabilities.RequirePagedownWebResource;
 import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;
 import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 

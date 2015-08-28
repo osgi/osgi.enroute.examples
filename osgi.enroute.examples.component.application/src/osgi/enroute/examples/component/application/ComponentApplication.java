@@ -2,7 +2,7 @@ package osgi.enroute.examples.component.application;
 
 import org.osgi.service.component.annotations.Component;
 
-import osgi.enroute.github.angular.capabilities.RequireAngularWebResource;
+import osgi.enroute.google.angular.capabilities.RequireAngularWebResource;
 import osgi.enroute.rest.api.REST;
 import osgi.enroute.rest.api.RESTRequest;
 import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;

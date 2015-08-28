@@ -2,7 +2,7 @@
 # OSGI ENROUTE EXAMPLES PROPERTIES APPLICATION APPLICATION
 #
 
-Bundle-Version: 1.0.0.${tstamp}
+Bundle-Version: 		1.0.0.${tstamp}
 Bundle-Description: \
 	This is a small project that shows the use of properties in bnd. In \
 	the osgi.enroute.examples.properties.bndrun file we can set or not set \
@@ -13,11 +13,9 @@ Bundle-Description: \
 	you can find a user interface that shows the result. Note: bndtools has a refresh problem, \
 	you have to close and open the bndrun file after you made changes to the \
 	build.bnd or etx/*.bnd files. 
-
+EnRoute-Application: 	osgi.enroute.examples.properties
 Private-Package:  \
 	osgi.enroute.examples.properties.application
-
-EnRoute-Application: osgi.enroute.examples.properties
 	
 -includeresource: \
 	{readme.md}, \
@@ -26,9 +24,6 @@ EnRoute-Application: osgi.enroute.examples.properties
 	web=web
 
 -buildpath: \
-	osgi.enroute.base.api,\
-	osgi.enroute.google.angular.webresource,\
-	osgi.enroute.twitter.bootstrap.webresource,\
-	osgi.enroute.stackexchange.pagedown.webresource
+	osgi.enroute.base.api
 	
 	

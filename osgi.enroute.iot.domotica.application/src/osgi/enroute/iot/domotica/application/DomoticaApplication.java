@@ -3,9 +3,9 @@ package osgi.enroute.iot.domotica.application;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 
-import osgi.enroute.configurer.capabilities.RequireConfigurerExtender;
+import osgi.enroute.configurer.api.RequireConfigurerExtender;
 import osgi.enroute.eventadminserversentevents.capabilities.RequireEventAdminServerSentEventsWebResource;
-import osgi.enroute.github.angular.capabilities.RequireAngularWebResource;
+import osgi.enroute.google.angular.capabilities.RequireAngularWebResource;
 import osgi.enroute.rest.api.REST;
 import osgi.enroute.rest.api.RESTRequest;
 import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;

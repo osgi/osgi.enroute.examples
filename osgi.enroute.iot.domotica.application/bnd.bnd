@@ -2,15 +2,14 @@
 # OSGI ENROUTE IOT DOMOTICA APPLICATION APPLICATION
 #
 
-Bundle-Version: 1.0.0.${tstamp}
+Bundle-Version: 		1.0.0.${tstamp}
 Bundle-Description: \
 	Bundle to control things in the house
-
+EnRoute-Application: 	osgi.enroute.iot.domotica
 Private-Package: \
 	osgi.enroute.iot.domotica.application,\
 	osgi.enroute.iot.domotica.command
 
-EnRoute-Application: osgi.enroute.iot.domotica
 
 -includeresource: \
 	{readme.md}, \
@@ -19,8 +18,5 @@ EnRoute-Application: osgi.enroute.iot.domotica
 	web=web
 
 -buildpath: \
-	osgi.enroute.base.api,\
-	osgi.enroute.google.angular.webresource,\
-	osgi.enroute.twitter.bootstrap.webresource,\
-	osgi.enroute.stackexchange.pagedown.webresource
-	
+	osgi.enroute.base.api
+

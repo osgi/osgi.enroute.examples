@@ -19,15 +19,15 @@ import org.osgi.service.event.EventAdmin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import osgi.enroute.configurer.capabilities.RequireConfigurerExtender;
+import osgi.enroute.configurer.api.RequireConfigurerExtender;
 import osgi.enroute.dto.api.DTOs;
 import osgi.enroute.eventadminserversentevents.capabilities.RequireEventAdminServerSentEventsWebResource;
 import osgi.enroute.examples.scheduler.examples.Examples;
-import osgi.enroute.github.angular.capabilities.RequireAngularWebResource;
+import osgi.enroute.google.angular.capabilities.RequireAngularWebResource;
 import osgi.enroute.scheduler.api.CancelException;
 import osgi.enroute.scheduler.api.CancellablePromise;
 import osgi.enroute.scheduler.api.TimeoutException;
-import osgi.enroute.stackexchange.pagedown.webresource.RequirePagedownWebResource;
+import osgi.enroute.stackexchange.pagedown.capabilities.RequirePagedownWebResource;
 import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;
 import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 

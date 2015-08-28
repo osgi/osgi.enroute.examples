@@ -33,7 +33,7 @@ public class SchedulerRESTFacade implements REST {
 	/*
 	 * Start a command and create a tracker.
 	 */
-	public Tracker putScheduler(PutRequest rq, String method) throws Exception {
+	public Tracker putScheduler(PutRequest rq, Object payload, String method) throws Exception {
 		return app.createTracker(method, rq.parameter());
 	}
 

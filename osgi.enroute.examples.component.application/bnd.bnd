@@ -6,7 +6,6 @@ Bundle-Version: 1.0.0.${tstamp}
 Bundle-Description: \
 	An example OSGi enRoute project demonstrating the use of Declarative Services \
 	components. 
-
 Private-Package: \
 	osgi.enroute.examples.component.application,\
 	osgi.enroute.examples.component.examples
@@ -19,12 +18,8 @@ EnRoute-Application: osgi.enroute.examples.component
 	{static=static}
 
 -buildpath:  \
-	osgi.enroute.base.api,\
-	osgi.enroute.google.angular.webresource,\
-	osgi.enroute.twitter.bootstrap.webresource,\
-	osgi.enroute.stackexchange.pagedown.webresource
+	osgi.enroute.base.api
 	
 -runrequires: \
 	osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.component.application)',\
 	osgi.identity;filter:='(osgi.identity=aQute.xray.plugin)'
--resolve: auto
