@@ -1,0 +1,29 @@
+#
+# OSGI ENROUTE EXAMPLES JSONRPC APPLICATION APPLICATION
+#
+
+Bundle-Version: 		1.0.0.${tstamp}
+Bundle-Description: \
+	This example shows how to use JSON RPC in enRoute. A JSON RPC application calls \
+	the back-end server with the JSON RPC protocol. On the fron-end the JSON RPC \
+	bundle provides an Angular service to communicate with the back-end OSGi service. \
+	the front-end service provides an endpoint object that implements the identical methods \
+	as the back-end service. 
+Bundle-DocURL: 			http://enroute.osgi.org/services/osgi.enroute.jsonrpc.api.html
+Private-Package:  \
+	osgi.enroute.examples.jsonrpc.application
+
+EnRoute-Application: 	osgi.enroute.examples.jsonrpc
+JPM-Command:			jsonrpc
+
+-includeresource: \
+	{readme.md}, \
+	{configuration=configuration}, \
+	{static=static}, \
+	web=web
+
+-buildpath: \
+	osgi.enroute.base.api
+	
+-testpath: \
+	osgi.enroute.junit.wrapper;version=4.12

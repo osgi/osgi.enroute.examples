@@ -1,0 +1,24 @@
+<section ng-cloak>
+
+	<div class="jumbotron">
+		<h1>{{welcome}}</h1>
+	</div>
+
+	<div class="input-group">
+		<span class="input-group-btn">
+			<button 
+				class="btn btn-default btn-success" 
+				type="button"
+				ng-click=upper(string)>
+				To Upper
+			</button>
+		</span> 
+		<input 
+			type="text" 
+			class="form-control" 
+			placeholder="some lower case text"
+			ng-model=string>
+	</div>
+	<br/>
+	<p>${Bundle-Description}</p>
+</section>

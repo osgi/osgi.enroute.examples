@@ -1,0 +1,17 @@
+#
+# OSGI ENROUTE EXAMPLES JSONRPC APPLICATION RUN SPECIFICATION
+#
+
+
+Bundle-Version:				1.0.0.${tstamp}
+Bundle-SymbolicName:		osgi.enroute.examples.jsonrpc.application.launch
+JPM-Command:					jsonrpc
+
+
+-runfw:						org.eclipse.osgi
+
+-runrequires:  \
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.jsonrpc.application)'
+
+-runbundles: \
+	${error;Resolve first}
