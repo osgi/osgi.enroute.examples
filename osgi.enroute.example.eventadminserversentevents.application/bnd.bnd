@@ -1,0 +1,27 @@
+#
+# OSGI ENROUTE EXAMPLE EVENTADMINSERVERSENTEVENTS APPLICATION APPLICATION
+#
+
+Bundle-Version: 1.0.0.${tstamp}
+Bundle-Description: \
+	A simple application that shows all the Event Admin events in the local \
+	OSGi framework.
+	
+Bundle-DocURL:		http://enroute.osgi.org/services/osgi.enroute.easse.html
+Private-Package:  \
+	osgi.enroute.example.eventadminserversentevents.application
+
+EnRoute-Application: 	osgi.enroute.example.eventadminserversentevents
+JPM-Command:			evntdmn
+
+-includeresource: \
+	{readme.md}, \
+	{configuration=configuration}, \
+	{static=static}, \
+	web=web
+
+-buildpath: \
+	osgi.enroute.base.api
+	
+-testpath: \
+	osgi.enroute.junit.wrapper;version=4.12

@@ -1,0 +1,38 @@
+<section ng-cloak>
+
+	<table class="table table-small">
+		<colgroup>
+			<col style="width:20%">
+			<col style="width:80%">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Topic</th>
+				<th>Properties</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="e in events">
+				<td>{{e['event.topics']}}</td>
+				<td>{{e | json}}</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="input-group">
+		<span class="input-group-btn">
+			<button 
+				class="btn btn-default btn-success" 
+				type="button"
+				ng-click=event(topic)>
+				Send Event
+			</button>
+		</span> 
+		<input 
+			type="text" 
+			class="form-control" 
+			placeholder="some/TOPIC"
+			ng-model=topic>
+	</div>
+	
+</section>

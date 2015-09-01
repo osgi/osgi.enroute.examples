@@ -1,0 +1,17 @@
+#
+# OSGI ENROUTE EXAMPLE EVENTADMINSERVERSENTEVENTS APPLICATION RUN SPECIFICATION
+#
+
+
+Bundle-Version:				1.0.0.${tstamp}
+Bundle-SymbolicName:		osgi.enroute.example.eventadminserversentevents.application.launch
+JPM-Command:					evntdmn
+
+
+-runfw:						org.eclipse.osgi
+
+-runrequires:  \
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.example.eventadminserversentevents.application)'
+
+-runbundles: \
+	${error;Resolve first}
