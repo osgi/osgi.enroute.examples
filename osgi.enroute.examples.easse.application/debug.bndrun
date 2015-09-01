@@ -1,8 +1,8 @@
 #
-# EVENTADMINSERVERSENTEVENTS APPLICATION DEBUG RUN SPECIFICATION
+# EASSE APPLICATION DEBUG RUN SPECIFICATION
 #
 
--include: ~osgi.enroute.example.eventadminserversentevents.bndrun
+-include: ~osgi.enroute.examples.easse.bndrun
 
 -runrequires.debug:  ${debug-bundles}
 
@@ -32,7 +32,7 @@
 	osgi.enroute.base.debug.provider;version='[1.1.0,1.1.1)',\
 	osgi.enroute.dto.bndlib.provider;version='[1.0.0,1.0.1)',\
 	osgi.enroute.easse.simple.adapter;version='[1.3.2,1.3.3)',\
-	osgi.enroute.example.eventadminserversentevents.application;version=snapshot,\
+	osgi.enroute.examples.easse.application;version=snapshot,\
 	osgi.enroute.executor.simple.provider;version='[1.0.0,1.0.1)',\
 	osgi.enroute.google.angular.webresource;version='[1.4.4,1.4.5)',\
 	osgi.enroute.logger.simple.provider;version='[1.1.1,1.1.2)',\

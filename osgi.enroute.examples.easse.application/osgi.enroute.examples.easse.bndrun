@@ -1,0 +1,17 @@
+#
+# OSGI ENROUTE EXAMPLES EASSE APPLICATION RUN SPECIFICATION
+#
+
+
+Bundle-Version:				1.0.0.${tstamp}
+Bundle-SymbolicName:		osgi.enroute.examples.easse.application.launch
+JPM-Command:					easse
+
+
+-runfw:						org.eclipse.osgi
+
+-runrequires:  \
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.easse.application)'
+
+-runbundles: \
+	${error;Resolve first}

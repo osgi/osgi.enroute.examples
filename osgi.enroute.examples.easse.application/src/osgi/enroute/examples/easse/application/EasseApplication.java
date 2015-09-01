@@ -1,4 +1,4 @@
-package osgi.enroute.example.eventadminserversentevents.application;
+package osgi.enroute.examples.easse.application;
 
 import java.util.Map;
 
@@ -13,12 +13,12 @@ import osgi.enroute.rest.api.REST;
 import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;
 import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 
+@RequireEventAdminServerSentEventsWebResource
 @RequireAngularWebResource(resource={"angular.js","angular-resource.js", "angular-route.js"}, priority=1000)
 @RequireBootstrapWebResource(resource="css/bootstrap.css")
 @RequireWebServerExtender
 @Component(name="osgi.enroute.example.eventadminserversentevents")
-@RequireEventAdminServerSentEventsWebResource
-public class EventadminserversenteventsApplication implements REST {
+public class EasseApplication implements REST {
 
 	@Reference
 	private EventAdmin eventAdmin;

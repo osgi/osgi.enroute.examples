@@ -11,12 +11,12 @@
 		});
 	}
 	
-	var MODULE = angular.module('osgi.enroute.example.eventadminserversentevents',
+	var MODULE = angular.module('osgi.enroute.examples.easse',
 			[ 'ngRoute', "enEasse"]);
 
 	MODULE.config( function($routeProvider) {
-		$routeProvider.when('/', { controller: mainProvider, templateUrl: '/osgi.enroute.example.eventadminserversentevents/main/htm/home.htm'});
-		$routeProvider.when('/about', { templateUrl: '/osgi.enroute.example.eventadminserversentevents/main/htm/about.htm'});
+		$routeProvider.when('/', { controller: mainProvider, templateUrl: '/osgi.enroute.examples.easse/main/htm/home.htm'});
+		$routeProvider.when('/about', { templateUrl: '/osgi.enroute.examples.easse/main/htm/about.htm'});
 		$routeProvider.otherwise('/');
 	});
 	

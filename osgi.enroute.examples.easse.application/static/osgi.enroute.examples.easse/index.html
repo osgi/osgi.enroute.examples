@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href=/osgi.enroute.example.eventadminserversentevents/favicon.ico">
+<link rel="icon" href=/osgi.enroute.examples.easse/favicon.ico">
 
-<title>OSGI ENROUTE EXAMPLE EVENT ADMIN SERVER SENT EVENTS APPLICATION</title>
+<title>OSGI ENROUTE EXAMPLES EASSE APPLICATION</title>
 
 <link rel="stylesheet" type="text/css"
 	href="/osgi.enroute.webresource/${bsn}/${Bundle-Version}/*.css">
@@ -22,7 +22,7 @@
     
 </head>
 
-<body ng-app="osgi.enroute.example.eventadminserversentevents">
+<body ng-app="osgi.enroute.examples.easse">
 
 	<div class="container">
 		
@@ -31,10 +31,10 @@
 				<li ng-class="{active: page() == '/'}"><a href="#/">Home</a></li>
 				<li ng-class="{active: page() == '/about'}"><a href="#/about">About</a></li>
 			</ul>
-			<h3 class="text-muted">Event Admin Server Sent Events</h3>
+			<h3 class="text-muted">Easse</h3>
 			<div ng-repeat="alert in alerts" class="alert alert-{{alert.type || 'alert'}} alert-dismissible">
 				{{alert.msg}}
-				<button type="button" ng-click='alerts.splice($index,1)' class="close pull-right"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<button type="button" ng-click='closeAlert($index)' class="close pull-right"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			</div>
 		</div>
   		

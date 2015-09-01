@@ -1,5 +1,5 @@
 #
-# OSGI ENROUTE EXAMPLE EVENTADMINSERVERSENTEVENTS APPLICATION APPLICATION
+# OSGI ENROUTE EXAMPLES EASSE APPLICATION APPLICATION
 #
 
 Bundle-Version: 1.0.0.${tstamp}
@@ -8,15 +8,15 @@ Bundle-Description: \
 	OSGi framework.
 	
 Bundle-DocURL:		http://enroute.osgi.org/services/osgi.enroute.easse.html
-Private-Package:  \
-	osgi.enroute.example.eventadminserversentevents.application
 
-EnRoute-Application: 	osgi.enroute.example.eventadminserversentevents
-JPM-Command:			evntdmn
+Private-Package:  \
+	osgi.enroute.examples.easse.application
+
+EnRoute-Application: 	osgi.enroute.examples.easse
+JPM-Command:			easse
 
 -includeresource: \
 	{readme.md}, \
-	{configuration=configuration}, \
 	{static=static}, \
 	web=web
 

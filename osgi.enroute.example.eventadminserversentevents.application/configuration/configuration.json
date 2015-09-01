@@ -1,8 +1,0 @@
-[
-   { 
-   	  "comment":							"Factory configuration for Eventadminserversentevents",
-      "service.factoryPid":					"osgi.enroute.example.eventadminserversentevents",
-      "service.pid":						"initial",
-      "name":								"EVENTADMINSERVERSENTEVENTS"
-   }
-]
