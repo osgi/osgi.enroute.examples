@@ -1,0 +1,26 @@
+#
+# OSGI ENROUTE EXAMPLES WEBSERVER WEBRESOURCE
+#
+# This is a sample web resource for the osgi.enroute.examples.webserver.application
+#
+
+vrs = ${version;===;${Bundle-Version}}
+name = /osgi.enroute.examples/webserver
+path = /static${name}/${vrs}
+
+Bundle-Version: 	1.0.0.${tstamp}
+Bundle-Description: \
+	An example resource wrapped for the Webserver WebResources.
+Export-Package: osgi.enroute.examples.webserver.webresource
+Provide-Capability:	\
+	osgi.enroute.webresource; \
+		osgi.enroute.webresource=${name}; \
+		version:Version=${vrs}; \
+		root=${path}
+
+-buildpath: \
+	osgi.enroute.base.api
+	
+-includeresource: \
+	{${path}=${vrs}}
+

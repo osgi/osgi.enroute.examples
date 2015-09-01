@@ -1,0 +1,26 @@
+#
+# OSGI ENROUTE EXAMPLES WEBSERVER APPLICATION APPLICATION
+#
+
+Bundle-Version: 1.0.0.${tstamp}
+Bundle-Description: \
+	An example that shows how to use the web server's static resources \
+	and WebResource capabilities.
+
+Private-Package:  \
+	osgi.enroute.examples.webserver.application
+
+EnRoute-Application: 	osgi.enroute.examples.webserver
+JPM-Command:			websrvr
+
+-includeresource: \
+	{readme.md}, \
+	{static=static}, \
+	web=web
+
+-buildpath: \
+	osgi.enroute.base.api,\
+	osgi.enroute.examples.webserver.webresource;version=latest
+	
+-testpath: \
+	osgi.enroute.junit.wrapper;version=4.12
