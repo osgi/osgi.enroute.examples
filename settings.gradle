@@ -5,6 +5,7 @@
  */
 
 import aQute.bnd.build.Workspace
+import aQute.bnd.osgi.Constants
 
 /* Add bnd gradle plugin as a script dependency */
 buildscript {
@@ -22,7 +23,9 @@ buildscript {
 }
 
 /* Initialize the bnd workspace */
-def workspace = Workspace.getWorkspace(rootDir, bnd_cnf)
+Workspace.setDriver(Constants.BNDDRIVER_GRADLE)
+Workspace.addGestalt(Constants.GESTALT_BATCH, null)
+def workspace = new Workspace(rootDir, bnd_cnf)
 if (workspace == null) {
   throw new GradleException("Unable to load workspace ${rootDir}/${bnd_cnf}")
 }
@@ -70,8 +73,8 @@ if (projectNames.remove('')) {
 projectNames.each { projectName ->
   include projectName
   def project = getBndProject(workspace, projectName)
-  project?.dependson.each {
-    include it.name
+  project?.getDependson()*.getName().each {
+    include it
   }
 }
 
@@ -88,10 +91,10 @@ def getBndProject(Workspace workspace, String projectName) {
 
   project.getInfo(workspace, "${rootDir} :")
   def errorCount = 0
-  project.warnings.each {
+  project.getWarnings().each {
     println "Warning: ${it}"
   }
-  project.errors.each {
+  project.getErrors().each {
     println "Error  : ${it}"
     errorCount++
   }
