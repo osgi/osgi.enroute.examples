@@ -1,0 +1,4 @@
+# OSGI ENROUTE EXAMPLES WEBCONSOLE PROVIDER
+
+${Bundle-Description}
+
