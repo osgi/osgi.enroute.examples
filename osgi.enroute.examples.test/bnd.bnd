@@ -1,0 +1,34 @@
+#
+# OSGI ENROUTE EXAMPLES TEST OSGi TEST BUNDLE 
+#
+
+Bundle-Version:1.0.0.${tstamp}
+Bundle-Description: \
+ 	This bundle is an OSGi test bundle that tests the enRoute Blog Manager API. Projects\
+ 	that provide this API should configure their bnd.bnd file to run this test so that\
+ 	the providers can test their conformance. This bundle requires DSTest to run so this\
+ 	bundle should be included. \
+	\
+	${warning;Please update this Bundle-Description in osgi.enroute.examples.test/bnd.bnd}
+
+
+Private-Package:  \
+	osgi.enroute.examples.test
+
+Test-Cases: ${test-cases}
+
+
+-includeresource: {readme.md}
+
+-buildpath: \
+	osgi.enroute.base.api;version=1.0, \
+	osgi.enroute.junit.wrapper;version=4.12
+
+-runrequires: \
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.test)'
+
+-runbundles: \
+	org.apache.felix.log;version='[1.0.1,1.0.2)',\
+	osgi.enroute.examples.test;version=snapshot,\
+	osgi.enroute.hamcrest.wrapper;version='[1.3.0,1.3.1)',\
+	osgi.enroute.junit.wrapper;version='[4.12.0,4.12.1)'
