@@ -1,0 +1,33 @@
+#
+# OSGI ENROUTE EXAMPLES LED CONTROLLER APPLICATION APPLICATION
+#
+
+Bundle-Version: 1.0.0.${tstamp}
+Bundle-Description: Example application to switch on LED connected to Raspberry Pi GPIO Pins \
+	using MQTT Communication
+
+Private-Package: \
+	osgi.enroute.examples.led.controller.application,\
+	osgi.enroute.example.mqtt.client
+
+EnRoute-Application: 	osgi.enroute.examples.led.controller
+JPM-Command:			cntrllr
+
+-includeresource: \
+	{readme.md}, \
+	{configuration=configuration}, \
+	{static=static}, \
+	web=web
+
+-buildpath: \
+	osgi.enroute.base.api,\
+	org.fusesource.hawtbuf.hawtbuf,\
+	org.fusesource.hawtdispatch.hawtdispatch,\
+	org.fusesource.hawtdispatch.hawtdispatch-transport,\
+	org.fusesource.mqtt-client.mqtt-client,\
+	osgi.enroute.iot.pi.provider
+	
+-testpath: \
+	osgi.enroute.junit.wrapper;version=4.12
+Bundle-Name: OSGi Enroute LED Controller Application
+Bundle-Vendor: OSGi Alliance
