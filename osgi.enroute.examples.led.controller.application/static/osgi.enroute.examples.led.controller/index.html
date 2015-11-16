@@ -9,7 +9,7 @@
 <meta name="author" content="Amit Kumar Mondal (admin@amitinside.com)">
 <link rel="icon" href=/osgi.enroute.examples.led.controller/favicon.ico">
 
-<title>OSGi Enroute LED Controller Example</title>
+<title>OSGi enRoute LED Controller</title>
 
 <link rel="stylesheet" type="text/css"
 	href="/osgi.enroute.webresource/${bsn}/${Bundle-Version}/*.css">
@@ -29,7 +29,7 @@
 		<div class="header">
 			<ul class="nav nav-pills pull-right">
 				<li ng-class="{active: page() == '/'}"><a href="#/">Home</a></li>
-				<li ng-class="{active: page() == '/about'}"><a href="#/about">About</a></li>
+				<li ng-class="{active: page() == '/settings'}"><a href="#/settings">Settings</a></li>
 			</ul>
 			<h3 class="text-muted"><img src="images/enroute-logo.png" style="width:32px">&nbsp;&nbsp;LED Controller</h3>
 			<div ng-repeat="alert in alerts" class="alert alert-{{alert.type || 'alert'}} alert-dismissible">
