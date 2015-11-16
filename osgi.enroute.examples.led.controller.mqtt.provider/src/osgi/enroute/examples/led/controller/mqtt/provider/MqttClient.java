@@ -21,7 +21,7 @@ import static java.util.Objects.nonNull;
 import static org.osgi.service.log.LogService.LOG_DEBUG;
 import static org.osgi.service.log.LogService.LOG_ERROR;
 import static org.osgi.service.log.LogService.LOG_INFO;
-import static osgi.enroute.examples.led.controller.util.Utils.dictioaryToMap;
+import static osgi.enroute.examples.led.controller.util.Utils.dictionaryToMap;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -216,7 +216,7 @@ public final class MqttClient implements IMqttClient, ConfigurationListener {
 	 * Extracts Configuration Parameters
 	 */
 	private void extractConfiguration(final Dictionary<String, ?> properties) {
-		final Map<String, ?> map = dictioaryToMap(properties);
+		final Map<String, ?> map = dictionaryToMap(properties);
 
 		// MQTT Password Check
 		if (map.containsKey("userPassword")) {
