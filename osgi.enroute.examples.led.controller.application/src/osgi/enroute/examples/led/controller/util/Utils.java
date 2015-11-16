@@ -38,7 +38,7 @@ public final class Utils {
 	 * @throws NullPointerException
 	 *             if argument is null
 	 */
-	public static <K, V> Map<K, V> dictioaryToMap(final Dictionary<K, V> dictionary) {
+	public static <K, V> Map<K, V> dictionaryToMap(final Dictionary<K, V> dictionary) {
 		checkNotNull(dictionary);
 		final Iterator<K> keysIter = Iterators.forEnumeration(dictionary.keys());
 		final Map<K, V> dict = Maps.toMap(keysIter, dictionary::get);

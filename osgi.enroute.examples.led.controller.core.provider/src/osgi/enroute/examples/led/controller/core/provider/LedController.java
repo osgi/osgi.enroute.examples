@@ -23,7 +23,7 @@ import static osgi.enroute.examples.led.controller.core.events.LEDEventConstants
 import static osgi.enroute.examples.led.controller.core.events.LEDEventConstants.ON;
 import static osgi.enroute.examples.led.controller.core.events.LEDEventConstants.STATUS_OFF;
 import static osgi.enroute.examples.led.controller.core.events.LEDEventConstants.STATUS_ON;
-import static osgi.enroute.examples.led.controller.util.Utils.dictioaryToMap;
+import static osgi.enroute.examples.led.controller.util.Utils.dictionaryToMap;
 
 import java.io.IOException;
 import java.util.Dictionary;
@@ -168,7 +168,7 @@ public final class LedController implements ILedController, ConfigurationListene
 	 * Extracts GPIO PIN Configuration
 	 */
 	private void extractConfiguration(final Dictionary<String, ?> properties) {
-		final Map<String, ?> map = dictioaryToMap(properties);
+		final Map<String, ?> map = dictionaryToMap(properties);
 		if (map.containsKey("GPIOpin")) {
 			final Object value = map.get("GPIOpin");
 			if (nonNull(value)) {

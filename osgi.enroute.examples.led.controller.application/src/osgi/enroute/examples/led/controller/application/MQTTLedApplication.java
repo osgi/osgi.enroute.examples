@@ -18,7 +18,7 @@ package osgi.enroute.examples.led.controller.application;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.util.Objects.nonNull;
 import static org.osgi.service.log.LogService.LOG_ERROR;
-import static osgi.enroute.examples.led.controller.util.Utils.dictioaryToMap;
+import static osgi.enroute.examples.led.controller.util.Utils.dictionaryToMap;
 
 import java.io.IOException;
 import java.util.Dictionary;
@@ -160,7 +160,7 @@ public final class MQTTLedApplication implements ManagedService, REST {
 
 		// Retrieving MQTT Settings
 		if (properties != null) {
-			map = dictioaryToMap(properties);
+			map = dictionaryToMap(properties);
 
 			if (map.containsKey("host")) {
 				final Object mqttServer = map.get("host");
@@ -195,7 +195,7 @@ public final class MQTTLedApplication implements ManagedService, REST {
 		properties = this.gpioConfiguration.getProperties();
 
 		if (properties != null) {
-			map = dictioaryToMap(properties);
+			map = dictionaryToMap(properties);
 			if (map.containsKey("GPIOpin")) {
 				final Object gpioPin = map.get("GPIOpin");
 				if (nonNull(gpioPin) && !isNullOrEmpty(String.valueOf(gpioPin))) {
@@ -207,7 +207,7 @@ public final class MQTTLedApplication implements ManagedService, REST {
 		// Retrieving LED Settings
 		properties = this.ledConfiguration.getProperties();
 		if (properties != null) {
-			map = dictioaryToMap(properties);
+			map = dictionaryToMap(properties);
 			if (map.containsKey("subscriptionTopic")) {
 				final Object subscriptionTopic = map.get("subscriptionTopic");
 				if (nonNull(subscriptionTopic) && !isNullOrEmpty(String.valueOf(subscriptionTopic))) {
@@ -290,7 +290,7 @@ public final class MQTTLedApplication implements ManagedService, REST {
 	/** {@inheritDoc}} */
 	@Override
 	public void updated(final Dictionary<String, ?> properties) throws ConfigurationException {
-		final Map<String, ?> map = dictioaryToMap(properties);
+		final Map<String, ?> map = dictionaryToMap(properties);
 		if (map.containsKey("subscriptionTopic")) {
 			final Object topic = map.get("subscriptionTopic");
 			if (nonNull(topic) && !isNullOrEmpty(String.valueOf(topic))) {
