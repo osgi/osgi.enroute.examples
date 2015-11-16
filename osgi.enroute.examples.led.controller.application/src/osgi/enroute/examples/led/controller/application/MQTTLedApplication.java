@@ -275,8 +275,8 @@ public final class MQTTLedApplication implements ManagedService, REST {
 							return;
 						}
 						if ("blink".startsWith(message)) {
-							final String seconds = message.split(" ")[1];
-							this.ledController.blink(Integer.valueOf(seconds));
+							final String noOfTimes = message.split(" ")[1];
+							this.ledController.blink(Integer.valueOf(noOfTimes));
 							return;
 						}
 					} catch (final Exception e) {
