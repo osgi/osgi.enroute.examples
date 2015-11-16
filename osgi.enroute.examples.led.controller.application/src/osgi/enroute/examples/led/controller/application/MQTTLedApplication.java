@@ -263,7 +263,7 @@ public final class MQTTLedApplication implements ManagedService, REST {
 	private void subscribeToChannel() {
 		if (!isNullOrEmpty(this.subscriptionChannel) && nonNull(this.mqttClient)) {
 			final boolean isConnected = this.mqttClient.connect();
-			if (isConnected) {
+			if (isConnected && nonNull(this.ledController)) {
 				this.mqttClient.subscribe(String.valueOf(this.subscriptionChannel), message -> {
 					try {
 						if ("on".equalsIgnoreCase(message)) {
