@@ -26,8 +26,14 @@ public interface IMqttClient {
 	 * Connection related exception
 	 */
 	class ConnectionException extends RuntimeException {
-		private static final long serialVersionUID = 1L;
+		/**
+		 * Serialization ID
+		 */
+		private static final long serialVersionUID = 47L;
 
+		/**
+		 * Constructor
+		 */
 		public ConnectionException(final String message) {
 			super(message);
 		}

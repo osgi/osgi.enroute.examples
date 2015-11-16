@@ -156,10 +156,10 @@ public final class MQTTLedApplication implements ManagedService, REST {
 	public Settings getSettings(final RESTRequest request) {
 		final Settings settings = new Settings();
 		Dictionary<String, Object> properties = this.mqttConfiguration.getProperties();
-		Map<String, Object> map;
+		Map<String, Object> map = null;
 
 		// Retrieving MQTT Settings
-		if (properties != null) {
+		if (nonNull(properties)) {
 			map = dictionaryToMap(properties);
 
 			if (map.containsKey("host")) {

@@ -154,11 +154,15 @@ public final class LedController implements ILedController, ConfigurationListene
 			this.extractConfiguration(properties);
 			if (this.retrieveCurrentLedStatus() == HIGH) {
 				this.event = new Event(STATUS_ON.value(), this.properties);
-				this.eventAdmin.postEvent(this.event);
+				if (nonNull(this.eventAdmin)) {
+					this.eventAdmin.postEvent(this.event);
+				}
 			}
 			if (this.retrieveCurrentLedStatus() == LOW) {
 				this.event = new Event(STATUS_OFF.value(), this.properties);
-				this.eventAdmin.postEvent(this.event);
+				if (nonNull(this.eventAdmin)) {
+					this.eventAdmin.postEvent(this.event);
+				}
 			}
 		}
 
@@ -299,7 +303,9 @@ public final class LedController implements ILedController, ConfigurationListene
 		if (nonNull(this.pin)) {
 			this.pin.low();
 			this.event = new Event(OFF.value(), this.properties);
-			this.eventAdmin.postEvent(this.event);
+			if (nonNull(this.eventAdmin)) {
+				this.eventAdmin.postEvent(this.event);
+			}
 		}
 		this.release();
 	}
@@ -314,7 +320,9 @@ public final class LedController implements ILedController, ConfigurationListene
 		if (nonNull(this.pin)) {
 			this.pin.high();
 			this.event = new Event(ON.value(), this.properties);
-			this.eventAdmin.postEvent(this.event);
+			if (nonNull(this.eventAdmin)) {
+				this.eventAdmin.postEvent(this.event);
+			}
 		}
 		this.release();
 	}
