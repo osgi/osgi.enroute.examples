@@ -56,7 +56,7 @@ import org.osgi.service.metatype.annotations.Designate;
 
 import osgi.enroute.examples.led.controller.mqtt.api.IMqttClient;
 import osgi.enroute.examples.led.controller.mqtt.api.MessageListener;
-import osgi.enroute.examples.led.controller.mqtt.configurables.MqttConfiguration;
+import osgi.enroute.examples.led.controller.mqtt.configurable.MqttConfiguration;
 
 /**
  * Implementation of {@link IMqttClient}
