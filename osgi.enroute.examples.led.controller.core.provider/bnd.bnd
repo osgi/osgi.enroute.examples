@@ -1,7 +1,9 @@
 #
 # OSGI ENROUTE EXAMPLES LED CONTROLLER CORE PROVIDER BUNDLE 
 #
+
 Bundle-Version:					1.0.0.${tstamp}
+
 Bundle-Description: This bundle is used to provide Service Implementation to control led connected \
 	to Raspberry Pi GPIO Pin
 
@@ -29,5 +31,7 @@ Private-Package: \
 	
 -runbundles: \
 	${error;Resolve first}
+	
 Bundle-Name: OSGi Enroute LED Controller Core Service Implementation
+
 Bundle-Vendor: OSGi Alliance

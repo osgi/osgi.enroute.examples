@@ -1,12 +1,14 @@
 #
 # OSGI ENROUTE EXAMPLES LED CONTROLLER MQTT PROVIDER BUNDLE 
 #
+
 Bundle-Version:					1.0.0.${tstamp}
+
 Bundle-Description: This is used to provide MQTT Communication related service implementation
 
 Private-Package: \
 	osgi.enroute.examples.led.controller.mqtt.provider,\
-	osgi.enroute.examples.led.controller.mqtt.configurables
+	osgi.enroute.examples.led.controller.mqtt.configurable
 	
 -buildpath: \
 	osgi.enroute.base.api;version=1.0,\
@@ -30,5 +32,7 @@ Private-Package: \
 	
 -runbundles: \
 	${error;Resolve first}
+	
 Bundle-Name: OSGi Enroute LED Controller MQTT Service Implementation
+
 Bundle-Vendor: OSGi Alliance

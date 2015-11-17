@@ -20,7 +20,7 @@ Before you start executing the following steps, it is advisable to configure the
 1. Run either **osgi.enroute.examples.led.controller.bndrun**  or **debug.run** (You might need to add **Google Guava Bundle** to your local Bndtools Repository) 
 2. You can now access the application at **http://<IP Address of the Raspberry Pi>:8080**
 3. Update the settings before you play with this tool
-4. Now you can publish MQTT message (with **on** or **off** or **blink X** payload where **X** is any specific integer number) to the specified topic
+4. Now you can publish MQTT message (with **on** or **off** or **blink X** payload where **X** is any integer number) to the specified topic
 
 ##### LED Configuration:
 The following image is an example of connecting **LED** to **GPIO PIN 1**.
