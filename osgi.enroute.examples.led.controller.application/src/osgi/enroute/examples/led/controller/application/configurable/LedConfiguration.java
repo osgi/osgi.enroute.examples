@@ -28,6 +28,6 @@ public @interface LedConfiguration {
 	 * MQTT Subscription Topic
 	 */
 	@AttributeDefinition(name = "MQTT Subscription Topic", description = "The subscription topic to be used to send messages for switching on/off the light")
-	public String subscriptionTopic();
+	public String subscriptionTopic() default "osgi/enRoute/led/controller";
 
 }

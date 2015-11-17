@@ -17,6 +17,35 @@ package osgi.enroute.examples.led.controller.core.provider;
 
 import static com.pi4j.io.gpio.PinState.HIGH;
 import static com.pi4j.io.gpio.PinState.LOW;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_00;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_01;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_02;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_03;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_05;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_06;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_07;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_08;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_09;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_10;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_11;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_12;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_13;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_14;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_15;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_16;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_17;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_18;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_19;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_20;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_21;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_22;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_23;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_24;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_25;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_26;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_27;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_28;
+import static com.pi4j.io.gpio.RaspiPin.GPIO_29;
 import static java.util.Objects.nonNull;
 import static org.osgi.service.log.LogService.LOG_ERROR;
 import static osgi.enroute.examples.led.controller.core.events.LEDEventConstants.OFF;
@@ -51,7 +80,6 @@ import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinState;
-import com.pi4j.io.gpio.RaspiPin;
 
 import osgi.enroute.examples.led.controller.core.api.ILedController;
 import osgi.enroute.examples.led.controller.gpio.configurable.LedGpioConfiguration;
@@ -179,91 +207,91 @@ public final class LedController implements ILedController, ConfigurationListene
 				final String pin = String.valueOf(value);
 				switch (pin) {
 				case "PIN00":
-					configurablePin = RaspiPin.GPIO_00;
+					configurablePin = GPIO_00;
 					break;
 				case "PIN01":
-					configurablePin = RaspiPin.GPIO_01;
+					configurablePin = GPIO_01;
 					break;
 				case "PIN02":
-					configurablePin = RaspiPin.GPIO_02;
+					configurablePin = GPIO_02;
 					break;
 				case "PIN03":
-					configurablePin = RaspiPin.GPIO_03;
+					configurablePin = GPIO_03;
 					break;
 				case "PIN04":
-					configurablePin = RaspiPin.GPIO_05;
+					configurablePin = GPIO_05;
 					break;
 				case "PIN06":
-					configurablePin = RaspiPin.GPIO_06;
+					configurablePin = GPIO_06;
 					break;
 				case "PIN07":
-					configurablePin = RaspiPin.GPIO_07;
+					configurablePin = GPIO_07;
 					break;
 				case "PIN08":
-					configurablePin = RaspiPin.GPIO_08;
+					configurablePin = GPIO_08;
 					break;
 				case "PIN09":
-					configurablePin = RaspiPin.GPIO_09;
+					configurablePin = GPIO_09;
 					break;
 				case "PIN10":
-					configurablePin = RaspiPin.GPIO_10;
+					configurablePin = GPIO_10;
 					break;
 				case "PIN11":
-					configurablePin = RaspiPin.GPIO_11;
+					configurablePin = GPIO_11;
 					break;
 				case "PIN12":
-					configurablePin = RaspiPin.GPIO_12;
+					configurablePin = GPIO_12;
 					break;
 				case "PIN13":
-					configurablePin = RaspiPin.GPIO_13;
+					configurablePin = GPIO_13;
 					break;
 				case "PIN14":
-					configurablePin = RaspiPin.GPIO_14;
+					configurablePin = GPIO_14;
 					break;
 				case "PIN15":
-					configurablePin = RaspiPin.GPIO_15;
+					configurablePin = GPIO_15;
 					break;
 				case "PIN16":
-					configurablePin = RaspiPin.GPIO_16;
+					configurablePin = GPIO_16;
 					break;
 				case "PIN17":
-					configurablePin = RaspiPin.GPIO_17;
+					configurablePin = GPIO_17;
 					break;
 				case "PIN18":
-					configurablePin = RaspiPin.GPIO_18;
+					configurablePin = GPIO_18;
 					break;
 				case "PIN19":
-					configurablePin = RaspiPin.GPIO_19;
+					configurablePin = GPIO_19;
 					break;
 				case "PIN20":
-					configurablePin = RaspiPin.GPIO_20;
+					configurablePin = GPIO_20;
 					break;
 				case "PIN21":
-					configurablePin = RaspiPin.GPIO_21;
+					configurablePin = GPIO_21;
 					break;
 				case "PIN22":
-					configurablePin = RaspiPin.GPIO_22;
+					configurablePin = GPIO_22;
 					break;
 				case "PIN23":
-					configurablePin = RaspiPin.GPIO_23;
+					configurablePin = GPIO_23;
 					break;
 				case "PIN24":
-					configurablePin = RaspiPin.GPIO_24;
+					configurablePin = GPIO_24;
 					break;
 				case "PIN25":
-					configurablePin = RaspiPin.GPIO_25;
+					configurablePin = GPIO_25;
 					break;
 				case "PIN26":
-					configurablePin = RaspiPin.GPIO_26;
+					configurablePin = GPIO_26;
 					break;
 				case "PIN27":
-					configurablePin = RaspiPin.GPIO_27;
+					configurablePin = GPIO_27;
 					break;
 				case "PIN28":
-					configurablePin = RaspiPin.GPIO_28;
+					configurablePin = GPIO_28;
 					break;
 				case "PIN29":
-					configurablePin = RaspiPin.GPIO_29;
+					configurablePin = GPIO_29;
 					break;
 				default:
 					break;

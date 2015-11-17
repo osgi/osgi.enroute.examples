@@ -28,13 +28,13 @@ public @interface MqttConfiguration {
 	 * MQTT broker Server Address
 	 */
 	@AttributeDefinition(name = "MQTT Server", description = "MQTT Server Address")
-	public String host();
+	public String host() default "iot.eclipse.org";
 
 	/**
 	 * MQTT Broker Port
 	 */
 	@AttributeDefinition(name = "MQTT Port", description = "MQTT Connection Port")
-	public int port();
+	public int port() default 1883;
 
 	/**
 	 * MQTT Broker Username
