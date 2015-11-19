@@ -1,0 +1,37 @@
+#
+# OSGI ENROUTE EXAMPLES LED CONTROLLER CORE PROVIDER BUNDLE 
+#
+
+Bundle-Version:					1.0.0.${tstamp}
+
+Bundle-Description: This bundle is used to provide Service Implementation to control led connected \
+	to Raspberry Pi GPIO Pin
+
+Private-Package: \
+	osgi.enroute.examples.led.controller.core.provider,\
+	osgi.enroute.examples.led.controller.gpio.configurable,\
+	osgi.enroute.examples.led.controller.core.events
+	
+-buildpath: \
+	osgi.enroute.base.api;version=1.0,\
+	osgi.enroute.examples.led.controller.core.api;version=latest,\
+	com.google.guava,\
+	osgi.enroute.iot.pi.provider,\
+	osgi.enroute.examples.led.controller.application;version=latest
+	
+-testpath: \
+	osgi.enroute.junit.wrapper;version=4.12
+
+-includeresource: {readme.md}
+
+-metatype: *
+
+-runrequires:  \
+	osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.led.controller.core.provider)'
+	
+-runbundles: \
+	${error;Resolve first}
+	
+Bundle-Name: OSGi Enroute LED Controller Core Service Implementation
+
+Bundle-Vendor: OSGi Alliance
