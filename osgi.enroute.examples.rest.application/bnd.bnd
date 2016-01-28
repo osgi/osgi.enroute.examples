@@ -1,0 +1,28 @@
+#
+# OSGI ENROUTE EXAMPLES REST APPLICATION APPLICATION
+#
+
+Bundle-Version: 1.0.0.${tstamp}
+Bundle-Description: \
+	Examples for the OSGi enRoute REST API with a test user interface donated by \
+	Chuck Boecking.
+	
+Bundle-Vendor: OSGi enRoute/Chuck Boecking
+Private-Package:  \
+	osgi.enroute.examples.rest.application
+
+EnRoute-Application: 	osgi.enroute.examples.rest
+JPM-Command:			rest
+
+-includeresource: \
+	{readme.md}, \
+	{configuration=configuration}, \
+	{static=static}, \
+	web=web
+
+-buildpath: \
+	osgi.enroute.base.api
+	
+-testpath: \
+	osgi.enroute.junit.wrapper;version=4.12
+	
