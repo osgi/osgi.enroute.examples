@@ -4,7 +4,7 @@
 
 Bundle-Version: 		1.0.0.${tstamp}
 Bundle-Description: \
-	This bundle contains a simple application to edit Configurations \ 
+	This bundle contains a simple application to edit Configurations \
 	through Confguration Admin. It provides examples for all the types in the org.osgi.service.cm \
 	specification. This example is part of the OSGi enRoute project. You can find a description \
 	at http://enroute.osgi.org/services/org.osgi.service.cm.html
