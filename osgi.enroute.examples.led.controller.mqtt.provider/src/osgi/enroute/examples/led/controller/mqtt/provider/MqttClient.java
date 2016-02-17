@@ -15,7 +15,6 @@
  *******************************************************************************/
 package osgi.enroute.examples.led.controller.mqtt.provider;
 
-import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.osgi.service.log.LogService.LOG_DEBUG;
@@ -222,7 +221,7 @@ public final class MqttClient implements IMqttClient, ConfigurationListener {
 		if (map.containsKey("userPassword")) {
 			final Object password = map.get("userPassword");
 			if (nonNull(password)) {
-				if (!isNullOrEmpty(String.valueOf(password))) {
+				if (!isNull(String.valueOf(password)) || (String.valueOf(password).length() == 0)) {
 					MqttClient.password = String.valueOf(password);
 				}
 			}
@@ -232,7 +231,7 @@ public final class MqttClient implements IMqttClient, ConfigurationListener {
 		if (map.containsKey("port")) {
 			final Object port = map.get("port");
 			if (nonNull(port)) {
-				if (!isNullOrEmpty(String.valueOf(port))) {
+				if (!isNull(String.valueOf(port)) || (String.valueOf(port).length() == 0)) {
 					MqttClient.port = Integer.valueOf(port.toString());
 				}
 			}
@@ -242,7 +241,7 @@ public final class MqttClient implements IMqttClient, ConfigurationListener {
 		if (map.containsKey("username")) {
 			final Object username = map.get("username");
 			if (nonNull(username)) {
-				if (!isNullOrEmpty(String.valueOf(username))) {
+				if (!isNull(String.valueOf(username)) || (String.valueOf(username).length() == 0)) {
 					MqttClient.username = String.valueOf(username);
 				}
 			}
@@ -252,7 +251,7 @@ public final class MqttClient implements IMqttClient, ConfigurationListener {
 		if (map.containsKey("host")) {
 			final Object host = map.get("host");
 			if (nonNull(host)) {
-				if (!isNullOrEmpty(String.valueOf(host))) {
+				if (!isNull(String.valueOf(host)) || (String.valueOf(host).length() == 0)) {
 					MqttClient.host = String.valueOf(host);
 				}
 			}

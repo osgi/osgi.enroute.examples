@@ -15,14 +15,12 @@
  *******************************************************************************/
 package osgi.enroute.examples.led.controller.util;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Dictionary;
-import java.util.Iterator;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
-
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Maps;
 
 /**
  * Useful Utility Methods
@@ -39,10 +37,14 @@ public final class Utils {
 	 *             if argument is null
 	 */
 	public static <K, V> Map<K, V> dictionaryToMap(final Dictionary<K, V> dictionary) {
-		checkNotNull(dictionary);
-		final Iterator<K> keysIter = Iterators.forEnumeration(dictionary.keys());
-		final Map<K, V> dict = Maps.toMap(keysIter, dictionary::get);
-		return dict;
+		requireNonNull(dictionary);
+		final Map<K, V> map = new HashMap<K, V>(dictionary.size());
+		final Enumeration<K> keys = dictionary.keys();
+		while (keys.hasMoreElements()) {
+			final K key = keys.nextElement();
+			map.put(key, dictionary.get(key));
+		}
+		return map;
 	}
 
 	/**

@@ -15,7 +15,7 @@
  *******************************************************************************/
 package osgi.enroute.examples.led.controller.application;
 
-import static com.google.common.base.Strings.isNullOrEmpty;
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.osgi.service.log.LogService.LOG_ERROR;
 import static osgi.enroute.examples.led.controller.util.Utils.dictionaryToMap;
@@ -164,28 +164,32 @@ public final class MQTTLedApplication implements ManagedService, REST {
 
 			if (map.containsKey("host")) {
 				final Object mqttServer = map.get("host");
-				if (nonNull(mqttServer) && !isNullOrEmpty(String.valueOf(mqttServer))) {
+				if (nonNull(mqttServer)
+						&& (!isNull(String.valueOf(mqttServer)) || (String.valueOf(mqttServer).length() == 0))) {
 					settings.host = String.valueOf(mqttServer);
 				}
 			}
 
 			if (map.containsKey("port")) {
 				final Object mqttPort = map.get("port");
-				if (nonNull(mqttPort) && !isNullOrEmpty(String.valueOf(mqttPort))) {
+				if (nonNull(mqttPort)
+						&& (!isNull(String.valueOf(mqttPort)) || (String.valueOf(mqttPort).length() == 0))) {
 					settings.port = String.valueOf(mqttPort);
 				}
 			}
 
 			if (map.containsKey("username")) {
 				final Object mqttUsername = map.get("username");
-				if (nonNull(mqttUsername) && !isNullOrEmpty(String.valueOf(mqttUsername))) {
+				if (nonNull(mqttUsername)
+						&& (!isNull(String.valueOf(mqttUsername)) || (String.valueOf(mqttUsername).length() == 0))) {
 					settings.username = String.valueOf(mqttUsername);
 				}
 			}
 
 			if (map.containsKey("userPassword")) {
 				final Object mqttPassword = map.get("userPassword");
-				if (nonNull(mqttPassword) && !isNullOrEmpty(String.valueOf(mqttPassword))) {
+				if (nonNull(mqttPassword)
+						&& (!isNull(String.valueOf(mqttPassword)) || (String.valueOf(mqttPassword).length() == 0))) {
 					settings.password = String.valueOf(mqttPassword);
 				}
 			}
@@ -198,7 +202,7 @@ public final class MQTTLedApplication implements ManagedService, REST {
 			map = dictionaryToMap(properties);
 			if (map.containsKey("GPIOpin")) {
 				final Object gpioPin = map.get("GPIOpin");
-				if (nonNull(gpioPin) && !isNullOrEmpty(String.valueOf(gpioPin))) {
+				if (nonNull(gpioPin) && (!isNull(String.valueOf(gpioPin)) || (String.valueOf(gpioPin).length() == 0))) {
 					settings.pin = String.valueOf(gpioPin);
 				}
 			}
@@ -210,7 +214,8 @@ public final class MQTTLedApplication implements ManagedService, REST {
 			map = dictionaryToMap(properties);
 			if (map.containsKey("subscriptionTopic")) {
 				final Object subscriptionTopic = map.get("subscriptionTopic");
-				if (nonNull(subscriptionTopic) && !isNullOrEmpty(String.valueOf(subscriptionTopic))) {
+				if (nonNull(subscriptionTopic) && (!isNull(String.valueOf(subscriptionTopic))
+						|| (String.valueOf(subscriptionTopic).length() == 0))) {
 					settings.topic = String.valueOf(subscriptionTopic);
 				}
 			}
@@ -261,7 +266,8 @@ public final class MQTTLedApplication implements ManagedService, REST {
 	 * Subscribe to the desired channel
 	 */
 	private void subscribeToChannel() {
-		if (!isNullOrEmpty(this.subscriptionChannel) && nonNull(this.mqttClient)) {
+		if ((!isNull(String.valueOf(this.subscriptionChannel))
+				|| (String.valueOf(this.subscriptionChannel).length() == 0)) && nonNull(this.mqttClient)) {
 			final boolean isConnected = this.mqttClient.connect();
 			if (isConnected && nonNull(this.ledController)) {
 				this.mqttClient.subscribe(String.valueOf(this.subscriptionChannel), message -> {
@@ -293,7 +299,7 @@ public final class MQTTLedApplication implements ManagedService, REST {
 		final Map<String, ?> map = dictionaryToMap(properties);
 		if (map.containsKey("subscriptionTopic")) {
 			final Object topic = map.get("subscriptionTopic");
-			if (nonNull(topic) && !isNullOrEmpty(String.valueOf(topic))) {
+			if (nonNull(topic) && (!isNull(String.valueOf(topic)) || (String.valueOf(topic).length() == 0))) {
 				this.subscriptionChannel = String.valueOf(topic);
 				this.subscribeToChannel();
 			}
