@@ -17,7 +17,6 @@ Private-Package: \
 	org.fusesource.hawtdispatch.hawtdispatch,\
 	org.fusesource.hawtdispatch.hawtdispatch-transport,\
 	org.fusesource.mqtt-client.mqtt-client,\
-	com.google.guava,\
 	osgi.enroute.examples.led.controller.application;version=latest
 	
 -testpath: \

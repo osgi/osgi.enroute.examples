@@ -18,7 +18,7 @@ Example application to switch on/off or blink LED connected to Raspberry Pi GPIO
 Before you start executing the following steps, it is advisable to configure the LED with GPIO Pin as mentioned the following image (although the image is an example). As soon as you connect the LED to the GPIO, you can start executing the following steps.
 
 1. Run either **osgi.enroute.examples.led.controller.bndrun**  or **debug.run** (You might need to add **Google Guava Bundle** to your local Bndtools Repository) 
-2. You can now access the application at **http://<IP Address of the Raspberry Pi>:8080**
+2. You can now access the application at **http://&lt;IP Address of the Raspberry Pi&gt;:8080**
 3. Update the settings before you play with this tool
 4. Now you can publish MQTT message (with **on** or **off** or **blink X** payload where **X** is any integer number) to the specified topic
 

@@ -15,7 +15,6 @@ Private-Package: \
 -buildpath: \
 	osgi.enroute.base.api;version=1.0,\
 	osgi.enroute.examples.led.controller.core.api;version=latest,\
-	com.google.guava,\
 	osgi.enroute.iot.pi.provider,\
 	osgi.enroute.examples.led.controller.application;version=latest
 	

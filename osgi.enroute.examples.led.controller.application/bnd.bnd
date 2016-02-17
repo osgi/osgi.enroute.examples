@@ -23,8 +23,7 @@ EnRoute-Application: 	osgi.enroute.examples.led.controller
 -buildpath: \
 	osgi.enroute.base.api,\
 	osgi.enroute.examples.led.controller.core.api;version=latest,\
-	osgi.enroute.examples.led.controller.mqtt.api;version=latest,\
-	com.google.guava
+	osgi.enroute.examples.led.controller.mqtt.api;version=latest
 	
 -testpath: \
 	osgi.enroute.junit.wrapper;version=4.12
