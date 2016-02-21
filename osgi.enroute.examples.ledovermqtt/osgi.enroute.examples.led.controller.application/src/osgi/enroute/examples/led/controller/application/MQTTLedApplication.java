@@ -286,7 +286,7 @@ public final class MQTTLedApplication implements ManagedService, REST {
 							final String seconds = message.split(" ")[1];
 							try {
 								this.ledController.blinkFor(Integer.valueOf(seconds));
-							} catch (final Exception e) {
+							} catch (final NumberFormatException e) {
 								this.logService.log(LOG_ERROR,
 										"Provided Seconds in Blinking LED Operation is not a number");
 							}
