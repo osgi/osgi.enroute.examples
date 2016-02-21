@@ -23,7 +23,9 @@ Before you start executing the following steps, it is advisable to configure the
 4. Now you can publish MQTT message (with **on** or **off** or **blink X** payload where **X** is any integer number) to the specified topic
 
 **on** - to switch the LED ON
+
 **off** - to switch the LED OFF
+
 **blink X** - to blink the LED for X number of seconds *(Don't forget to change X to any number)*
 
 ##### LED Configuration:
