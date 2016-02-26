@@ -15,8 +15,6 @@ Private-Package: \
 EnRoute-Application: 	osgi.enroute.examples.led.controller
 
 -includeresource: \
-	{readme.md}, \
-	{configuration=configuration}, \
 	{static=static}, \
 	web=web
 
