@@ -40,7 +40,7 @@
 				
 				<tr>
 					<td><label for="text">GPIO PIN*</label></td>
-					<td><input type="number" class="form-control" id="pin" min=1 max=29
+					<td><input type="number" class="form-control" id="pin" min=0 max=29
 						placeholder="Enter PIN No" ng-model=bm.pin></td>
 				<tr>
 			</tbody>
@@ -50,6 +50,6 @@
 	
 		<button ng-click=bm.store() type="button"
 			class="btn btn-default btn-primary pull-right"
-			ng-disabled="!bm.host || !bm.port || !bm.topic || !bm.pin">Store</button>
+			ng-disabled="!bm.host || !bm.port || !bm.topic">Store</button>
 	</div>
 </section>
