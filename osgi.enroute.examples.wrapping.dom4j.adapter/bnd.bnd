@@ -1,0 +1,67 @@
+#
+# OSGI ENROUTE EXAMPLES WRAPPING DOM4J ADAPTER BUNDLE 
+#
+
+
+version-dom4j = 1.6.1
+version-relaxng = 1.0.0
+version-gjt = 2.1.10
+
+Bundle-Version:			1.6.1.${tstamp}
+Bundle-Description:		Wraps DOM4J for OSGi, including the primary dependencies
+Bundle-Copyright:		OSGi enRoute
+Bundle-Vendor:			OSGi Alliance
+
+
+Export-Package: \
+			org.dom4j.*;version=${version-dom4j}, \
+			org.relaxng.datatype;version=${version-relaxng}, \
+			org.gjt.xpp;version=${version-gjt}
+
+Private-Package: \
+	org.gjt.xpp.*
+
+Provide-Capability: \
+	  osgi.contract; \
+	    osgi.contract=DOM4J; \
+	    uses:="${exports}"; \
+	    version:List<Version>="1.0"
+
+Import-Package: \
+	  com.sun.msv.datatype.*; resolution:=optional, \
+	  !org.xmlpull.*, \
+	  *
+
+	
+-includeresource: \
+		@pull-parser__pull-parser-2.1.10.jar!/PullParser*_VERSION, \
+		tosc-license.txt, \
+		{readme.md}
+
+-conditionalpackage: \
+	  !javax.*, \
+	  !org.xml.*, \
+	  !org.w3c.*, \
+	  !org.ietf.jgss, \
+	  !org.omg.*, \
+	  !com.sun.*, \
+	  !org.jaxen.*, \
+	  !org.xmlpull.*, '\
+	  *
+	
+-buildpath: \
+	org.jvnet.hudson.dom4j__dom4j;version=1.6.1.hudson-3,\
+	xmlpull__xmlpull;version=1.1.3.4d_b4_min,\
+	pull-parser__pull-parser;version=2.1.10,\
+	jaxen;version=1.1.6, \
+	net.java.dev.msv.core;version=2013.6.1,\
+	net.java.dev.msv.xsdlib;version=2013.6.1,\
+	relaxngDatatype__relaxngDatatype;version=20020414.0
+	
+-testpath: \
+	osgi.enroute.junit.wrapper;version=4.12
+
+#
+# Disable warning about pre-annotation code
+#
+Service-Component: 
