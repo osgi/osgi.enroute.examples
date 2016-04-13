@@ -1,0 +1,27 @@
+#
+# OSGI ENROUTE EXAMPLES LOGGING APPLICATION APPLICATION
+#
+
+Bundle-Version: 1.0.0.${tstamp}
+Bundle-Description: \
+	This is the OSGI ENROUTE EXAMPLES LOGGING APPLICATION bundle. It demonstrates how use a Log Reader Service \
+	and the Log Service as well as the integration with SLF4J. It registers a service 
+
+Private-Package:  \
+	osgi.enroute.examples.logging.application
+
+EnRoute-Application: 	osgi.enroute.examples.logging
+JPM-Command:			logging
+
+-includeresource: \
+	{readme.md}, \
+	{configuration=configuration}, \
+	{static=static}, \
+	web=web
+
+-buildpath: \
+	osgi.enroute.base.api, \
+	osgi.enroute.logger.simple.provider
+	
+-testpath: \
+	osgi.enroute.junit.wrapper;version=4.12
