@@ -36,6 +36,7 @@ Import-Package: \
 -includeresource: \
 	@pull-parser__pull-parser-2.1.10.jar!/PullParser*_VERSION, \
 	@pull-parser__pull-parser-2.1.10.jar!/META-INF/services/*, \
+	tosc-license.txt, \
 	{readme.md}
 
 -conditionalpackage: \
