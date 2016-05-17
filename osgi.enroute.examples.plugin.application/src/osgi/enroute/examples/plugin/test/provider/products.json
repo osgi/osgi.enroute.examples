@@ -1,0 +1,35 @@
+[
+	{
+	    "supplier":   "test",
+		"id": 			"B003MTTJOY",
+		"name": 		"Edimax EW-7811Un",
+		"description": 	"150Mbps 11n WiFi USB Adapter, Nano Size Lets You Plug it and Forget it, Ideal for Raspberry Pi / Pi2, Supports Windows, Mac OS, Linux (Black/Gold)",
+		"price":		899,
+		"inStock":		12,
+		"deliveryTimeInDays": 0 
+	}, {
+	    "supplier":   "test",
+		"id": 			"B00AVSRLTO",
+		"name": 		"Realtek 8191",
+		"description": 	"300Mbps 802.11n/g/b USB Wireless WIFI LAN Network Card Adapter",
+		"price":		1099,
+		"inStock":		1,
+		"deliveryTimeInDays": 10 
+	}, {
+	    "supplier":   "test",
+		"id": 			"B00JDVRCI0",
+		"name": 		"Panda Wireless PAU06 ",
+		"description": 	"300Mbps N USB Wifi Adapter",
+		"price":		1999,
+		"inStock":		190,
+		"deliveryTimeInDays": 0 
+	}, {
+	    "supplier":   "test",
+		"id": 			"B00E1GGE40",
+		"name": 		"Raspberry PI 5MP",
+		"description": 	"Camera Board Module",
+		"price":		1590,
+		"inStock":		1112,
+		"deliveryTimeInDays": 0 
+	}
+]
