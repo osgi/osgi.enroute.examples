@@ -5,7 +5,7 @@
 Bundle-Version: 1.0.0.${tstamp}
 Bundle-Description: \
 	This is the OSGI ENROUTE EXAMPLES LOGGING APPLICATION bundle. It demonstrates how use a Log Reader Service \
-	and the Log Service as well as the integration with SLF4J. It registers a service 
+	and the Log Service as well as the integration with SLF4J.  
 
 Private-Package:  \
 	osgi.enroute.examples.logging.application

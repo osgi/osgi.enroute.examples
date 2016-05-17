@@ -2,7 +2,3 @@
 
 ${Bundle-Description}
 
-## Example
-
-## References
-
