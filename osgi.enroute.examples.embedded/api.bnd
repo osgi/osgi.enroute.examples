@@ -1,0 +1,19 @@
+#
+# OSGI ENROUTE EXAMPLES EMBEDDED API
+#
+
+Bundle-Description: \
+	OSGI ENROUTE EXAMPLES EMBEDDED API \
+	\
+	${warning;Please update this Bundle-Description in osgi.enroute.examples.embedded/api.bnd}
+	
+	
+Export-Package:  \
+	osgi.enroute.examples.embedded.api
+
+Require-Capability: \
+	compile-only
+
+
+-includeresource: {readme.md}
+
