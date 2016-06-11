@@ -7,8 +7,7 @@ Bundle-Description: \
 	This is the OSGI ENROUTE EXAMPLES PLUGIN APPLICATION bundle. It carries the configuration for an application \
 	and provides some basic very much application specific stuff.  It provides a button \
 	that calls a REST function that turns a text into upper case. \
-	\
-	${warning;Please update this Bundle-Description in osgi.enroute.examples.plugin.application/bnd.bnd}
+	Type `wifi` in the search box and click search
 
 Private-Package: \
 	osgi.enroute.examples.plugin.application,\
