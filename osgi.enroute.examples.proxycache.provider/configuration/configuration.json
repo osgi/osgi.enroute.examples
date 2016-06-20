@@ -1,0 +1,6 @@
+[
+	{
+		"service.pid": "osgi.enroute.examples.proxycache",
+		"remote": "https://cdnjs.cloudflare.com/ajax/libs/"
+	}
+]
