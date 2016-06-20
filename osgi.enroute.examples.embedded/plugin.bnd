@@ -1,5 +1,0 @@
-Bundle-Description: \
-	An example plugin for our embedded app
-	
-Private-Package: \
-	osgi.enroute.examples.embedded.plugin
