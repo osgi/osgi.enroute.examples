@@ -1,12 +1,3 @@
 #
 # This file is left open for you to define your macros
 #
-
-# For examples properties project
-#-runvm: -DRUNVM_IS_SET_IN_BUILD=1
-#-runvm.ext: -DRUNVM_BUILD_PLUS_IS_SET=1
-
--runblacklist: \
-	osgi.identity;filter:='(&(osgi.identity=osgi.enroute.web.simple.provider)(version<=2.0.0))', \
-	osgi.identity;filter:='(&(osgi.identity=osgi.enroute.rest.simple.provider)(version>=2.0.1))'
-	

@@ -7,10 +7,12 @@
 -runfw: org.eclipse.osgi
 
 -plugin.enroute.distro = \
-	aQute.bnd.deployer.repository.FixedIndexedRepo; \
-	        name		=       Distro; \
-	        locations	=       https://raw.githubusercontent.com/osgi/osgi.enroute/v1.0.0/cnf/distro/index.xml
-	        
+	aQute.bnd.repository.maven.pom.provider.BndPomRepository; \
+		snapshotUrls=https://oss.sonatype.org/content/groups/osgi; \
+		releaseUrls=https://repo1.maven.org/maven2/; \
+		revision=org.osgi:osgi.enroute.pom.distro:2.0.0-SNAPSHOT; \
+		name=Distro; \
+		location=${build}/cache/enroute-distro.xml
 
 -runblacklist.enroute:	\
 	osgi.identity;filter:='(osgi.identity=osgi.enroute.base.api)', \
@@ -26,9 +28,8 @@
 -runproperties.eqnx: 				\
 	org.apache.felix.http.jettyEnabled=true, \
 	org.apache.felix.http.whiteboardEnabled=true,\
-	osgi.console.enable.builtin=false, \
 	osgi.console=, \
-	org.osgi.service.http.port=8080
+	osgi.console.enable.builtin=false
 
 -runpath.eqnx: 					osgi.enroute.equinox.log.adapter
 -runrequires.eqnx: \
@@ -47,49 +48,3 @@ debug-bundles: \
 	osgi.identity;filter:='(osgi.identity=osgi.enroute.gogo.shell.provider)', \
 	osgi.identity;filter:='(osgi.identity=osgi.enroute.base.debug.provider)'
 
--augment.kn_ua: \
-	org.knopflerfish.bundle.useradmin; \
-		capability:="osgi.service;objectClass:List<String>=org.osgi.service.useradmin.UserAdmin;effective:=active, \
-					 osgi.implementation;osgi.implementation=osgi.useradmin"
-
--augment.eq_ev: \
-	org.eclipse.equinox.event; \
-		capability:="  osgi.service;objectClass=org.osgi.service.event.EventAdmin;effective:=active, \
-					   osgi.implementation;osgi.implementation=osgi.event", \
-		requirement:= "osgi.extender;filter:='(osgi.extender=osgi.component)'"
-
-#
--augment.fe_ht: \
-	org.apache.felix.http.api; \
-		requirement:="osgi.implementation;filter:='(&(osgi.implementation=osgi.http)(version>=1.0.0)(!(version>=2.0)))'"
-		
--augment.os_rs: \
-	org.osgi.service.remoteserviceadmin; \
-		requirement:="osgi.remoteserviceadmin.distribution;filter:='(configs=*)', \
-		              osgi.remoteserviceadmin.topology;filter:='(policy=*)', \
-		              osgi.remoteserviceadmin.discovery;filter:='(protocols=*)'"
-
-
--augment.os_me: \
-	org.osgi.service.metatype; \
-		requirement:="osgi.implementation;filter:='(osgi.implementation=osgi.metatype)'"
-		
--augment.os_ev: \
-	org.osgi.service.event; \
-		requirement:="osgi.implementation;filter:='(osgi.implementation=osgi.event)'"
-
-
--augment.eq_co: \
-	org.eclipse.equinox.coordinator; \
-		capability:= "osgi.service;objectClass=org.osgi.service.coordinator.Coordinator;effective:=active, \
-		              osgi.implementation;osgi.implementation=osgi.coordinator"
-
--augment.fe_lo: \
-	org.apache.felix.log; \
-		capability:= "osgi.implementation;osgi.implementation=osgi.log"
-		
-
--augment.fe_sc: \
-	org.apache.felix.scr; \
-		requirement:="osgi.implementation;filter:='(osgi.implementation=osgi.metatype)'"
-	

@@ -25,7 +25,8 @@ EnRoute-Application: osgi.enroute.examples.backend
 	{web=web}
 
 -buildpath: \
-	osgi.enroute.base.api
+	osgi.enroute.base.api, \
+	osgi.enroute.rest.simple.provider
 	
 
 
