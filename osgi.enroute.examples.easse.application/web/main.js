@@ -38,7 +38,7 @@
 
 	var mainProvider = function($scope, $http) {
 		$scope.event = function(topic) {
-			$http.put('/rest/topic/'+encodeURIComponent(topic), {time: new Date()}).then(
+			$http.put('/rest/topic', {topic: topic, time: new Date()}).then(
 					undefined, function(d) {
 						$scope.alerts.push( { type: 'danger', msg: 'Failed with ['+ d.status + '] '+ d.statusText });
 					}

@@ -23,8 +23,8 @@ public class EasseApplication implements REST {
 	@Reference
 	private EventAdmin eventAdmin;
 	
-	public void putTopic(Map<String,Object> properties, String topic) {
-		Event event = new Event(topic, properties);
+	public void putTopic(Map<String,Object> properties) {
+		Event event = new Event((String) properties.get("topic"), properties);
 		eventAdmin.postEvent(event);
 	}
 }
