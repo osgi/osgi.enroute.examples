@@ -1,0 +1,14 @@
+
+
+
+-plugin.enroute.distro.apache = \
+    aQute.bnd.repository.maven.provider.MavenBndRepository; \
+        name='Felix';\
+        releaseUrl=http://repo2.maven.org/maven2/;\
+        snapshotUrl=http://repo2.maven.org/maven2/; \
+        index=${.}/apache.mvn
+
+-augment.fx_ev: \
+	org.apache.felix.eventadmin; \
+		capability:="  osgi.service;objectClass=org.osgi.service.event.EventAdmin;effective:=active, \
+					   osgi.implementation;osgi.implementation=osgi.event"

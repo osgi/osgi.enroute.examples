@@ -21,7 +21,8 @@ JPM-Command:			easse
 	web=web
 
 -buildpath: \
-	osgi.enroute.base.api
+	osgi.enroute.base.api,\
+	osgi.enroute.rest.simple.provider;version=2.0
 	
 -testpath: \
 	osgi.enroute.junit.wrapper;version=4.12

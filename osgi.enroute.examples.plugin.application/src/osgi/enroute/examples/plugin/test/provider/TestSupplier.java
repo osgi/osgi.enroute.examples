@@ -13,7 +13,6 @@ import org.osgi.service.component.annotations.Reference;
 import osgi.enroute.dto.api.DTOs;
 import osgi.enroute.examples.plugin.api.Product;
 import osgi.enroute.examples.plugin.api.SupplierPlugin;
-import osgi.enroute.examples.plugin.application.OrderApplication;
 
 @Component
 public class TestSupplier implements SupplierPlugin {

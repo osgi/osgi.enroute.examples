@@ -6,8 +6,8 @@ import osgi.enroute.examples.webserver.webresource.RequireWebserverWebresource;
 import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;
 import osgi.enroute.webserver.capabilities.RequireWebServerExtender;
 
-@RequireBootstrapWebResource(resource="css/bootstrap.css")
 @RequireWebserverWebresource
+@RequireBootstrapWebResource(resource="css/bootstrap.css")
 @RequireWebServerExtender
 @Component(name="osgi.enroute.examples.webserver")
 public class WebserverApplication  {

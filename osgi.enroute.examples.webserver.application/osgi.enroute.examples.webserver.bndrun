@@ -8,13 +8,12 @@ Bundle-SymbolicName:		osgi.enroute.examples.webserver.application.launch
 JPM-Command:					websrvr
 
 
--runfw:						org.eclipse.osgi
+-runfw:						org.eclipse.osgi;version=3.9
 
 -runrequires:  \
 	osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.webserver.application)'
 
 -runbundles: \
-	biz.aQute.bndlib;version='[3.0.0,3.0.1)',\
 	org.apache.felix.configadmin;version='[1.8.6,1.8.7)',\
 	org.apache.felix.http.api;version='[3.0.0,3.0.1)',\
 	org.apache.felix.http.jetty;version='[3.1.0,3.1.1)',\
@@ -30,6 +29,6 @@ JPM-Command:					websrvr
 	osgi.enroute.examples.webserver.application;version=snapshot,\
 	osgi.enroute.examples.webserver.webresource;version=snapshot,\
 	osgi.enroute.executor.simple.provider;version='[1.0.0,1.0.1)',\
-	osgi.enroute.logger.simple.provider;version='[1.1.1,1.1.2)',\
+	osgi.enroute.logger.simple.provider;version='[1.2.1,1.2.2)',\
 	osgi.enroute.twitter.bootstrap.webresource;version='[3.3.5,3.3.6)',\
 	osgi.enroute.web.simple.provider;version='[1.3.3,1.3.4)'

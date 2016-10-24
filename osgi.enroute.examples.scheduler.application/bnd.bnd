@@ -20,5 +20,6 @@ Private-Package: \
 	web=web
 
 -buildpath: \
-	osgi.enroute.base.api
+	osgi.enroute.base.api,\
+	osgi.enroute.web.simple.provider;version=2.0
 	

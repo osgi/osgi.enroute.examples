@@ -42,4 +42,7 @@ public class PropertiesApplication implements REST {
 		return System.getProperties();
 	}
 
+	public void postValue(String s, String b) {
+		System.out.println(s);
+	}
 }

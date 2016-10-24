@@ -2,7 +2,6 @@ package osgi.enroute.examples.logging.application;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -16,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import osgi.enroute.configurer.api.RequireConfigurerExtender;
 import osgi.enroute.debug.api.Debug;
 import osgi.enroute.google.angular.capabilities.RequireAngularWebResource;
-import osgi.enroute.logger.api.LoggerAdmin;
 import osgi.enroute.rest.api.REST;
 import osgi.enroute.scheduler.api.Scheduler;
 import osgi.enroute.twitter.bootstrap.capabilities.RequireBootstrapWebResource;
@@ -72,8 +70,6 @@ public class LoggingApplication implements REST {
 
 	@Activate
 	void activate() throws Exception {
-		AtomicInteger n = new AtomicInteger();
-
 		schedule = scheduler.schedule(() -> {
 			log.log(LogService.LOG_INFO, "From scheduler");
 		}, 10000, 10000);
