@@ -9,6 +9,11 @@
 	<packaging>pom</packaging>
 
 	<dependencies>
+		<dependency>
+			<groupId>biz.aQute.bnd</groupId>
+			<artifactId>aQute.libg</artifactId>
+			<version>3.3.0</version>
+		</dependency>
 	</dependencies>
 
 </project>
