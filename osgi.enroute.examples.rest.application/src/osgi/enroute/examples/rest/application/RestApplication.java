@@ -38,7 +38,7 @@ public class RestApplication implements REST {
 		StringBuilder st = new StringBuilder("Get with no argument: \n")
 				.append("  --> rr._host(): " + rr._host() + "\n");
 		System.out.println(st.toString() + "\n");
-		return "ChuckSteak is Great".toUpperCase();
+		return "ChuckSteak is a new Chuck Norris".toUpperCase();
 	}
 	
 	//GET http://localhost:8080/rest/upper/steak ==> returns "STEAK"
